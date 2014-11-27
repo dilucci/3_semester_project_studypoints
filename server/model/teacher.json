@@ -1,0 +1,16 @@
+// _id, first_name, last_name, email
+
+[
+  [
+    1003,
+    "Andreas",
+    "Løvehjerte",
+    "andreas@lærer.com"
+  ],
+  [
+    1004,
+    "Sebastian",
+    "Lucci",
+    "lucci@good.com"
+  ]
+]

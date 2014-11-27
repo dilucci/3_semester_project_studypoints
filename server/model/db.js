@@ -47,14 +47,36 @@ process.on('SIGINT', function() {
 });
 
 
-/** User SCHEMA **/
-/** Replace this Schema with your own(s) **/
-var usersSchema = new mongoose.Schema({
+/** Profile SCHEMA **/
+/** SQL database **/
+var profileSchema = new mongoose.Schema({
+  _id: Number,
   userName : String,
   email: {type: String, unique: true},
   pw: String,
-  created: { type: Date, default: new Date() }
+  created: { type: Date, default: new Date() },
+  role: String
 });
 
-mongoose.model( 'User', usersSchema,"testusers" );
+/** student SCHEMA **/
+/** Replace this Schema with your own(s) **/
+var studentSchema = new mongoose.Schema({
+  _id: Number,
+  first_name: String,
+  last_name: String,
+  email: {type: String, unique: true},
+  study_points: Number
+});
 
+/** teacher SCHEMA **/
+/** Replace this Schema with your own(s) **/
+var teacherSchema = new mongoose.Schema({
+  _id: Number,
+  first_name: String,
+  last_name: String,
+  email: {type: String, unique: true},
+});
+
+mongoose.model( 'Profile', profileSchema,"testusers" );
+mongoose.model( 'Student', studentSchema,"teststudents" );
+mongoose.model( 'Teacher', teacherSchema,"testusers" );

@@ -1,0 +1,18 @@
+// id, first_name, last_name, email, study_points
+
+[
+  [
+    1001,
+    "Michael",
+    "Larsen",
+    "michael@email.com",
+    100
+  ],
+  [
+    1002,
+    "Emil",
+    "Fridthjof",
+    "emil@bøgse.com",
+    1000
+  ]
+]
