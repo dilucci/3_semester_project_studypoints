@@ -3,17 +3,60 @@ var async = require('async');
 var mongoose = require('mongoose');
 var model = require('./model');
 
-var dbURI;
+var dbURI = 'mongodb://test:test@ds056727.mongolab.com:56727/3_sem_pro_studypoints';
 
 //This is set by the backend tests
-if( typeof global.TEST_DATABASE != "undefined" ) {
-    dbURI = global.TEST_DATABASE;
-}
-else{
-    dbURI = 'mongodb://test:test@ds056727.mongolab.com:56727/3_sem_pro_studypoints';
+//if( typeof global.TEST_DATABASE != "undefined" ) {
+//    dbURI = global.TEST_DATABASE;
+//}
+//else{
+//    dbURI = 'mongodb://test:test@ds056727.mongolab.com:56727/3_sem_pro_studypoints';
+//}
+
+function readData(path) {
+    var file = fs.readFileSync(path, 'utf8');
+    var lines = file.split(/[\r]?[\n]/);
+    var headers = lines[0].split(',');
+    var data = JSON.parse(lines[1]);
+    var result = data.map(function(e) {
+        var res = {};
+        for(var i = 0; i < e.length; i++) {
+            if(e[i] !== 'NULL')
+                res[headers[i]] = e[i];
+        }
+        return res;
+    })
+    console.log(path + ": " + result.length);
+    return result;
 }
 
-mongoose.connect(dbURI);
+function getStudents() {
+    return students.map(function(student) {
+        return {
+            _id: student.studentID,
+            first_name: student.first_name,
+            last_name: student.last_name,
+            email: student.email,
+            study_points: student.study_points
+        };
+    });
+};
+
+function getTeachers() {
+    return teachers.map(function(teacher) {
+        return {
+            _id: teacher.teacherID,
+            first_name: teacher.first_name,
+            last_name: teacher.last_name,
+            email: teacher.email
+        };
+    });
+};
+
+var students = readData('students.json');
+var teachers = readData('teachers.json');
+
+var db = mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {
     console.log('Mongoose connected to ' + dbURI);
@@ -34,49 +77,6 @@ process.on('SIGINT', function() {
         process.exit(0);
     });
 });
-
-function readData(path) {
-    var file = fs.readFileSync(path, 'utf8');
-    var lines = file.split(/[\r]?[\n]/);
-    var headers = lines[0].split(',');
-    var data = JSON.parse(lines[1]);
-    var result = data.map(function(e) {
-        var res = {};
-        for(var i = 0; i < e.length; i++) {
-            if(e[i] !== 'NULL')
-                res[headers[i]] = e[i];
-        }
-        return res;
-    })
-    console.log(path + ": " + result.length);
-    return result;
-}
-
-function getStudents() {
-    return customers.map(function(student) {
-        return {
-            _id: student._id,
-            first_name: student.first_name,
-            last_name: student.last_name,
-            email: student.email,
-            study_points: student.study_points
-        };
-    });
-};
-
-function getTeachers() {
-    return customers.map(function(teacher) {
-        return {
-            _id: teacher._id,
-            first_name: teacher.first_name,
-            last_name: teacher.last_name,
-            email: teacher.email
-        };
-    });
-};
-
-var students = readData('students.json');
-var teachers = readData('teachers.json');
 
 model.StudentModel.remove({}).exec();
 model.TeacherModel.remove({}).exec();

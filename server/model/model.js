@@ -17,14 +17,14 @@ Start mongo.exe and do:
 
 /** Profile SCHEMA **/
 /** SQL database **/
-var profileSchema = new mongoose.Schema({
-  _id: Number,
-  userName : String,
-  email: {type: String, unique: true},
-  pw: String,
-  created: { type: Date, default: new Date() },
-  role: String
-});
+//var profileSchema = new mongoose.Schema({
+//  _id: Number,
+//  userName : String,
+//  email: {type: String, unique: true},
+//  pw: String,
+//  created: { type: Date, default: new Date() },
+//  role: String
+//});
 
 /** Student SCHEMA **/
 /** Replace this Schema with your own(s) **/
@@ -46,6 +46,6 @@ var teacherSchema = new mongoose.Schema({
 });
 
 
-exports.ProfileModel = mongoose.model( 'Profile', profileSchema);
+//exports.ProfileModel = mongoose.model( 'Profile', profileSchema);
 exports.StudentModel = mongoose.model( 'Student', studentSchema);
 exports.TeacherModel = mongoose.model( 'Teacher', teacherSchema);
