@@ -14,38 +14,6 @@ Start mongo.exe and do:
   db.testusers.insert({userName : "Anders", email :"aka@cphbusiness.dk",pw: "test",created : new Date()})
 
 */
-var dbURI;
-
-//This is set by the backend tests
-if( typeof global.TEST_DATABASE != "undefined" ) {
-  dbURI = global.TEST_DATABASE;
-}
-else{
-  dbURI = 'mongodb://localhost/testdb';
-}
-
-mongoose.connect(dbURI);
-
-mongoose.connection.on('connected', function () {
-  console.log('Mongoose connected to ' + dbURI);
-});
-
-mongoose.connection.on('error',function (err) {
-  global.mongo_error = "Not Connected to the Database";
-  console.log('Mongoose connection error: ' + err);
-});
-
-mongoose.connection.on('disconnected', function () {
-  console.log('Mongoose disconnected');
-});
-
-process.on('SIGINT', function() {
-  mongoose.connection.close(function () {
-    console.log('Mongoose disconnected through app termination');
-    process.exit(0);
-  });
-});
-
 
 /** Profile SCHEMA **/
 /** SQL database **/
@@ -58,7 +26,7 @@ var profileSchema = new mongoose.Schema({
   role: String
 });
 
-/** student SCHEMA **/
+/** Student SCHEMA **/
 /** Replace this Schema with your own(s) **/
 var studentSchema = new mongoose.Schema({
   _id: Number,
@@ -68,7 +36,7 @@ var studentSchema = new mongoose.Schema({
   study_points: Number
 });
 
-/** teacher SCHEMA **/
+/** Teacher SCHEMA **/
 /** Replace this Schema with your own(s) **/
 var teacherSchema = new mongoose.Schema({
   _id: Number,
@@ -77,6 +45,7 @@ var teacherSchema = new mongoose.Schema({
   email: {type: String, unique: true}
 });
 
-mongoose.model( 'Profile', profileSchema,"testusers" );
-mongoose.model( 'Student', studentSchema,"teststudents" );
-mongoose.model( 'Teacher', teacherSchema,"testusers" );
+
+exports.ProfileModel = mongoose.model( 'Profile', profileSchema);
+exports.StudentModel = mongoose.model( 'Student', studentSchema);
+exports.TeacherModel = mongoose.model( 'Teacher', teacherSchema);
