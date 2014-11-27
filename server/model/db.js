@@ -74,7 +74,7 @@ var teacherSchema = new mongoose.Schema({
   _id: Number,
   first_name: String,
   last_name: String,
-  email: {type: String, unique: true},
+  email: {type: String, unique: true}
 });
 
 mongoose.model( 'Profile', profileSchema,"testusers" );
