@@ -26,10 +26,15 @@ angular.module('myAppRename.controllers', []).
     $scope.error = null;
 
     $scope.submit = function () {
-      authProfiles.getProfiles(function(data){
-        console.log(data);
+      console.log("POSTING!" + $scope.user);
+      $http({
+        method: 'POST',
+        url: 'http://gruppe4.cloudapp.net/authenticate',
+        data: $scope.user
+      }).success(function(data){
         $scope.profiles = data;
-      })
+        console.log('DATA FROM JAVA-DB: ' + JSON.stringify(data));
+      });
       $http
         .post('/authenticate', [$scope.user, $scope.profiles])
         .success(function (data, status, headers, config) {
