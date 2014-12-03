@@ -1,16 +1,16 @@
-describe('myAppRename.users view2Ctrl', function() {
+describe('myAppRename.users usersCtrl', function() {
 
   var scope, httpBackendMock, ctrl;
   var testResponse = {msg : "Test Message"};
 
-  beforeEach(module('myAppRename.view2'));
+  beforeEach(module('myAppRename.users'));
 
   beforeEach(inject(function ($httpBackend, $rootScope, $controller) {
     httpBackendMock = $httpBackend;
     httpBackendMock.expectGET('userApi/test').
       respond(testResponse);
     scope = $rootScope.$new();
-    ctrl = $controller('View2Ctrl', {$scope: scope});
+    ctrl = $controller('usersCtrl', {$scope: scope});
   }));
 
   it('Should fetch two names ', function () {

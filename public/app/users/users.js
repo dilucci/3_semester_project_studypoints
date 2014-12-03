@@ -25,3 +25,22 @@ angular.module('myAppRename.users', ['ngRoute'])
         $scope.error = data;
       });
   }]);
+
+/*
+function toggleTable() {
+  var lTable = document.getElementById("periodetable");
+  lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
+};*/
+
+function showHide(shID) {
+  if (document.getElementById(shID)) {
+    if (document.getElementById(shID+'-show').style.display != 'none') {
+      document.getElementById(shID+'-show').style.display = 'none';
+      document.getElementById(shID).style.display = 'block';
+    }
+    else {
+      document.getElementById(shID+'-show').style.display = 'inline';
+      document.getElementById(shID).style.display = 'none';
+    }
+  }
+}
