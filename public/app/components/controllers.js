@@ -17,8 +17,6 @@ angular.module('myAppRename.controllers', []).
       }
       return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
     }
-
-
     $scope.title = "Semester Project";
     $scope.username = "";
     $scope.isAuthenticated = false;

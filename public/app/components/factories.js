@@ -2,8 +2,9 @@
 
 /* Factories */
 
-angular.module('myAppRename.factories', []).
-  factory('InfoFactory', function () {
+var app = angular.module('myAppRename.factories', []);
+
+  app.factory('InfoFactory', function () {
     var info = "Hello World from a Factory";
     var getInfo = function getInfo(){
       return info;
@@ -12,7 +13,8 @@ angular.module('myAppRename.factories', []).
       getInfo: getInfo
     }
   })
-  .factory('authInterceptor', function ($rootScope, $q, $window) {
+
+  app.factory('authInterceptor', function ($rootScope, $q, $window) {
     return {
       request: function (config) {
         config.headers = config.headers || {};
@@ -28,7 +30,20 @@ angular.module('myAppRename.factories', []).
         return $q.reject(rejection);
       }
     };
-  });
-
-
+  })
+  app.factory('authProfiles', function($http){
+    var getProfiles = function(callback){
+      $http.get('http://gruppe4.cloudapp.net/Profiles')
+          .success(function(data){
+            var profiles = JSON.stringify(data);
+            callback(null, profiles);
+          })
+          .error(function(err){
+            callback(err);
+          })
+      }
+    return{
+      getProfiles: getProfiles
+    }
+    });
 ;
