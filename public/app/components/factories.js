@@ -35,8 +35,7 @@ var app = angular.module('myAppRename.factories', []);
     var getProfiles = function(callback){
       $http.get('http://gruppe4.cloudapp.net/Profiles')
           .success(function(data){
-            var profiles = JSON.stringify(data);
-            callback(null, profiles);
+            callback(null, data);
           })
           .error(function(err){
             callback(err);

@@ -1,5 +1,5 @@
 angular.module('myAppRename.controllers', []).
-  controller('AppCtrl', function ($scope, $http, $window,$location) {
+  controller('AppCtrl', function ($scope, $http, $window,$location, authProfiles) {
 
     function url_base64_decode(str) {
       var output = str.replace('-', '+').replace('_', '/');
@@ -26,8 +26,12 @@ angular.module('myAppRename.controllers', []).
     $scope.error = null;
 
     $scope.submit = function () {
+      authProfiles.getProfiles(function(data){
+        console.log(data);
+        $scope.profiles = data;
+      })
       $http
-        .post('/authenticate', $scope.user)
+        .post('/authenticate', [$scope.user, $scope.profiles])
         .success(function (data, status, headers, config) {
           $window.sessionStorage.token = data.token;
           $scope.isAuthenticated = true;

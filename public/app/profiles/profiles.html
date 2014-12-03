@@ -1,2 +1,4 @@
     <h1>Profiles</h1>
-    <p>{{profiles}}</p>
+    <ul>
+        <li ng-repeat="profile in profiles"> {{profile.user_name}} {{profile.role}} </li>
+    </ul>
