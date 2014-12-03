@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('myAppRename.view2', ['ngRoute'])
+angular.module('myAppRename.users', ['ngRoute'])
 
   .config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/view2', {
-      templateUrl: 'app/view2/view2.html',
-      controller: 'View2Ctrl'
+    $routeProvider.when('/users', {
+      templateUrl: 'app/users/users.html',
+      controller: 'UsersCtrl'
     });
   }])
-  .controller('View2Ctrl', ['$scope', '$http', function ($scope, $http) {
+  .controller('UsersCtrl', ['$scope', '$http', function ($scope, $http) {
     $http({
       method: 'GET',
       url: 'userApi/test'

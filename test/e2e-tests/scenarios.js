@@ -6,19 +6,19 @@
 //
 //  browser.get('/');
 //
-//  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
-//    expect(browser.getLocationAbsUrl()).toMatch("/view1");
+//  it('should automatically redirect to /home when location hash/fragment is empty', function() {
+//    expect(browser.getLocationAbsUrl()).toMatch("/home");
 //  });
 //
 //
-//  describe('view1', function() {
+//  describe('home', function() {
 //
 //    beforeEach(function() {
-//      browser.get('#/view1');
+//      browser.get('#/home');
 //    });
 //
 //
-//    it('should render view1 when user navigates to /view1', function() {
+//    it('should render home when user navigates to /home', function() {
 //      expect(element.all(by.css('[ng-view] p')).first().getText()).
 //        toMatch(/partial for view 1/);
 //    });
@@ -26,14 +26,14 @@
 //  });
 //
 //
-//  describe('view2', function() {
+//  describe('users', function() {
 //
 //    beforeEach(function() {
-//      browser.get('#/view2');
+//      browser.get('#/users');
 //    });
 //
 //
-//    it('should render view2 when user navigates to /view2', function() {
+//    it('should render users when user navigates to /users', function() {
 //      expect(element.all(by.css('[ng-view] p')).first().getText()).
 //        toMatch(/partial for view 2/);
 //    });
