@@ -54,12 +54,14 @@ router.post('/authenticate', function (req, res) {
         response.setEncoding('utf8');
         response.on('data', function (data) {
             console.log("body: " + data);
-            var profileStr = data.substring(1, data.length-1).split(",");
+            var profileStr = data.substring(1, data.length-1).split("\"");
             console.log("prfStr: " + profileStr);
+            var strArray = [profileStr[0], profileStr[1], profileStr[2]];
+            console.log("array: " + strArray)
             var profile = {
-                        id: profileStr[0],
+                        id: profileStr[0].substring(0,1),
                         username: profileStr[1],
-                        role: profileStr[2]
+                        role: profileStr[3]
                     };
             console.log("profile: " + profile.id)
             console.log("profile: " + profile.username)

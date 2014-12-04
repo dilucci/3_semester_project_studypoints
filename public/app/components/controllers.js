@@ -39,7 +39,7 @@ angular.module('myAppRename.controllers', []).
           var String1 = "hej jeg er en string";
           console.log(String1)
           console.log('Profile Role: ' + profile.role) ;
-          $scope.isAdmin = profile.role == "\"admin\"";
+          $scope.isAdmin = profile.role == "admin";
           $scope.isUser = !$scope.isAdmin;
           console.log("isAdmin: " + $scope.isAdmin);
           console.log("isUser: " + $scope.isUser);
