@@ -39,11 +39,16 @@ angular.module('myAppRename.controllers', []).
         console.log("role: " + userData[2]);
         $scope.isAuthenticated = true;
         $scope.username = userData[1];
-        $scope.isAdmin = userData[2] = "admin";
+        $scope.isAdmin = userData[2] == "admin";
         $scope.isUser = !$scope.isAdmin;
         $scope.error = null;
         console.log('DATA FROM JAVA-DB: ' + userData);
-      });
+      })
+      .error(function (data, status, headers, config) {
+          // Erase the token if the user fails to log in
+          $scope.isAuthenticated = false;
+          $scope.error = 'You failed to login. Invalid User or Password';
+          });;
       //$http
       //  .post('/authenticate', [$scope.user, $scope.profiles])
       //  .success(function (data, status, headers, config) {
@@ -67,7 +72,7 @@ angular.module('myAppRename.controllers', []).
 
     $scope.logout = function () {
       $scope.isAuthenticated = false;
-      $scope.isAdmin =false;
+      $scope.isAdmin = false;
       $scope.isUser = false;
       delete $window.sessionStorage.token;
       $location.path("/home");

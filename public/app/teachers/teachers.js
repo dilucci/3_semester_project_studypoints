@@ -9,7 +9,7 @@ angular.module('myAppRename.teachers', ['ngRoute'])
   });
 }])
 
-.controller('View3Ctrl', function ($scope, $http) {
+.controller('teachersCtrl', function ($scope, $http) {
     $http({
       method: 'GET',
       url: 'adminApi/user'

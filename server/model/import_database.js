@@ -34,8 +34,7 @@ function getStudents() {
     return students.map(function(student) {
         return {
             _id: student.studentID,
-            first_name: student.first_name,
-            last_name: student.last_name,
+            username: student.username,
             email: student.email,
             study_points: student.study_points
         };
@@ -46,8 +45,7 @@ function getTeachers() {
     return teachers.map(function(teacher) {
         return {
             _id: teacher.teacherID,
-            first_name: teacher.first_name,
-            last_name: teacher.last_name,
+            username: teacher.username,
             email: teacher.email
         };
     });

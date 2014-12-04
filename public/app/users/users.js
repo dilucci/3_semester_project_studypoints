@@ -11,7 +11,7 @@ angular.module('myAppRename.users', ['ngRoute'])
   .controller('UsersCtrl', ['$scope', '$http', function ($scope, $http) {
     $http({
       method: 'GET',
-      url: 'userApi/test'
+      url: 'userApi/users'
     })
       .success(function (data, status, headers, config) {
         $scope.info = data;
