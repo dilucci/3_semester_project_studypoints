@@ -1,9 +1,13 @@
 var express = require('express');
+var dbhandler = require('../model/dbhandler');
 
 var router = express.Router();
-router.get('/users', function(req, res) {
-    res.header("Content-type","application/json");
-    res.end('{"msg" : "Test Message, You are logged on as a User since you could fetch this data"}');
+router.get('/students', function(req, res) {
+    dbhandler.getStudents(function(students){
+        res.header("Content-type","application/json");
+        console.log(JSON.stringify(students));
+        res.end(JSON.stringify(students));
+    })
 });
 
 module.exports = router;

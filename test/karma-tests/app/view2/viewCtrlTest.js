@@ -1,4 +1,4 @@
-describe('myAppRename.users usersCtrl', function() {
+describe('myAppRename.students usersCtrl', function() {
 
   var scope, httpBackendMock, ctrl;
   var testResponse = {msg : "Test Message"};

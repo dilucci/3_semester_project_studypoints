@@ -4,7 +4,9 @@
 <br/>
 <p style="color: #105cb6">
 
-  {{info.msg}}
+  <!--students message: {{students.msg}}-->
+  <!--error: {{error}}-->
+  <!--students: {{students}}-->
 
   <!--<ul>
     <li>Repeats incoming! <input type="radio"> Emil Fridthjof<br>
@@ -44,3 +46,8 @@
       </tbody>
     </table>
         <p> Max antal point = 23 ud af 32</p>
+
+<h1>Students</h1>
+<ul>
+  <li ng-repeat="student in students"> {{student.username}} {{student.email}} {{student.study_points}}</li>
+</ul>

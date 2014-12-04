@@ -9,7 +9,7 @@ angular.module('myAppRename', [
   'myAppRename.factories',
   'myAppRename.filters',
   'myAppRename.home',
-  'myAppRename.users',
+  'myAppRename.students',
   'myAppRename.teachers',
   'myAppRename.profiles'
 ]).

@@ -1,5 +1,5 @@
 angular.module('myAppRename.controllers', []).
-  controller('AppCtrl', function ($scope, $http, $window,$location, authProfiles) {
+  controller('AppCtrl', function ($scope, $http, $window,$location) {
 
     function url_base64_decode(str) {
       var output = str.replace('-', '+').replace('_', '/');
@@ -37,6 +37,8 @@ angular.module('myAppRename.controllers', []).
         console.log("id: " + userData[0]);
         console.log("username: " + userData[1]);
         console.log("role: " + userData[2]);
+        $window.sessionStorage.setItem('token', userData.token);
+        console.log("token: " + $window.sessionStorage.getItem('token'));
         $scope.isAuthenticated = true;
         $scope.username = userData[1];
         $scope.isAdmin = userData[2] == "admin";
@@ -46,6 +48,7 @@ angular.module('myAppRename.controllers', []).
       })
       .error(function (data, status, headers, config) {
           // Erase the token if the user fails to log in
+          delete $window.sessionStorage.token;
           $scope.isAuthenticated = false;
           $scope.error = 'You failed to login. Invalid User or Password';
           });;
@@ -53,6 +56,8 @@ angular.module('myAppRename.controllers', []).
       //  .post('/authenticate', [$scope.user, $scope.profiles])
       //  .success(function (data, status, headers, config) {
       //    $window.sessionStorage.token = data.token;
+      //      console.log($window.sessionStorage.token);
+      //      console.log(data.token);
       //    $scope.isAuthenticated = true;
       //    var encodedProfile = data.token.split('.')[1];
       //    var profile = JSON.parse(url_base64_decode(encodedProfile));
