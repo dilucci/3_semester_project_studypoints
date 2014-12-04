@@ -17,6 +17,7 @@ angular.module('myAppRename.controllers', []).
       }
       return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
     }
+
     $scope.title = "Semester Project";
     $scope.username = "";
     $scope.isAuthenticated = false;
@@ -37,8 +38,8 @@ angular.module('myAppRename.controllers', []).
         console.log("id: " + userData[0]);
         console.log("username: " + userData[1]);
         console.log("role: " + userData[2]);
-        $window.sessionStorage.setItem('token', userData.token);
-        console.log("token: " + $window.sessionStorage.getItem('token'));
+        $window.sessionStorage.token = userData.token;
+        console.log("Token " + userData.token);
         $scope.isAuthenticated = true;
         $scope.username = userData[1];
         $scope.isAdmin = userData[2] == "admin";
