@@ -15,7 +15,6 @@ router.get('/', function(req, res) {
 router.post('/authenticate', function (req, res) {
   //TODO: Go and get UserName Password from "somewhere"
   //if is invalid, return 401
-  console.log(req.body)
    if (req.body.username === profile.username && req.body.password === profile.pw) {
 
     var profile = {
