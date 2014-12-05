@@ -7,9 +7,18 @@ angular.module('myAppRename.teachers', ['ngRoute'])
     templateUrl: 'app/teachers/teachers.html',
     controller: 'teachersCtrl'
   });
+  $routeProvider.when('/teacheradd', {
+    templateUrl: 'app/teachers/teacheradd.html',
+    controller: 'teachersCtrl'
+  });
+      $routeProvider.when('/teachermarking', {
+        templateUrl: 'app/teachers/teachermarking.html',
+        controller: 'teachersCtrl'
+      });
+
 }])
 
-.controller('View3Ctrl', function ($scope, $http) {
+.controller('teachersCtrl', function ($scope, $http) {
     $http({
       method: 'GET',
       url: 'adminApi/user'

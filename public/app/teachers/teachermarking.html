@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Marking</title>
+    </head>
+    <body>
+    <h1>Hej i Teachermarking!</h1>
+
+    <p>Search Student</p><input type="search" ng-model="searchStudent">
+
+
+    <ul>
+        <li ng-repeat="user in users"> <input type="radio" {{user.userName}} {{user.email}}> </li>
+    </ul>
+
+    <!--<ul> &lt;!&ndash;Her er det users bliver indsættet og checked for at møde op osv. &ndash;&gt;
+        <li>Repeats incoming!
+            <input type="radio"> Emil Fridthjof
+            <br>
+            <input type="radio"> Sebastian Di Lucci
+        </li>
+    </ul>-->
+
+    </body>
+</html>

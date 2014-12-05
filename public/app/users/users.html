@@ -6,12 +6,6 @@
 
   {{info.msg}}
 
-  <!--<ul>
-    <li>Repeats incoming! <input type="radio"> Emil Fridthjof<br>
-                          <input type="radio"> Sebastian Di Lucci
-    </li>
-  </ul>-->
-
     <table style="border-collapse:collapse;">
       <thead>
       <tr>
@@ -25,18 +19,79 @@
       <tbody>
       <tr>
         <td style="padding:5px;">
-          <a href="#" id="example-show" class="showLink" onclick="showHide('example');return false;">Periode 1</a>
-          <div id="example" class="more">
-          <p>Congratulations! You've found the magic hidden text! Clicking the link below will hide this content again.</p>
-          <p><a href="#" id="example-hide" class="hideLink" onclick="showHide('example');return false;">Hide this content.</a></p></div>
+          <a ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">Periode 1</a>
+            <div ng-show="abstract">
+                    <table style="border-collapse:collapse;">
+                        <thead>
+                            <tr style="border-bottom:1px solid black;">
+                              <th style="padding:5px;"><em>Uge 1</em></th>
+                              <th style="padding:5px;border-left:1px solid black;"><em>Study Points</em></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <td style="padding:5px;">
+                                Dag 1
+                              </td>
+                              <td style="padding:5px;border-left:1px solid black;">
+                                5 ud af 5
+                              </td>
+
+                            </tr>
+                            <tr>
+                              <td style="padding:5px;">
+                                Dag 2
+                              </td>
+                              <td style="padding:5px;border-left:1px solid black;">
+                                0 ud af 5
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+
         </td>
         <td style="padding:5px;border-left:1px solid black;">10 ud af 12</td>
       </tr>
 
       <tr>
-        <td style="padding:5px;"><a href="www.facebook.com">Periode 2</a></td>
-        <td style="padding:5px;border-left:1px solid black;">5 ud af 10</td>
+        <td style="padding:5px;">
+          <div ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">Periode 2</div>
+          <div ng-show="abstract">
+            <table style="border-collapse:collapse;">
+              <thead>
+              <tr style="border-bottom:1px solid black;">
+                <th style="padding:5px;"><em>Uge 1</em></th>
+                <th style="padding:5px;border-left:1px solid black;"><em>Study Points</em></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td style="padding:5px;">
+                  Dag 1
+                </td>
+                <td style="padding:5px;border-left:1px solid black;">
+                  5 ud af 5
+                </td>
+
+              </tr>
+              <tr>
+                <td style="padding:5px;">
+                  Dag 2
+                </td>
+                <td style="padding:5px;border-left:1px solid black;">
+                  0 ud af 5
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </td>
+        <td style="padding:5px;border-left:1px solid black;">5 ud af 12</td>
       </tr>
+
+
       <tr>
         <td style="padding:5px;"><a href="www.facebook.com">Periode 3</a></td>
         <td style="padding:5px;border-left:1px solid black;">8 ud af 10</td>

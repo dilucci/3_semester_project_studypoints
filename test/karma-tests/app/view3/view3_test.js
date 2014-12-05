@@ -12,7 +12,7 @@ describe('myAppRename.teachers teachersCtrl', function() {
     httpBackendMock.expectGET('adminApi/user').
       respond(users);
     scope = $rootScope.$new();
-    ctrl = $controller('View3Ctrl', {$scope: scope});
+    ctrl = $controller('teachersCtrl', {$scope: scope});
   }));
 
   it('Should fetch two names ', function () {

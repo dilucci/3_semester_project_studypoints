@@ -9,6 +9,16 @@ angular.module('myAppRename.users', ['ngRoute'])
     });
   }])
   .controller('UsersCtrl', ['$scope', '$http', function ($scope, $http) {
+
+      $scope.abstract = false;
+      $scope.hoverIn = function(){
+        this.abstract = true;
+      };
+
+      $scope.hoverOut = function(){
+        this.abstract = false;
+      };
+
     $http({
       method: 'GET',
       url: 'userApi/test'
