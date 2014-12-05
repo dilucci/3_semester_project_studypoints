@@ -1,30 +1,22 @@
 'use strict';
 
-angular.module('myAppRename.users', ['ngRoute'])
+angular.module('myAppRename.students', ['ngRoute'])
 
   .config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/users', {
-      templateUrl: 'app/users/users.html',
-      controller: 'UsersCtrl'
+    $routeProvider.when('/students', {
+      templateUrl: 'app/students/students.html',
+      controller: 'StudentCtrl'
     });
   }])
-  .controller('UsersCtrl', ['$scope', '$http', function ($scope, $http) {
-
-      $scope.abstract = false;
-      $scope.hoverIn = function(){
-        this.abstract = true;
-      };
-
-      $scope.hoverOut = function(){
-        this.abstract = false;
-      };
-
+  .controller('StudentCtrl', ['$scope', '$http', function ($scope, $http) {
+      console.log("inde i studentCtrl")
     $http({
       method: 'GET',
-      url: 'userApi/test'
+      url: 'userApi/students'
     })
       .success(function (data, status, headers, config) {
-        $scope.info = data;
+        console.log("success!")
+        $scope.students = data;
         $scope.error = null;
       }).
       error(function (data, status, headers, config) {

@@ -26,14 +26,14 @@
 //  });
 //
 //
-//  describe('users', function() {
+//  describe('students', function() {
 //
 //    beforeEach(function() {
-//      browser.get('#/users');
+//      browser.get('#/students');
 //    });
 //
 //
-//    it('should render users when user navigates to /users', function() {
+//    it('should render students when user navigates to /students', function() {
 //      expect(element.all(by.css('[ng-view] p')).first().getText()).
 //        toMatch(/partial for view 2/);
 //    });

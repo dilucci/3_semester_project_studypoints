@@ -30,8 +30,7 @@ Start mongo.exe and do:
 /** Replace this Schema with your own(s) **/
 var studentSchema = new mongoose.Schema({
   _id: Number,
-  first_name: String,
-  last_name: String,
+  username: String,
   email: {type: String, unique: true},
   study_points: Number
 });
@@ -40,8 +39,7 @@ var studentSchema = new mongoose.Schema({
 /** Replace this Schema with your own(s) **/
 var teacherSchema = new mongoose.Schema({
   _id: Number,
-  first_name: String,
-  last_name: String,
+  username: String,
   email: {type: String, unique: true}
 });
 
