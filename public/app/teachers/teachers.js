@@ -29,21 +29,21 @@ angular.module('myAppRename.teachers', ['ngRoute'])
 .controller('teachersCtrl', function ($scope, $http) {
 
         $scope.searchStudent ="";
-    $http({
-      method: 'GET',
-      url: 'adminApi/user'
-    }).
-      success(function (data, status, headers, config) {
-        $scope.users = data;
-         $scope.error = null;
-      }).
-      error(function (data, status, headers, config) {
-        if(status == 401){
-          $scope.error ="You are not authenticated to request these data";
-            return;
-        }
-        $scope.error = data;
-      });
+    //$http({
+    //  method: 'GET',
+    //  url: 'adminApi/user'
+    //}).
+    //  success(function (data, status, headers, config) {
+    //    $scope.users = data;
+    //     $scope.error = null;
+    //  }).
+    //  error(function (data, status, headers, config) {
+    //    if(status == 401){
+    //      $scope.error ="You are not authenticated to request these data";
+    //        return;
+    //    }
+    //    $scope.error = data;
+    //  });
       $http({
         method: 'GET',
         url: 'userApi/students' + $scope.searchStudent
