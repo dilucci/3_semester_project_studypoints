@@ -11,15 +11,20 @@ angular.module('myAppRename.teachers', ['ngRoute'])
     templateUrl: 'app/teachers/teacheradd.html',
     controller: 'teachersCtrl'
   });
-      $routeProvider.when('/teachermarking', {
-        templateUrl: 'app/teachers/teachermarking.html',
-        controller: 'teachersCtrl'
-      });
+  $routeProvider.when('/teachermarking', {
+    templateUrl: 'app/teachers/teachermarking.html',
+    controller: 'teachersCtrl'
+  });
+  $routeProvider.when('/teacherchangestudent', {
+    templateUrl: 'app/teachers/teacherchangestudent.html',
+    controller: 'teachersCtrl'
+  });
 
 }])
 
 .controller('teachersCtrl', function ($scope, $http) {
 
+        $scope.searchStudent ="";
     $http({
       method: 'GET',
       url: 'adminApi/user'
@@ -37,7 +42,7 @@ angular.module('myAppRename.teachers', ['ngRoute'])
       });
       $http({
         method: 'GET',
-        url: 'userApi/students'
+        url: 'userApi/students' + $scope.searchStudent
       })
           .success(function (data, status, headers, config) {
             console.log("success!")

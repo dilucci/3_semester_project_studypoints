@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1>Hej i TeacherChangeStudent</h1>
+
+<p>Search Student:  <input type="search" ng-model="searchStudent"></p>
+
+<ul ng-repeat="student in students | filter: searchStudent">
+    <li><button type="submit">Details</button>     {{student.username}}</li>
+</ul>
+
+</body>
+</html>
