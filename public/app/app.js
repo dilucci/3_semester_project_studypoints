@@ -11,7 +11,8 @@ angular.module('myAppRename', [
   'myAppRename.home',
   'myAppRename.students',
   'myAppRename.teachers',
-  'myAppRename.profiles'
+  'myAppRename.profiles',
+  'myAppRename.mypage'
 ]).
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({redirectTo: '/home'});
