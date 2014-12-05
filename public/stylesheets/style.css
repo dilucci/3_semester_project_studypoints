@@ -11,3 +11,11 @@ a {
 {
   margin-bottom:10px;
 }
+.detailsbutton
+{
+  float: right;
+}
+.repeatstudents
+{
+  border-bottom: 1px solid black;
+}

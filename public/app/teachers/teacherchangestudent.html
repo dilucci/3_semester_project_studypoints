@@ -10,8 +10,8 @@
 
 <p>Search Student:  <input type="search" ng-model="searchStudent"></p>
 
-<ul ng-repeat="student in students | filter: searchStudent">
-    <li><button type="submit">Details</button>     {{student.username}}</li>
+<ul class="repeatstudents" ng-repeat="student in students | filter: searchStudent">
+    <li>Username:   {{student.username}} | Email:   {{student.email}}<button type="submit" class="detailsbutton">Details</button></li>
 </ul>
 
 </body>
