@@ -34,6 +34,22 @@ angular.module('myAppRename.teachers', ['ngRoute'])
         }
         $scope.error = data;
       });
+      $http({
+        method: 'GET',
+        url: 'userApi/students'
+      })
+          .success(function (data, status, headers, config) {
+            console.log("success!")
+            $scope.students = data;
+            $scope.error = null;
+          }).
+          error(function (data, status, headers, config) {
+            if (status == 401) {
+              $scope.error = "You are not authenticated to request these data";
+              return;
+            }
+            $scope.error = data;
+          });
 });
 
 

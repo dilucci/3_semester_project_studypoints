@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 var http = require('http');
-http.post = require('http-post');
+
 
 
 
@@ -79,24 +79,6 @@ router.post('/authenticate', function (req, res) {
     httpreq.end();
     console.log("Request ended.")
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   //  var authString = JSON.stringify(req.body)
   //  var headers = {
   //      'Content-Type': 'application/json',

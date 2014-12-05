@@ -10,6 +10,15 @@ angular.module('myAppRename.students', ['ngRoute'])
   }])
   .controller('StudentCtrl', ['$scope', '$http', function ($scope, $http) {
       console.log("inde i studentCtrl")
+
+      $scope.abstract = false;
+      $scope.hoverIn = function(){
+        this.abstract = true;
+      };
+
+      $scope.hoverOut = function(){
+        this.abstract = false;
+      };
     $http({
       method: 'GET',
       url: 'userApi/students'
