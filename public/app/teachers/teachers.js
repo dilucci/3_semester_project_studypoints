@@ -19,6 +19,7 @@ angular.module('myAppRename.teachers', ['ngRoute'])
 }])
 
 .controller('teachersCtrl', function ($scope, $http) {
+
     $http({
       method: 'GET',
       url: 'adminApi/user'
