@@ -7,8 +7,8 @@ angular.module('myAppRename.teachers', ['ngRoute'])
     templateUrl: 'app/teachers/teachers.html',
     controller: 'teachersCtrl'
   });
-  $routeProvider.when('/teacheradd', {
-    templateUrl: 'app/teachers/teacheradd.html',
+  $routeProvider.when('/teacheraddperiod', {
+    templateUrl: 'app/teachers/teacheraddperiod.html',
     controller: 'teachersCtrl'
   });
   $routeProvider.when('/teachermarking', {
@@ -17,6 +17,10 @@ angular.module('myAppRename.teachers', ['ngRoute'])
   });
   $routeProvider.when('/teacherchangestudent', {
     templateUrl: 'app/teachers/teacherchangestudent.html',
+    controller: 'teachersCtrl'
+  });
+  $routeProvider.when('/teacheraddstudent', {
+    templateUrl: 'app/teachers/teacheraddstudent.html',
     controller: 'teachersCtrl'
   });
 
