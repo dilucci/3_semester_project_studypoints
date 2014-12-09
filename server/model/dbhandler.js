@@ -13,11 +13,11 @@ module.exports.getStudents = function(callback) {
     });
 };
 
-module.exports.getStudentDetails = function(username, callback) {
+module.exports.getStudentDetails = function(id, callback) {
     mongo.connect();
-    console.log("getStudentDetail metode!")
-    model.StudentModel.find( {username: username }, function (error, student) {
-        console.log("student: " + student)
+    //console.log("getStudentDetail metode!")
+    model.StudentModel.find( {_id: id }, function (error, student) {
+        //console.log("student: " + student)
         callback(student);
         mongo.close();
     });

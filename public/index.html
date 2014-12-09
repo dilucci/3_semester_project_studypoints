@@ -24,10 +24,10 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
 <!--          <li><a class="active" href="#/home">home</a></li>-->
-          <!--<li><a href="#/students" ng-show="isUser">Users only (students)</a></li>-->
+          <!--<li><a href="#/schedule" ng-show="isUser">Users only (schedule)</a></li>-->
           <li><a href="#/mypage" ng-show="isUser">My page</a></li>
-          <li><a href="#/students" >Users only (students)</a></li>
-          <li><a href="#/teachers" ng-show="isAdmin">Admins only (teachers)</a></li>
+          <li><a href="#/teachers" ng-show="isAdmin">Students</a></li>
+          <li><a href="#/schedule" ng-show="isAuthenticated">Schedule</a></li>
           <!--<li><a href="#/teachers" >Admins only (teachers)</a></li>-->
           <!--<li><a href="#/profiles" >profiles</a></li>-->
         </ul>
@@ -44,7 +44,7 @@
           <button type="submit" class="btn btn-success">Sign in</button>
         </form>
         <div class="navbar-right" ng-show="isAuthenticated">
-          <p class="navbar-text">Logged on as: {{username}}</p>
+          <p class="navbar-text">Logged on as: {{student.username}}</p>
 
           <button type="submit" class="btn btn-primary navbar-btn"  ng-click="logout()">Logout
           </button>
@@ -62,7 +62,7 @@
 <script src="vendor/angular-route/angular-route.js"></script>
 <script src="app/app.js"></script>
 <script src="app/home/home.js"></script>
-<script src="app/students/students.js"></script>
+<script src="app/schedule/schedule.js"></script>
 <script src="app/teachers/teachers.js"></script>
 <script src="app/profiles/profiles.js"></script>
 <script src="app/mypage/mypage.js"></script>

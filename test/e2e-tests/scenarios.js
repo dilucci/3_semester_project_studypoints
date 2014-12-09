@@ -26,14 +26,14 @@
 //  });
 //
 //
-//  describe('students', function() {
+//  describe('schedule', function() {
 //
 //    beforeEach(function() {
-//      browser.get('#/students');
+//      browser.get('#/schedule');
 //    });
 //
 //
-//    it('should render students when user navigates to /students', function() {
+//    it('should render schedule when user navigates to /schedule', function() {
 //      expect(element.all(by.css('[ng-view] p')).first().getText()).
 //        toMatch(/partial for view 2/);
 //    });

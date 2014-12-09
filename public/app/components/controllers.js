@@ -36,6 +36,7 @@ angular.module('myAppRename.controllers', []).
           var encodedProfile = data.token.split('.')[1];
           var profile = JSON.parse(url_base64_decode(encodedProfile));
           $scope.username = profile.username;
+          $scope.userId = profile.id;
           var String1 = "hej jeg er en string";
           console.log(String1)
           console.log('Profile Role: ' + profile.role) ;
@@ -44,6 +45,22 @@ angular.module('myAppRename.controllers', []).
           console.log("isAdmin: " + $scope.isAdmin);
           console.log("isUser: " + $scope.isUser);
           $scope.error = null;
+            $http({
+              method: 'GET',
+              url: 'userApi/schedule/' + $scope.userId
+            })
+                .success(function (studentArray, status, headers, config) {
+                  //console.log("success!")
+                  $scope.student = studentArray[0];
+                  $scope.error = null;
+                }).
+                error(function (data, status, headers, config) {
+                  if (status == 401) {
+                    $scope.error = "Could not retrieve user data from database.";
+                    return;
+                  }
+                  $scope.error = data;
+                });
         })
         .error(function (data, status, headers, config) {
           // Erase the token if the user fails to log in

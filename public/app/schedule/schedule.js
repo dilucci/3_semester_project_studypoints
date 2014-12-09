@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myAppRename.students', ['ngRoute'])
+angular.module('myAppRename.schedule', ['ngRoute'])
 
   .config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/students', {
-      templateUrl: 'app/students/students.html',
-      controller: 'StudentCtrl'
+    $routeProvider.when('/schedule', {
+      templateUrl: 'app/schedule/schedule.html',
+      controller: 'ScheduleCtrl'
     });
   }])
-  .controller('StudentCtrl', ['$scope', '$http', function ($scope, $http) {
-      console.log("inde i studentCtrl")
+  .controller('ScheduleCtrl', ['$scope', '$http', function ($scope, $http) {
+      console.log("inde i ScheduleCtrl")
 
       $scope.abstract = false;
       $scope.hoverIn = function(){
@@ -21,7 +21,7 @@ angular.module('myAppRename.students', ['ngRoute'])
       };
     $http({
       method: 'GET',
-      url: 'userApi/students'
+      url: 'userApi/schedule'
     })
       .success(function (data, status, headers, config) {
         console.log("success!")

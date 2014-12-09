@@ -38,7 +38,7 @@ describe('REST API for /user', function () {
     testServer.close();
   })
 
-  it("Should get 2 students; Lars and Henrik", function (done) {
+  it("Should get 2 schedule; Lars and Henrik", function (done) {
     http.get("http://localhost:"+testPort+"/adminApi/user",function(res){
       res.setEncoding("utf8");//response data is now a string
       res.on("data",function(chunk){
