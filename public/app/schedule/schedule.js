@@ -11,21 +11,21 @@ angular.module('myAppRename.schedule', ['ngRoute'])
   .controller('ScheduleCtrl', ['$scope', '$http', function ($scope, $http) {
       console.log("inde i ScheduleCtrl")
 
-      $scope.abstract = false;
-      $scope.hoverIn = function(){
-        this.abstract = true;
-      };
-
-      $scope.hoverOut = function(){
-        this.abstract = false;
-      };
+      //$scope.abstract = false;
+      //$scope.hoverIn = function(){
+      //  this.abstract = true;
+      //};
+      //
+      //$scope.hoverOut = function(){
+      //  this.abstract = false;
+      //};
     $http({
       method: 'GET',
-      url: 'userApi/schedule'
+      url: 'userApi/periods'
     })
       .success(function (data, status, headers, config) {
         console.log("success!")
-        $scope.students = data;
+        $scope.periods = data;
         $scope.error = null;
       }).
       error(function (data, status, headers, config) {
@@ -43,15 +43,15 @@ function toggleTable() {
   lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
 };*/
 
-function showHide(shID) {
-  if (document.getElementById(shID)) {
-    if (document.getElementById(shID+'-show').style.display != 'none') {
-      document.getElementById(shID+'-show').style.display = 'none';
-      document.getElementById(shID).style.display = 'block';
-    }
-    else {
-      document.getElementById(shID+'-show').style.display = 'inline';
-      document.getElementById(shID).style.display = 'none';
-    }
-  }
-}
+//function showHide(shID) {
+//  if (document.getElementById(shID)) {
+//    if (document.getElementById(shID+'-show').style.display != 'none') {
+//      document.getElementById(shID+'-show').style.display = 'none';
+//      document.getElementById(shID).style.display = 'block';
+//    }
+//    else {
+//      document.getElementById(shID+'-show').style.display = 'inline';
+//      document.getElementById(shID).style.display = 'none';
+//    }
+//  }
+//}

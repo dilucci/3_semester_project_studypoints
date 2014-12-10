@@ -19,3 +19,13 @@ a {
 {
   border-bottom: 1px solid black;
 }
+.newPeriods {
+  margin-bottom:10px;
+}
+.forms {
+  border: 2px solid black;
+  padding: 3px;
+  margin-right: 10px;
+  border-radius: 10px;
+  display: inline-block;
+}
