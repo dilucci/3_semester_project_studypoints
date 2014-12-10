@@ -1,9 +1,9 @@
 var express = require('express');
 var dbhandler = require('../model/dbhandler');
-
 var router = express.Router();
 
 router.get('/schedule', function(req, res) {
+    console.log('PERIODS');
     if(typeof global.mongo_error !== "undefined"){
         res.status(500);
         res.end("Error: "+global.mongo_error+"Make sure you have started the database");

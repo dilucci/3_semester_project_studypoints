@@ -31,3 +31,12 @@ module.exports.getPeriods = function(callback) {
         mongo.close();
     });
 };
+
+module.exports.addPeriod = function(callback) {
+    mongo.connect();
+    console.log("getPeriods metode!")
+    model.PeriodModel.insert( function (error, periods) {
+        callback(periods);
+        mongo.close();
+    });
+};

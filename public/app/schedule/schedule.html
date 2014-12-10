@@ -14,12 +14,13 @@
         </ul>
     </div>
   </div>
-<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;">
+<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="isAdmin">
   <div class="alert alert-info" role="alert" style="text-align: center">Create a new Period</div>
   <form>
-    Name: <input type="text" class="newPeriods" ng-model="newPeriod"><br>
+    Name: <input type="text" class="newPeriods" ng-model="newPeriodName"><br>
     From: <input type="date" class="newPeriods" ng-model="newStart"><br>
     To: <input type="date" class="newPeriods" ng-model="newEnd"><br>
+    Max-Points: <input type="number" class="newPeriods" ng-model="newMaxPoints"><br>
     <button ng-click="add()">Add period</button>
   </form>
 </div>

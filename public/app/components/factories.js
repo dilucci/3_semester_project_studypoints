@@ -25,6 +25,7 @@ var app = angular.module('myAppRename.factories', []);
       },
       responseError: function (rejection) {
         if (rejection.status === 401) {
+          console.log('REJECTED BITCH');
           // handle the case where the user is not authenticated
         }
         return $q.reject(rejection);
