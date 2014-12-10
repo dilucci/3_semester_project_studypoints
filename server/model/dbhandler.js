@@ -7,7 +7,7 @@ module.exports.getStudents = function(callback) {
     mongo.connect();
     console.log("getStudents metode!")
     model.StudentModel.find( function (error, students) {
-        console.log("students: " + students)
+        //console.log("students: " + students)
         callback(students);
         mongo.close();
     });
@@ -19,6 +19,15 @@ module.exports.getStudentDetails = function(id, callback) {
     model.StudentModel.find( {_id: id }, function (error, student) {
         //console.log("student: " + student)
         callback(student);
+        mongo.close();
+    });
+};
+
+module.exports.getPeriods = function(callback) {
+    mongo.connect();
+    console.log("getPeriods metode!")
+    model.SemesterModel.find( function (error, periods) {
+        callback(periods);
         mongo.close();
     });
 };

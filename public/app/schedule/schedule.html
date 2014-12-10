@@ -3,101 +3,127 @@
 <p style="color: darkgreen">Partial (view2.html) is located in the folder for this view (app/view2)</p>
 <br/>
 <p style="color: #105cb6">
+  <h1 style="text-align: center;">Semester</h1>
+  <h2 style="text-align: center;">02-08-14 til 19-12-14</h2>
+  <div class="panel">
+    <div class="panel-body" style="border: 2px solid black; border-radius: 10px;">
+      <form class="forms" ng-click="choose()">
+        name:
+        date: from - to
+      </form>
+      <form class="forms" ng-click="choose()">
+        name:
+        date: from - to
+      </form>
+      <form class="forms" ng-click="choose()">
+        name:
+        date: from - to
+      </form>
+    </div>
+  </div>
+<div class="col-md-3" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;">
+  <form>
+    Name: <input type="text" class="newPeriods" ng-model="newYear">
+    From: <input type="date" class="newPeriods" ng-model="newRegistered"><br>
+    To: <input type="date" class="newPeriods" ng-model="newMake"><br>
+    <button ng-click="add()">Add period</button>
+  </form>
+</div>
 
   <!--schedule message: {{schedule.msg}}-->
   <!--error: {{error}}-->
   <!--schedule: {{schedule}}-->
 
-    <table style="border-collapse:collapse;">
-      <thead>
-      <tr>
-        <th colspan="2" style="color:black">Study Points</th>
-      </tr>
-      <tr style="border-bottom:1px solid black;">
-        <th style="padding:5px;"><em>"Name"</em></th>
-        <th style="padding:5px;border-left:1px solid black;"><em>Study Points</em></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td style="padding:5px;">
-          <a ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">Periode 1</a>
-            <div ng-show="abstract">
-                    <table style="border-collapse:collapse;">
-                        <thead>
-                            <tr style="border-bottom:1px solid black;">
-                              <th style="padding:5px;"><em>Uge 1</em></th>
-                              <th style="padding:5px;border-left:1px solid black;"><em>Study Points</em></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                              <td style="padding:5px;">
-                                Dag 1
-                              </td>
-                              <td style="padding:5px;border-left:1px solid black;">
-                                5 ud af 5
-                              </td>
+    <!--<table style="border-collapse:collapse;">-->
+      <!--<thead>-->
+      <!--<tr>-->
+        <!--<th colspan="2" style="color:black">Study Points</th>-->
+      <!--</tr>-->
+      <!--<tr style="border-bottom:1px solid black;">-->
+        <!--<th style="padding:5px;"><em>"Name"</em></th>-->
+        <!--<th style="padding:5px;border-left:1px solid black;"><em>Study Points</em></th>-->
+      <!--</tr>-->
+      <!--</thead>-->
+      <!--<tbody>-->
+      <!--<tr>-->
+        <!--<td style="padding:5px;">-->
+          <!--<a ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">Periode 1</a>-->
+            <!--<div ng-show="abstract">-->
+                    <!--<table style="border-collapse:collapse;">-->
+                        <!--<thead>-->
+                            <!--<tr style="border-bottom:1px solid black;">-->
+                              <!--<th style="padding:5px;"><em>Uge 1</em></th>-->
+                              <!--<th style="padding:5px;border-left:1px solid black;"><em>Study Points</em></th>-->
+                            <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                            <!--<tr>-->
+                              <!--<td style="padding:5px;">-->
+                                <!--Dag 1-->
+                              <!--</td>-->
+                              <!--<td style="padding:5px;border-left:1px solid black;">-->
+                                <!--5 ud af 5-->
+                              <!--</td>-->
 
-                            </tr>
-                            <tr>
-                              <td style="padding:5px;">
-                                Dag 2
-                              </td>
-                              <td style="padding:5px;border-left:1px solid black;">
-                                0 ud af 5
-                              </td>
-                            </tr>
-                        </tbody>
-                    </table>
-            </div>
+                            <!--</tr>-->
+                            <!--<tr>-->
+                              <!--<td style="padding:5px;">-->
+                                <!--Dag 2-->
+                              <!--</td>-->
+                              <!--<td style="padding:5px;border-left:1px solid black;">-->
+                                <!--0 ud af 5-->
+                              <!--</td>-->
+                            <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+            <!--</div>-->
 
-        </td>
-        <td style="padding:5px;border-left:1px solid black;">10 ud af 12</td>
-      </tr>
+        <!--</td>-->
+        <!--<td style="padding:5px;border-left:1px solid black;">10 ud af 12</td>-->
+      <!--</tr>-->
 
-      <tr>
-        <td style="padding:5px;">
-          <div ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">Periode 2</div>
-          <div ng-show="abstract">
-            <table style="border-collapse:collapse;">
-              <thead>
-              <tr style="border-bottom:1px solid black;">
-                <th style="padding:5px;"><em>Uge 1</em></th>
-                <th style="padding:5px;border-left:1px solid black;"><em>Study Points</em></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td style="padding:5px;">
-                  Dag 1
-                </td>
-                <td style="padding:5px;border-left:1px solid black;">
-                  5 ud af 5
-                </td>
+      <!--<tr>-->
+        <!--<td style="padding:5px;">-->
+          <!--<div ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">Periode 2</div>-->
+          <!--<div ng-show="abstract">-->
+            <!--<table style="border-collapse:collapse;">-->
+              <!--<thead>-->
+              <!--<tr style="border-bottom:1px solid black;">-->
+                <!--<th style="padding:5px;"><em>Uge 1</em></th>-->
+                <!--<th style="padding:5px;border-left:1px solid black;"><em>Study Points</em></th>-->
+              <!--</tr>-->
+              <!--</thead>-->
+              <!--<tbody>-->
+              <!--<tr>-->
+                <!--<td style="padding:5px;">-->
+                  <!--Dag 1-->
+                <!--</td>-->
+                <!--<td style="padding:5px;border-left:1px solid black;">-->
+                  <!--5 ud af 5-->
+                <!--</td>-->
 
-              </tr>
-              <tr>
-                <td style="padding:5px;">
-                  Dag 2
-                </td>
-                <td style="padding:5px;border-left:1px solid black;">
-                  0 ud af 5
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td style="padding:5px;">-->
+                  <!--Dag 2-->
+                <!--</td>-->
+                <!--<td style="padding:5px;border-left:1px solid black;">-->
+                  <!--0 ud af 5-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--</tbody>-->
+            <!--</table>-->
+          <!--</div>-->
 
-        </td>
-        <td style="padding:5px;border-left:1px solid black;">5 ud af 12</td>
-      </tr>
+        <!--</td>-->
+        <!--<td style="padding:5px;border-left:1px solid black;">5 ud af 12</td>-->
+      <!--</tr>-->
 
 
-      <tr>
-        <td style="padding:5px;"><a href="www.facebook.com">Periode 3</a></td>
-        <td style="padding:5px;border-left:1px solid black;">8 ud af 10</td>
-      </tr>
-      </tbody>
-    </table>
-        <p> Max antal point = 23 ud af 32</p>
+      <!--<tr>-->
+        <!--<td style="padding:5px;"><a href="www.facebook.com">Periode 3</a></td>-->
+        <!--<td style="padding:5px;border-left:1px solid black;">8 ud af 10</td>-->
+      <!--</tr>-->
+      <!--</tbody>-->
+    <!--</table>-->
+        <!--<p> Max antal point = 23 ud af 32</p>-->

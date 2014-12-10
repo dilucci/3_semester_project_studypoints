@@ -27,8 +27,8 @@ angular.module('myAppRename.teachers', ['ngRoute'])
 }])
 
 .controller('teachersCtrl', function ($scope, $http) {
-
-        $scope.searchStudent ="";
+    console.log("inde i TeacherCtrl")
+    $scope.searchStudent ="";
     //$http({
     //  method: 'GET',
     //  url: 'adminApi/user'

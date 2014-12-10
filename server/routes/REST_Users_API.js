@@ -6,11 +6,11 @@ var router = express.Router();
 router.get('/schedule', function(req, res) {
     if(typeof global.mongo_error !== "undefined"){
         res.status(500);
-        res.end("Error: "+global.mongo_error+" To see a list of wikis here, make sure you have started the database and set up some test wikis (see model-->db.js for instructions)");
+        res.end("Error: "+global.mongo_error+"Make sure you have started the database");
         return;
     }
     dbhandler.getStudents(function(students){
-        console.log("schedule stringy: " + JSON.stringify(students));
+        //console.log("schedule stringy: " + JSON.stringify(students));
         res.header("Content-type","application/json");
         res.end(JSON.stringify(students));
     })
@@ -19,14 +19,27 @@ router.get('/schedule', function(req, res) {
 router.get('/schedule/:id', function(req, res) {
     if(typeof global.mongo_error !== "undefined"){
         res.status(500);
-        res.end("Error: "+global.mongo_error+" To see a list of wikis here, make sure you have started the database and set up some test wikis (see model-->db.js for instructions)");
+        res.end("Error: "+global.mongo_error+"Make sure you have started the database");
         return;
     }
     var id = req.params.id;
     dbhandler.getStudentDetails(id, function(student){
-        console.log("schedule stringy: " + JSON.stringify(student));
+        //console.log("schedule stringy: " + JSON.stringify(student));
         res.header("Content-type","application/json");
         res.end(JSON.stringify(student));
+    })
+});
+
+router.get('/periods', function(req, res) {
+    if(typeof global.mongo_error !== "undefined"){
+        res.status(500);
+        res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+        return;
+    }
+    dbhandler.getPeriods(function(periods){
+        console.log("Periods stringy: " + JSON.stringify(periods));
+        res.header("Content-type","application/json");
+        res.end(JSON.stringify(periods));
     })
 });
 
