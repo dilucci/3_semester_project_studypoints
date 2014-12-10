@@ -72,28 +72,22 @@ function getClasses() {
     });
 };
 
-function getSemesters() {
-    return semesters.map(function(semester) {
+function getPeriods() {
+    return periods.map(function(period) {
         return {
-            _id: semester.semesterID,
+            _id: period.periodID,
+            period_name: period.period_name,
+            start_date: period.start_date,
+            end_date: period.end_date,
+            max_points: period.max_points,
             classes: [{
-                class: semester.classID
+                class: period.classID
             }],
-            periods: [{
-                period_id: semester.periodID,
-                weeks:[{
-                    week_id: semester.weekID,
-                    days:[{
-                        date: semester.currentDate,
-                        study_point: semester.study_point,
-                        students: [{
-                            student: semester.studentID
-                        }]
-                    }]
-                }]
+            days: [{
+                day: period.dayID
             }],
             tasks: [{
-                task: semester.taskID
+                task: period.taskID
             }]
         };
     });
@@ -109,11 +103,27 @@ function getTasks() {
     });
 };
 
+function getDays() {
+    return days.map(function(day) {
+        return {
+            _id: day.dayID,
+            date: day.date,
+            description: day.description,
+            study_point: day.study_point,
+            students: [{
+                student: day.students.studentID
+            }]
+        };
+    });
+};
+
 var students = readData('students.json');
 var teachers = readData('teachers.json');
 var classes = readData('classes.json');
-var semesters = readData('semesters.json');
 var tasks = readData('tasks.json');
+var days = readData('days.json');
+var periods = readData('periods.json');
+
 
 var db = mongoose.connect(dbURI);
 
@@ -140,8 +150,9 @@ process.on('SIGINT', function() {
 model.StudentModel.remove({}).exec();
 model.TeacherModel.remove({}).exec();
 model.ClassModel.remove({}).exec();
-model.SemesterModel.remove({}).exec();
 model.TaskModel.remove({}).exec();
+model.DayModel.remove({}).exec();
+model.PeriodModel.remove({}).exec();
 
 function closeDatabase() {
     db.connection.close();
@@ -164,8 +175,9 @@ function addData(data, dataModel) {
 addData(getStudents(), model.StudentModel);
 addData(getTeachers(), model.TeacherModel);
 addData(getClasses(), model.ClassModel);
-addData(getSemesters(), model.SemesterModel);
 addData(getTasks(), model.TaskModel);
+addData(getDays(), model.DayModel);
+addData(getPeriods(), model.PeriodModel);
 
 async.series(asyncTasks, function(){
     closeDatabase();

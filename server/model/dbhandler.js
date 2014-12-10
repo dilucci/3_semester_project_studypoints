@@ -26,7 +26,7 @@ module.exports.getStudentDetails = function(id, callback) {
 module.exports.getPeriods = function(callback) {
     mongo.connect();
     console.log("getPeriods metode!")
-    model.SemesterModel.find( function (error, periods) {
+    model.PeriodModel.find( function (error, periods) {
         callback(periods);
         mongo.close();
     });
