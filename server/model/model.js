@@ -90,7 +90,7 @@ var classSchema = new mongoose.Schema({
         }],
     teachers: [
         {
-        teacher: { type: Number, ref: 'Teacher'}
+            teacher: { type: Number, ref: 'Teacher'}
     }]
 });
 

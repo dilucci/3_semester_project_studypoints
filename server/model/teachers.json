@@ -1,2 +1,2 @@
-_id,username,first_name,last_name,phone,email
-[1,"m","Sebastian","Di Lucci","12345678","Sebu@hotmale.com"]
+teacherID,username,first_name,last_name,phone,email
+[[1,"m","Sebastian","Di Lucci","12345678","Sebu@hotmail.com"]]

@@ -33,7 +33,7 @@ function readData(path) {
 function getStudents() {
     return students.map(function(student) {
         return {
-            _id: student._id,
+            _id: student.studentID,
             username: student.username,
             first_name: student.first_name,
             last_name: student.last_name,
@@ -48,7 +48,7 @@ function getStudents() {
 function getTeachers() {
     return teachers.map(function(teacher) {
         return {
-            _id: teacher._id,
+            _id: teacher.teacherID,
             username: teacher.username,
             first_name: teacher.first_name,
             last_name: teacher.last_name,
@@ -61,9 +61,13 @@ function getTeachers() {
 function getClasses() {
     return classes.map(function(class_) {
         return {
-            _id: class_._id,
-            students: class_.students,
-            teachers: class_.teachers
+            _id: class_.classID,
+            students: [{
+               student: class_.students.studentID
+            }],
+            teachers: [{
+                teacher: class_.teacherID
+            }]
         };
     });
 };
@@ -71,10 +75,26 @@ function getClasses() {
 function getSemesters() {
     return semesters.map(function(semester) {
         return {
-            _id: semester._id,
-            classes: semester.classes,
-            periods: semester.periods,
-            tasks: semester.tasks
+            _id: semester.semesterID,
+            classes: [{
+                class: semester.classID
+            }],
+            periods: [{
+                period_id: semester.periodID,
+                weeks:[{
+                    week_id: semester.weekID,
+                    days:[{
+                        date: semester.currentDate,
+                        study_point: semester.study_point,
+                        students: [{
+                            student: semester.studentID
+                        }]
+                    }]
+                }]
+            }],
+            tasks: [{
+                task: semester.taskID
+            }]
         };
     });
 };
@@ -82,7 +102,7 @@ function getSemesters() {
 function getTasks() {
     return tasks.map(function(task) {
         return {
-            _id: task._id,
+            _id: task.taskID,
             task_name: task.task_name,
             description: task.description
         };

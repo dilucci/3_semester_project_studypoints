@@ -1,2 +1,2 @@
-_id,classes,periods,tasks
-[[1,["Dat-A-2013"],["Period_1",["Week_1",["2014-01-01T10:50:42.389Z",1,[1,2]]]],[1]]]
+semesterID,classes,periods,periodID,weeks,weekID,days,currentDate,study_point,students,tasks
+[[1,["Dat-A-2013"],["Period_1",["Week_1",["2014-01-01T10:50:42.389Z",1,[1]]]],[1]]]
