@@ -7,6 +7,10 @@ angular.module('myAppRename.schedule', ['ngRoute'])
       templateUrl: 'app/schedule/schedule.html',
       controller: 'ScheduleCtrl'
     });
+    $routeProvider.when('/scheduleperiod', {
+      templateUrl: 'app/schedule/scheduleperiod.html',
+      controller: 'ScheduleCtrl'
+    });
   }])
   .controller('ScheduleCtrl', ['$scope', '$http', function ($scope, $http) {
       console.log("inde i ScheduleCtrl");

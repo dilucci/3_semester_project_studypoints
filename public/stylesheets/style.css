@@ -25,11 +25,30 @@ a {
   display: inline-block;
   margin-bottom:10px;
 }
-.forms {
+/*.forms {
   border: 2px solid black;
   padding: 3px;
   margin-right: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
   display: inline-block;
+}*/
+.forminteach
+{
+  color: #F8F8F8;
+  border-radius: 25px;
+  margin-bottom:5px;
+  width: 400px;
+}
+.inputinteach
+{
+  background-color: #0066CC;
+  border-radius: 25px;
+  margin-bottom: 5px;
+  width: 400px;
+}
+#forminteach
+{
+  border-radius: 25px;
+  margin-top:5px;
 }

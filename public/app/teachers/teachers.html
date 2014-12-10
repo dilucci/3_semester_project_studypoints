@@ -1,22 +1,18 @@
 <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
 
-<h1>Hej i TeacherMain!</h1>
+<h1>Hello!</h1>
         <p>Click on one of the following links to do what you want. or something, idc. GGWP teacher.</p>
-<!--
-<ul>
-  <li ng-repeat="user in users"> {{user.userName}} {{user.email}} </li>
-</ul>
--->
 
-<a href="#/teacheraddperiod">Add periode</a> <br>
-<a href="#/teacheraddstudent">Add Student</a> <br>
-<a href="#/teachermarking">Mark schedule</a> <br>
-<a href="#/teacherchangestudent">Search for student</a>
-
-<!--
-<ul> &lt;!&ndash;Her er det users bliver indsættet og checked for at møde op osv. &ndash;&gt;
-  <li>Repeats incoming! <input type="radio"> Emil Fridthjof<br>
-    <input type="radio"> Sebastian Di Lucci
-  </li>
-</ul>
--->
+    <div class="panel">
+        <div class="panel-body-col-md-8" style="border: 2px solid black; border-radius: 10px; display: inline-block;">
+            <form action="/teacheraddstudent" class="forminteach" id="forminteach">
+                <input type="submit" class="inputinteach" value="Add Student">
+            </form>
+            <form action="#/teachermarking" class="forminteach">
+                <input type="submit" class="inputinteach" value="Student mark schema">
+            </form>
+            <form action="#/teacherchangestudent" class="forminteach">
+                <input type="submit" class="inputinteach" value="Search for student">
+            </form>
+        </div>
+    </div>
