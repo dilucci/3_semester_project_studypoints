@@ -19,6 +19,10 @@ angular.module('myAppRename.schedule', ['ngRoute'])
       $scope.add = function() {
       $scope.newPeriod = {_id: $scope.nextId, period_name: $scope.newPeriodName, start_date: $scope.newStart, end_date: $scope.newEnd, max_points: $scope.newMaxPoints};
 
+        $scope.showDetails = function (period) {
+          $scope.period = period;
+        }
+
       $http({
           method: 'POST',
           url: 'adminApi/periods',
