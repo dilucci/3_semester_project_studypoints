@@ -83,7 +83,8 @@ var teacherSchema = new mongoose.Schema({
 });
 
 var classSchema = new mongoose.Schema({
-    _id: String,
+    _id: Number,
+    class_name: String,
     students: [
         {
             student: { type: Number, ref: 'Student' }
@@ -94,44 +95,77 @@ var classSchema = new mongoose.Schema({
     }]
 });
 
-var semesterSchema = new mongoose.Schema({
-    _id: String,
-    classes: [
-        {
-            class: { type: String, ref: 'Class' }
-        }],
-    periods: [
-        {
-            period_id: String,
-            weeks: [
-                {
-                    week_id: String,
-                    days: [
-                        {
-                            date: Date,
-                            study_point: Number,
-                            students: [
-                                {
-                                    student: { type: Number, ref: 'Student' }
-                                }]
-
-                        }]
-                }]
-        }],
-    tasks: [
-        {
-            task: { type: Number, ref: 'Task' }
-        }]
-});
 var taskSchema = new mongoose.Schema({
     _id: Number,
     task_name: String,
     description: String
 });
 
+var periodSchema = new mongoose.Schema({
+    _id: Number,
+    period_name: String,
+    start_date: Date,
+    end_date: Date,
+    max_points: Number,
+    classes: [
+        {
+            class: { type: Number, ref: 'Class' }
+        }],
+    days: [
+        {
+            day: { type: Number, ref: 'Day'}
+        }],
+    tasks: [
+        {
+            task: { type: Number, ref: 'Task' }
+        }]
+});
+
+var daySchema = new mongoose.Schema({
+    _id: Number,
+    date: Date,
+    description: String,
+    study_point: Number,
+    students: [
+        {
+            student: { type: Number, ref: 'Student' }
+        }]
+});
+
 
 exports.StudentModel = mongoose.model('Student', studentSchema);
 exports.TeacherModel = mongoose.model('Teacher', teacherSchema);
 exports.ClassModel = mongoose.model('Class', classSchema);
-exports.SemesterModel = mongoose.model( 'Semester', semesterSchema);
 exports.TaskModel = mongoose.model( 'Task', taskSchema);
+exports.DayModel = mongoose.model( 'Day', daySchema);
+exports.PeriodModel = mongoose.model( 'Period', periodSchema);
+
+//var semesterSchema = new mongoose.Schema({
+//    _id: String,
+//    classes: [
+//        {
+//            class: { type: String, ref: 'Class' }
+//        }],
+//    periods: [
+//        {
+//            period_id: String,
+//            weeks: [
+//                {
+//                    week_id: String,
+//                    days: [
+//                        {
+//                            date: Date,
+//                            study_point: Number,
+//                            students: [
+//                                {
+//                                    student: { type: Number, ref: 'Student' }
+//                                }]
+//
+//                        }]
+//                }]
+//        }],
+//    tasks: [
+//        {
+//            task: { type: Number, ref: 'Task' }
+//        }]
+//});
