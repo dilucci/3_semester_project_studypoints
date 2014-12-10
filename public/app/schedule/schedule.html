@@ -5,8 +5,32 @@
 <p style="color: #105cb6">
   <h1 style="text-align: center;">Semester</h1>
   <h2 style="text-align: center;">02-08-14 til 19-12-14</h2>
-  <div class="panel">
-    <div class="panel-body-col-md-8" style="border: 2px solid black; border-radius: 10px; display: inline-block;">
+  <div class="col-md-8">
+    <div class="panel-body" style="border: 2px solid black; border-radius: 10px; display: inline-block;">
+      <form class="forms" ng-click="choose()">
+        <p>name:</p>
+        <p>date: from - to</p>
+      </form>
+      <form class="forms" ng-click="choose()">
+        <p>name:</p>
+        <p>date: from - to</p>
+      </form>
+      <form class="forms" ng-click="choose()">
+        <p>name:</p>
+        <p>date: from - to</p>
+      </form>
+      <form class="forms" ng-click="choose()">
+        <p>name:</p>
+        <p>date: from - to</p>
+      </form>
+      <form class="forms" ng-click="choose()">
+        <p>name:</p>
+        <p>date: from - to</p>
+      </form>
+      <form class="forms" ng-click="choose()">
+        <p>name:</p>
+        <p>date: from - to</p>
+      </form>
       <form class="forms" ng-click="choose()">
         <p>name:</p>
         <p>date: from - to</p>
@@ -22,10 +46,11 @@
     </div>
   </div>
 <div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;">
+  <div class="alert alert-info" role="alert" style="text-align: center">Create a new Period</div>
   <form>
-    Name: <input type="text" class="newPeriods" ng-model="newYear">
-    From: <input type="date" class="newPeriods" ng-model="newRegistered"><br>
-    To: <input type="date" class="newPeriods" ng-model="newMake"><br>
+    Name: <input type="text" class="newPeriods" ng-model="newPeriod"><br>
+    From: <input type="date" class="newPeriods" ng-model="newStart"><br>
+    To: <input type="date" class="newPeriods" ng-model="newEnd"><br>
     <button ng-click="add()">Add period</button>
   </form>
 </div>

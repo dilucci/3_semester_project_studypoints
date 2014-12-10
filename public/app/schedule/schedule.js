@@ -9,7 +9,12 @@ angular.module('myAppRename.schedule', ['ngRoute'])
     });
   }])
   .controller('ScheduleCtrl', ['$scope', '$http', function ($scope, $http) {
-      console.log("inde i ScheduleCtrl")
+      console.log("inde i ScheduleCtrl");
+      $scope.add = function() {
+        $scope.newPeriod = {periode_id: $scope.newPeriod, start_date: $scope.newStart, end_date: $scope.newEnd};
+        $scope.cars.push($scope.newPeriod);
+        $scope.newPeriod = "";
+      }
 
       //$scope.abstract = false;
       //$scope.hoverIn = function(){
