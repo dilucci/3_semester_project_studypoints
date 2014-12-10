@@ -50,7 +50,6 @@ angular.module('myAppRename.controllers', []).
                 url: 'userApi/schedule/' + $scope.userId
               })
                   .success(function (studentArray, status, headers, config) {
-                    //console.log("success!")
                     $scope.student = studentArray[0];
                     $scope.error = null;
                   }).
@@ -67,7 +66,6 @@ angular.module('myAppRename.controllers', []).
           // Erase the token if the user fails to log in
           delete $window.sessionStorage.token;
           $scope.isAuthenticated = false;
-
           $scope.error = 'You failed to login. Invalid User or Password';
         });
     };

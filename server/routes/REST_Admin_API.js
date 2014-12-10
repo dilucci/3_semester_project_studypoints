@@ -3,7 +3,7 @@ var dbhandler = require('../model/dbhandler');
 var router = express.Router();
 
 router.get('/periods', function(req, res) {
-  console.log('PERIODS');
+  console.log('PERIODS I ADMIN');
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
@@ -17,17 +17,18 @@ router.get('/periods', function(req, res) {
 });
 
 router.post('/periods', function(req, res) {
-  console.log("newPeriod: " + req.body);
+  console.log('POST');
+  var newPeriod = req.body;
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
     return;
   }
-  //dbhandler.addPeriod(function(period){
-  //  console.log("schedule stringy: " + JSON.stringify(periods));
-  //  res.header("Content-type","application/json");
-  //  res.end(JSON.stringify(periods));
-  //})
+  dbhandler.addPeriod(newPeriod, function(period){
+    console.log("schedule stringy: " + JSON.stringify(period));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(period));
+  })
 });
 
 module.exports = router;

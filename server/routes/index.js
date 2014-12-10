@@ -51,7 +51,10 @@ router.post('/authenticate', function (req, res) {
             //console.log("profile: " + profile.id)
             //console.log("profile: " + profile.username)
             //console.log("profile: " + profile.role)
-            token = jwt.sign(profile, require("../security/secrets").secretTokenUser, { expiresInMinutes: 60*5 });
+            if(profile.role = "student")
+                token = jwt.sign(profile, require("../security/secrets").secretTokenUser, { expiresInMinutes: 60*5 });
+            if(profile.role = "admin")
+                token = jwt.sign(profile, require("../security/secrets").secretTokenAdmin, { expiresInMinutes: 60*5 });
             //console.log("token: " + token);
         });
         response.on('end', function() {

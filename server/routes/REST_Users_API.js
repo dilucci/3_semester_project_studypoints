@@ -31,11 +31,12 @@ router.get('/schedule/:id', function(req, res) {
 });
 
 router.get('/periods', function(req, res) {
-    if(typeof global.mongo_error !== "undefined"){
-        res.status(500);
-        res.end("Error: "+global.mongo_error+"Make sure you have started the database");
-        return;
-    }
+    console.log('PERIODS I USER');
+        if(typeof global.mongo_error !== "undefined"){
+            res.status(500);
+            res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+            return;
+        }
     dbhandler.getPeriods(function(periods){
         console.log("schedule stringy: " + JSON.stringify(periods));
         res.header("Content-type","application/json");
