@@ -23,7 +23,9 @@ a {
   margin-bottom:10px;
 }
 .forms {
-  border: 10px black;
+  border: 2px solid black;
+  padding: 3px;
+  margin-right: 10px;
   border-radius: 10px;
-  display: inline;
+  display: inline-block;
 }
