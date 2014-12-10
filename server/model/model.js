@@ -1,68 +1,128 @@
 var mongoose = require('mongoose');
 
-/*
-
- Note:
- To this test project as it is:
-
- Start your MongoDB database.
- Start mongo.exe and do:
- use testdb
- db.testusers.insert({userName : "Lars", email :"lam@cphbusiness.dk",pw: "test",created : new Date()})
- db.testusers.insert({userName : "Henrik", email :"hsty@cphbusiness.dk",pw: "test",created : new Date()})
- db.testusers.insert({userName : "Tobias", email :"tog@cphbusiness.dk",pw: "test",created : new Date()})
- db.testusers.insert({userName : "Anders", email :"aka@cphbusiness.dk",pw: "test",created : new Date()})
-
- */
-
-/** Profile SCHEMA **/
-/** SQL database **/
-//var profileSchema = new mongoose.Schema({
-//  _id: Number,
-//  userName : String,
-//  email: {type: String, unique: true},
-//  pw: String,
-//  created: { type: Date, default: new Date() },
-//  role: String
+/** SCHEMAS **/
+//var studentSchema = new mongoose.Schema({
+//    _id: Number,
+//    username: String,
+//    email: {type: String, unique: true},
+//    study_points_total: Number
 //});
-
-/** Student SCHEMA **/
-/** Replace this Schema with your own(s) **/
+//
+//var teacherSchema = new mongoose.Schema({
+//    _id: Number,
+//    username: String,
+//    email: {type: String, unique: true}
+//});
+//
+//var classSchema = new mongoose.Schema({
+//    class_id: Number,
+//    semester_id: Number,
+//    period: [
+//        {
+//            period_id: String,
+//            week: [
+//                {
+//                    week_id: String,
+//                    day: [
+//                        {
+//                            date: Date,
+//                            study_point: Number,
+//                            students: [
+//                                {
+//                                    student: { type: Number, ref: 'Student' }
+//                                }]
+//
+//                        }]
+//                }]
+//        }],
+//    students: [
+//        {
+//            student: { type: Number, ref: 'Student' }
+//        }]
+//});
+//
+//var semesterSchema = new mongoose.Schema({
+//    semester_id: Number,
+//            period: [
+//                {
+//                    period_id: String,
+//                    week: [
+//                        {
+//                            week_id: String,
+//                            day: [
+//                                {
+//                                    date: Date,
+//                                    study_point: Number,
+//                                            students: [
+//                                                {
+//                                                    student: { type: Number, ref: 'Student' }
+//                                                }]
+//
+//                                }]
+//                        }]
+//                }]
+//});
 var studentSchema = new mongoose.Schema({
     _id: Number,
     username: String,
+    first_name: String,
+    last_name: String,
     email: {type: String, unique: true},
-    study_points_total: Number,
-    study_points: [
-        {
-            semester: [
-                {
-                    semester_id: String,
-                    period: [
-                        {
-                            period_id: String,
-                            week: [
-                                {
-                                    week_id: String,
-                                    day: {
-                                        date: String,
-                                        study_point: Number
-                                    }
-                                }]
-                        }]
-                }]
-        }]
+    study_points_total: Number
 });
 
-/** Teacher SCHEMA **/
-/** Replace this Schema with your own(s) **/
 var teacherSchema = new mongoose.Schema({
     _id: Number,
     username: String,
     email: {type: String, unique: true}
 });
 
+var classSchema = new mongoose.Schema({
+    class_id: Number,
+    students: [
+        {
+            student: { type: Number, ref: 'Student' }
+        }]
+});
 
-//exports.ProfileModel = mongoose.model( 'Profile', profileSchema);
+var semesterSchema = new mongoose.Schema({
+    semester_id: String,
+    classes: [
+        {
+            class: { type: Number, ref: 'Class' }
+        }],
+    period: [
+        {
+            period_id: String,
+            week: [
+                {
+                    week_id: String,
+                    day: [
+                        {
+                            date: Date,
+                            study_point: Number,
+                            students: [
+                                {
+                                    student: { type: Number, ref: 'Student' }
+                                }]
+
+                        }]
+                }]
+        }],
+    tasks: [
+        {
+            task: { type: Number, ref: 'Task' }
+        }]
+});
+var taskSchema = new mongoose.Schema({
+    task_id: Number,
+    task_name: String,
+    description: String
+});
+
+
 exports.StudentModel = mongoose.model('Student', studentSchema);
 exports.TeacherModel = mongoose.model('Teacher', teacherSchema);
+exports.ClassModel = mongoose.model('Class', classSchema);
+exports.SemesterModel = mongoose.model( 'Semester', semesterSchema);
+exports.TaskModel = mongoose.model( 'Task', taskSchema);

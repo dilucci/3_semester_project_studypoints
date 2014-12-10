@@ -36,7 +36,7 @@ function getStudents() {
             _id: student.studentID,
             username: student.username,
             email: student.email,
-            study_points: student.study_points
+            study_points: student.study_points_total
         };
     });
 };
