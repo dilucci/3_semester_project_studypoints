@@ -8,31 +8,8 @@
   <div class="col-md-8">
     <div class="panel-body" style="border: 2px solid black; border-radius: 10px; display: block;">
       <ul style="list-style:none; position:relative; left:15%;">
-      <form action="#/scheduleperiod" class="forminteach">
-      </form>
-      <form action="#/scheduleperiod" class="forminteach">
-        <input type="submit" class="inputinteach" value="name:">
-      </form>
-      <form action="#/scheduleperiod" class="forminteach">
-        <input type="submit" class="inputinteach" value="name:">
-      </form>
-      <form action="#/scheduleperiod" class="forminteach">
-        <input type="submit" class="inputinteach" value="name:">
-      </form>
-      <form action="#/scheduleperiod" class="forminteach">
-        <input type="submit" class="inputinteach" value="name:">
-      </form>
-      <form action="#/scheduleperiod" class="forminteach">
-        <input type="submit" class="inputinteach" value="name:">
-      </form>
-      <form action="#/scheduleperiod" class="forminteach">
-        <input type="submit" class="inputinteach" value="name:">
-      </form>
-      <form action="#/scheduleperiod" class="forminteach">
-        <input type="submit" class="inputinteach" value="name:">
-      </form>
-      <form action="#/scheduleperiod" class="forminteach">
-        <input type="submit" class="inputinteach" value="name:">
+      <form action="#/scheduleperiod" class="forminteach" ng-repeat="period in periods">
+        <input type="submit" class="inputinteach" value={{period.period_name}}>
       </form>
         </ul>
     </div>
