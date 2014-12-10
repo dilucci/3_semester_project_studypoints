@@ -64,40 +64,49 @@ var mongoose = require('mongoose');
 //});
 var studentSchema = new mongoose.Schema({
     _id: Number,
-    username: String,
+    username: {type: String, unique: true},
     first_name: String,
     last_name: String,
+    address: String,
+    phone: String,
     email: {type: String, unique: true},
     study_points_total: Number
 });
 
 var teacherSchema = new mongoose.Schema({
     _id: Number,
-    username: String,
+    username: {type: String, unique: true},
+    first_name: String,
+    last_name: String,
+    phone: String,
     email: {type: String, unique: true}
 });
 
 var classSchema = new mongoose.Schema({
-    class_id: Number,
+    _id: String,
     students: [
         {
             student: { type: Number, ref: 'Student' }
-        }]
+        }],
+    teachers: [
+        {
+        teacher: { type: Number, ref: 'Teacher'}
+    }]
 });
 
 var semesterSchema = new mongoose.Schema({
-    semester_id: String,
+    _id: String,
     classes: [
         {
-            class: { type: Number, ref: 'Class' }
+            class: { type: String, ref: 'Class' }
         }],
-    period: [
+    periods: [
         {
             period_id: String,
-            week: [
+            weeks: [
                 {
                     week_id: String,
-                    day: [
+                    days: [
                         {
                             date: Date,
                             study_point: Number,
@@ -115,7 +124,7 @@ var semesterSchema = new mongoose.Schema({
         }]
 });
 var taskSchema = new mongoose.Schema({
-    task_id: Number,
+    _id: Number,
     task_name: String,
     description: String
 });

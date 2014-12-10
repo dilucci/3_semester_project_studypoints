@@ -1,2 +1,2 @@
-studentID,username,email,study_points_total
-[[1,"MichaelLarsen","larsen_max@hotmail.com",100],[2,"EmilAndreas","larsen_max@hotmail.com",1000]]
+_id,username,first_name,last_name,address,phone,email,study_points_total
+[[1,"s","Michael","Larsen","Søborg Torv 7 2 2201","12345678","larsen_max@hotmail.com",100],[2,"e","Andreas","Leo","Søborg Torv 7 2 2201","12345678","And@hotmail.com",1000]]

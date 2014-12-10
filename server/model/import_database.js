@@ -33,10 +33,14 @@ function readData(path) {
 function getStudents() {
     return students.map(function(student) {
         return {
-            _id: student.studentID,
+            _id: student._id,
             username: student.username,
+            first_name: student.first_name,
+            last_name: student.last_name,
+            address: student.address,
+            phone: student.phone,
             email: student.email,
-            study_points: student.study_points_total
+            study_points_total: student.study_points_total
         };
     });
 };
@@ -44,15 +48,52 @@ function getStudents() {
 function getTeachers() {
     return teachers.map(function(teacher) {
         return {
-            _id: teacher.teacherID,
+            _id: teacher._id,
             username: teacher.username,
+            first_name: teacher.first_name,
+            last_name: teacher.last_name,
+            phone: teacher.phone,
             email: teacher.email
+        };
+    });
+};
+
+function getClasses() {
+    return classes.map(function(class_) {
+        return {
+            _id: class_._id,
+            students: class_.students,
+            teachers: class_.teachers
+        };
+    });
+};
+
+function getSemesters() {
+    return semesters.map(function(semester) {
+        return {
+            _id: semester._id,
+            classes: semester.classes,
+            periods: semester.periods,
+            tasks: semester.tasks
+        };
+    });
+};
+
+function getTasks() {
+    return tasks.map(function(task) {
+        return {
+            _id: task._id,
+            task_name: task.task_name,
+            description: task.description
         };
     });
 };
 
 var students = readData('students.json');
 var teachers = readData('teachers.json');
+var classes = readData('classes.json');
+var semesters = readData('semesters.json');
+var tasks = readData('tasks.json');
 
 var db = mongoose.connect(dbURI);
 
@@ -78,6 +119,9 @@ process.on('SIGINT', function() {
 
 model.StudentModel.remove({}).exec();
 model.TeacherModel.remove({}).exec();
+model.ClassModel.remove({}).exec();
+model.SemesterModel.remove({}).exec();
+model.TaskModel.remove({}).exec();
 
 function closeDatabase() {
     db.connection.close();
@@ -99,6 +143,9 @@ function addData(data, dataModel) {
 
 addData(getStudents(), model.StudentModel);
 addData(getTeachers(), model.TeacherModel);
+addData(getClasses(), model.ClassModel);
+addData(getSemesters(), model.SemesterModel);
+addData(getTasks(), model.TaskModel);
 
 async.series(asyncTasks, function(){
     closeDatabase();
