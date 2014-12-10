@@ -8,7 +8,7 @@ var teacher = mongoose.model('Teacher');
 router.get('/user', function(req, res) {
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
-    res.end("Error: "+global.mongo_error+" To see a list of schedule here, make sure you have started the database and set up some test schedule (see model-->model.js for instructions)");
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
     return;
   }
   teacher.find({}, function (err, users) {
