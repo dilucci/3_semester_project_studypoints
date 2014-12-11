@@ -135,4 +135,4 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 }
                 $scope.error = data;
             });
-    });
+    })
