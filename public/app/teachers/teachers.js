@@ -42,7 +42,7 @@ angular.module('myAppRename.teachers', ['ngRoute'])
     //  });
       $http({
         method: 'GET',
-        url: 'userApi/schedule' + $scope.searchStudent
+        url: 'adminApi/schedule' + $scope.searchStudent
       })
           .success(function (data, status, headers, config) {
             console.log("success!")
