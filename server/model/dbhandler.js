@@ -81,7 +81,8 @@ module.exports.getClassesInPeriod = function(periodId, callback) {
 module.exports.getStudentsInClass = function(classId, callback) {
     mongo.connect();
     console.log("getStudentsInClass metode!");
-    model.ClassModel.find({_id: classId}, function (error, class_) {
+
+    model.ClassModel.findOne({_id: classId}, function (error, class_) {
         var studentIds = [];
         class_.studentIds.forEach(function(sId){
             studentIds.push(sId.studentId)

@@ -67,6 +67,23 @@ angular.module('myAppRename.schedule', ['ngRoute'])
 
         $scope.showStudentsInClass = function (index) {
             classDetails.setClass(index);
+            $http({
+                method: 'GET',
+                url: 'adminApi/students/class/'+classDetails.getClass()._id
+            })
+                .success(function (data, status, headers, config) {
+                    console.log("success!")
+                    $scope.students = data;
+                    studentDetails.setStudents(data);
+                    $scope.error = null;
+                }).
+                error(function (data, status, headers, config) {
+                    if (status == 401) {
+                        $scope.error = "You are not authenticated to request these data";
+                        return;
+                    }
+                    $scope.error = data;
+                });
         };
 
         $scope.showStudentDetails = function (index) {
@@ -82,24 +99,6 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 console.log("success!")
                 $scope.classes = data;
                 classDetails.setClasses(data);
-                $scope.error = null;
-            }).
-            error(function (data, status, headers, config) {
-                if (status == 401) {
-                    $scope.error = "You are not authenticated to request these data";
-                    return;
-                }
-                $scope.error = data;
-            });
-
-        $http({
-            method: 'GET',
-            url: 'adminApi/students/class/'+classDetails.getClass()
-        })
-            .success(function (data, status, headers, config) {
-                console.log("success!")
-                $scope.students = data;
-                studentDetails.setStudents(data);
                 $scope.error = null;
             }).
             error(function (data, status, headers, config) {
