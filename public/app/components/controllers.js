@@ -47,7 +47,7 @@ angular.module('myAppRename.controllers', []).
             if($scope.isUser){
               $http({
                 method: 'GET',
-                url: 'userApi/schedule/' + $scope.userId
+                url: 'userApi/students/' + $scope.userId
               })
                   .success(function (studentArray, status, headers, config) {
                     $scope.student = studentArray[0];

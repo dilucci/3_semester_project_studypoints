@@ -32,6 +32,15 @@ module.exports.getPeriods = function(callback) {
     });
 };
 
+module.exports.getClasses = function(callback) {
+    mongo.connect();
+    console.log("getPeriods metode!")
+    model.ClassModel.find( function (error, classes) {
+        callback(classes);
+        mongo.close();
+    });
+};
+
 module.exports.addPeriod = function(newPeriod, callback) {
     mongo.connect();
     console.log("addPeriod metode!")

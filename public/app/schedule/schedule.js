@@ -108,10 +108,87 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         console.log("periods: " + $scope.periods)
 
     })
-    .controller('SchedulePeriodCtrl', function ($scope, periodDetails) {
+    .controller('SchedulePeriodCtrl', function ($scope, periodDetails, $http) {
         console.log("Er nu inde i ScheduleperiodCtrl, svin");
         console.log("periodDetails " + periodDetails.getPeriods());
         $scope.period = periodDetails.getPeriod();
+
+        if ($scope.isUser) {
+            console.log('isUser get Students');
+            $http({
+                method: 'GET',
+                url: 'userApi/students'
+            })
+                .success(function (data, status, headers, config) {
+                    console.log("success!")
+                    $scope.students = data;
+                    $scope.error = null;
+                }).
+                error(function (data, status, headers, config) {
+                    if (status == 401) {
+                        $scope.error = "You are not authenticated to request these data";
+                        return;
+                    }
+                    $scope.error = data;
+                });
+        }
+        if ($scope.isAdmin) {
+            console.log('isAdmin get Students');
+            $http({
+                method: 'GET',
+                url: 'adminApi/students'
+            })
+                .success(function (data, status, headers, config) {
+                    console.log("success!")
+                    $scope.students = data;
+                    $scope.error = null;
+                }).
+                error(function (data, status, headers, config) {
+                    if (status == 401) {
+                        $scope.error = "You are not authenticated to request these data";
+                        return;
+                    }
+                    $scope.error = data;
+                });
+        }
+        if ($scope.isUser) {
+            console.log('isUser get Classes');
+            $http({
+                method: 'GET',
+                url: 'userApi/classes'
+            })
+                .success(function (data, status, headers, config) {
+                    console.log("success!")
+                    $scope.classes = data;
+                    $scope.error = null;
+                }).
+                error(function (data, status, headers, config) {
+                    if (status == 401) {
+                        $scope.error = "You are not authenticated to request these data";
+                        return;
+                    }
+                    $scope.error = data;
+                });
+        }
+        if ($scope.isAdmin) {
+            console.log('isAdmin get Classes');
+            $http({
+                method: 'GET',
+                url: 'adminApi/classes'
+            })
+                .success(function (data, status, headers, config) {
+                    console.log("success!")
+                    $scope.classes = data;
+                    $scope.error = null;
+                }).
+                error(function (data, status, headers, config) {
+                    if (status == 401) {
+                        $scope.error = "You are not authenticated to request these data";
+                        return;
+                    }
+                    $scope.error = data;
+                });
+        }
     });
 
 /*

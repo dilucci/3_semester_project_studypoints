@@ -10,8 +10,6 @@ angular.module('myAppRename.mypage', ['ngRoute'])
     }])
     .controller('mypageCtrl', ['$scope', '$http', function ($scope, $http) {
         //console.log("inde i mypageCtrl")
-
-
     }]);
 
 /*
