@@ -9,13 +9,15 @@
     <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Classes</div>
     <form>
         <ul>
-            <li ng-repeat="class in classes">{{class.class_name}}</li>
+            <li ng-repeat="class in classes" ng-click="showStudentsInClass($index)">{{class.class_name}}</li>
         </ul>
     </form>
 </div>
 <div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;">
     <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Class-attendence</div>
     <form>
-       <p>Her kommer teksten fra diverse students</p>
+        <ul>
+            <li ng-repeat="student in students">{{student.first_name}} {{student.last_name}}</li>
+        </ul>
     </form>
 </div>

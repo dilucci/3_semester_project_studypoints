@@ -110,3 +110,22 @@ app.factory('periodDetails', function(){
     }
   }
 });
+
+app.factory('classDetails', function(){
+    var classes = [];
+    var selectedClass = "";
+    return {
+        getClasses: function(){
+            return classes;
+        },
+        setClasses: function(array){
+            classes = array;
+        },
+        setClass: function(index){
+            selectedClass = classes[index];
+        },
+        getClass: function(){
+            return selectedClass;
+        }
+    }
+});

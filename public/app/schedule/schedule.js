@@ -110,10 +110,14 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         };
     })
 
-    .controller('SchedulePeriodCtrl', function ($scope, periodDetails, adminDatabase, $http) {
+    .controller('SchedulePeriodCtrl', function ($scope, periodDetails, adminDatabase, classdetails, $http) {
         console.log('SchedulePeriodCtrl!');
         $scope.period = periodDetails.getPeriod();
         console.log('isUser get Periods');
+
+        $scope.showStudentsInClass = function (index) {
+            classDetails.setClass(index);
+        };
         $http({
             method: 'GET',
             url: 'adminApi/periods/'+$scope.period._id+'/classes'
@@ -121,6 +125,24 @@ angular.module('myAppRename.schedule', ['ngRoute'])
             .success(function (data, status, headers, config) {
                 console.log("success!")
                 $scope.classes = data;
+                classDetails.setClasses(data);
+                $scope.error = null;
+            }).
+            error(function (data, status, headers, config) {
+                if (status == 401) {
+                    $scope.error = "You are not authenticated to request these data";
+                    return;
+                }
+                $scope.error = data;
+            });
+
+        $http({
+            method: 'GET',
+            url: 'adminApi/students/class/'+classDetails.getClass()
+        })
+            .success(function (data, status, headers, config) {
+                console.log("success!")
+                $scope.students = data;
                 $scope.error = null;
             }).
             error(function (data, status, headers, config) {

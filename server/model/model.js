@@ -89,15 +89,8 @@ var teacherSchema = new mongoose.Schema({
 var classSchema = new mongoose.Schema({
     _id: Number,
     class_name: String,
-    studentIds: [
-        {
-            studentId: { type: Number }
-        }],
-    teacherIds: [
-        {
-            teacherId: { type: Number }
-    }]
-    },
+    studentIds: [{studentId:{ type: Number, ref:'Student' }}],
+    teacherIds: [{teacherId:{ type: Number, ref:'Teacher' }}]},
 {collection: 'Class'}
 );
 
@@ -117,15 +110,15 @@ var periodSchema = new mongoose.Schema({
     max_points: Number,
     classIds: [
         {
-            classId: { type: Number }
+            classId: { type: Number, ref:'Class' }
         }],
     dayIds: [
         {
-            dayId: { type: Number }
+            dayId: { type: Number, ref:'Day' }
         }],
     taskIds: [
         {
-            taskId: { type: Number }
+            taskId: { type: Number, ref:'Task' }
         }]
 },
 {collection: 'Period'}
@@ -138,7 +131,7 @@ var daySchema = new mongoose.Schema({
     study_point: Number,
     studentIds: [
         {
-            studentId: { type: Number }
+            studentId: { type: Number, ref:'Student' }
         }]
 },
 {collection: 'Day'}

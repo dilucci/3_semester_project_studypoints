@@ -89,4 +89,18 @@ router.get('/periods/:id/classes', function(req, res) {
     })
 });
 
+router.get('/students/class/:id', function(req, res) {
+  var classId = req.params.id;
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.getStudentsInClass(classId, function(students){
+    console.log("StudentsInClass stringy: " + JSON.stringify(students));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(students));
+  })
+});
+
 module.exports = router;
