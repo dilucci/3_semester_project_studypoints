@@ -1,4 +1,4 @@
-angular.module('myAppRename.controllers', []).
+angular.module('myAppRename.controllers', ['ui.bootstrap']).
   controller('AppCtrl', function ($scope, $http, $window,$location) {
 
     function url_base64_decode(str) {
