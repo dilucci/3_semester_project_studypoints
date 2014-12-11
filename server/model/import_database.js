@@ -62,6 +62,7 @@ function getClasses() {
     return classes.map(function(class_) {
         return {
             _id: class_.classID,
+            class_name: class_.class_name,
             students: [{
                student: class_.students.studentID
             }],

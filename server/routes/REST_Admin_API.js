@@ -44,6 +44,7 @@ router.get('/students', function(req, res) {
 });
 
 router.get('/classes', function(req, res) {
+  console.log('classes i admin');
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
@@ -51,6 +52,38 @@ router.get('/classes', function(req, res) {
   }
   dbhandler.getClasses(function(classes){
     console.log("Classes stringy: " + JSON.stringify(classes));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(classes));
+  })
+});
+
+router.get('/periods/:id', function(req, res) {
+  var periodId = req.params.id;
+  console.log('classes i admin');
+  console.log('id: ' + periodId);
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.getPeriod(periodId, function(period){
+    console.log("Period stringy: " + JSON.stringify(period));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(period));
+  })
+});
+
+router.get('/periods/:id/classes', function(req, res) {
+  var periodId = req.params.id;
+  console.log('classes i admin');
+  console.log('id: ' + periodId);
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.getClassesInPeriod(periodId, function(classes){
+    console.log("classesInPeriod stringy: " + JSON.stringify(classes));
     res.header("Content-type","application/json");
     res.end(JSON.stringify(classes));
   })

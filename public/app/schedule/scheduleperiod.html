@@ -6,24 +6,16 @@
     to: {{period.end_date}}</h2>
 </form>
 <div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;">
-    <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Students</div>
-    <form>
-        <ul>
-            <li ng-repeat="student in students">{{student.first_name}} {{student.last_name}}</li>
-        </ul>
-    </form>
-</div>
-<div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;">
-    <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Details</div>
-    <form>
-       <p>Her kommer teksten fra diverse students</p>
-    </form>
-</div>
-<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;">
     <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Classes</div>
     <form>
         <ul>
             <li ng-repeat="class in classes">{{class.class_name}}</li>
         </ul>
+    </form>
+</div>
+<div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;">
+    <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Class-attendence</div>
+    <form>
+       <p>Her kommer teksten fra diverse students</p>
     </form>
 </div>

@@ -31,20 +31,66 @@ var app = angular.module('myAppRename.factories', []);
       }
     };
   });
-  app.factory('authProfiles', function($http){
-    var getProfiles = function(callback){
-      $http.get('http://gruppe4.cloudapp.net/Profiles')
+  app.factory('adminDatabase', function($http){
+    var students = [];
+    var getStudents = function(callback){
+      $http.get('adminApi/students')
           .success(function(data){
             callback(null, data);
           })
           .error(function(err){
             callback(err);
           })
-      };
+        };
+    var getClasses = function(callback){
+      $http.get('adminApi/classes')
+          .success(function(data){
+            callback(null, data);
+          })
+          .error(function(err){
+            callback(err);
+          })
+    };
+    var getPeriods = function(callback){
+      $http.get('adminApi/periods')
+          .success(function(data){
+            callback(null, data);
+          })
+          .error(function(err){
+            callback(err);
+          })
+    };
+    var getTeachers = function(callback){
+      $http.get('adminApi/teachers')
+          .success(function(data){
+            callback(null, data);
+          })
+          .error(function(err){
+            callback(err);
+          })
+    };
     return{
-      getProfiles: getProfiles
+      getStudents: getStudents,
+      getClasses: getClasses,
+      getPeriods: getPeriods,
+      getTeachers: getTeachers
     }
     });
+
+app.factory('studentFactory', function($http){
+  var getProfiles = function(callback){
+    $http.get('userApi/students')
+        .success(function(data){
+          callback(null, data);
+        })
+        .error(function(err){
+          callback(err);
+        })
+  };
+  return{
+    getProfiles: getProfiles
+  }
+});
 
 app.factory('periodDetails', function(){
   var periods = [];
@@ -63,5 +109,4 @@ app.factory('periodDetails', function(){
       return selectedPeriod;
     }
   }
-
 });
