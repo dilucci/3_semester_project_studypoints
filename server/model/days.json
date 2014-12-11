@@ -1,2 +1,2 @@
-dayID,date,description,study_point,students
+dayID,date,description,study_point,studentIds
 [[1,"2014-01-01T10:50:42.389Z","day one with javascript",1,[1]]]

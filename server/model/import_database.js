@@ -63,11 +63,11 @@ function getClasses() {
         return {
             _id: class_.classID,
             class_name: class_.class_name,
-            students: [{
-               student: class_.students.studentID
+            studentIds: [{
+               studentId: class_.studentID
             }],
-            teachers: [{
-                teacher: class_.teacherID
+            teacherIds: [{
+                teacherId: class_.teacherID
             }]
         };
     });
@@ -81,14 +81,14 @@ function getPeriods() {
             start_date: period.start_date,
             end_date: period.end_date,
             max_points: period.max_points,
-            classes: [{
-                class: period.classID
+            classIds: [{
+                classId: period.classID
             }],
-            days: [{
-                day: period.dayID
+            dayIds: [{
+                dayId: period.dayID
             }],
-            tasks: [{
-                task: period.taskID
+            taskIds: [{
+                taskid: period.taskID
             }]
         };
     });
@@ -111,8 +111,8 @@ function getDays() {
             date: day.date,
             description: day.description,
             study_point: day.study_point,
-            students: [{
-                student: day.students.studentID
+            studentIds: [{
+                studentId: day.studentID
             }]
         };
     });

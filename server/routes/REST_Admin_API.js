@@ -82,11 +82,11 @@ router.get('/periods/:id/classes', function(req, res) {
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
     return;
   }
-  dbhandler.getClassesInPeriod(periodId, function(classes){
-    console.log("classesInPeriod stringy: " + JSON.stringify(classes));
-    res.header("Content-type","application/json");
-    res.end(JSON.stringify(classes));
-  })
+    dbhandler.getClassesInPeriod(periodId, function(classes){
+      console.log("classesInPeriod stringy: " + JSON.stringify(classes));
+      res.header("Content-type","application/json");
+      res.end(JSON.stringify(classes));
+    })
 });
 
 module.exports = router;

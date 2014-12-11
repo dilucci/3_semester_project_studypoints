@@ -1,2 +1,2 @@
-periodID,period_name,start_date,end_date,max_points,classes,days,tasks
+periodID,period_name,start_date,end_date,max_points,classIds,dayIds,taskIds
 [[1,"Dat-A-2013 periode 1","2014-01-01T10:50:42.389Z","2014-01-03T10:50:42.389Z",150,[1],[1],[1]],[2,"Dat-A-2013 periode 2","2014-01-03T10:50:42.389Z","2014-01-06T10:50:42.389Z",150,[1],[1],[1]]]

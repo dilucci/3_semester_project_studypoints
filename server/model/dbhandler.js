@@ -58,14 +58,27 @@ module.exports.getPeriod = function(periodId, callback) {
 };
 
 module.exports.getClassesInPeriod = function(periodId, callback) {
+    var classIds = [];
+    console.log("getClassesInPeriod metode!");
     mongo.connect();
-    console.log("getPeriod metode!");
-    model.PeriodModel.find( {_id: periodId }).populate('class').exec(function (error, periods) {
-        var classes = [];
-        periods.forEach(function(period){
-            classes.push(period.class)
+
+    model.PeriodModel.find({_id: periodId}).populate('Class').exec(function(err, periods){
+        model.ClassModel.find({})
+    })
+
+
+    model.PeriodModel.find( {_id: periodId }, function (error, period) {
+        console.log('period1: ' + period);
+        model.ClassModel.find( {_id: {$in:classIds}}, function(err, classes){
+            console.log('period2: ' + period);
+            console.log('period_name ' + period.period_name);
+            console.log('max_points ' + period.max_points);
+            //period.classIds.forEach(function(classId){
+            //    classIds.push(classId.classId)
+            //});
+            callback(classes);
+            console.log('classes: ' + classes);
+            mongo.close();
         });
-        callback(classes);
-        mongo.close();
     });
 };

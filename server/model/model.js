@@ -71,7 +71,9 @@ var studentSchema = new mongoose.Schema({
     phone: String,
     email: {type: String, unique: true},
     study_points_total: Number
-});
+},
+    {collection: 'Student'}
+);
 
 var teacherSchema = new mongoose.Schema({
     _id: Number,
@@ -80,26 +82,32 @@ var teacherSchema = new mongoose.Schema({
     last_name: String,
     phone: String,
     email: {type: String, unique: true}
-});
+},
+    {collection: 'Teacher'}
+);
 
 var classSchema = new mongoose.Schema({
     _id: Number,
     class_name: String,
-    students: [
+    studentIds: [
         {
-            student: { type: Number, ref: 'Student' }
+            studentId: { type: Number }
         }],
-    teachers: [
+    teacherIds: [
         {
-            teacher: { type: Number, ref: 'Teacher'}
+            teacherId: { type: Number }
     }]
-});
+    },
+{collection: 'Class'}
+);
 
 var taskSchema = new mongoose.Schema({
     _id: Number,
     task_name: String,
     description: String
-});
+},
+    {collection: 'Task'}
+);
 
 var periodSchema = new mongoose.Schema({
     _id: Number,
@@ -107,30 +115,34 @@ var periodSchema = new mongoose.Schema({
     start_date: Date,
     end_date: Date,
     max_points: Number,
-    classes: [
+    classIds: [
         {
-            class: { type: Number, ref: 'Class' }
+            classId: { type: Number }
         }],
-    days: [
+    dayIds: [
         {
-            day: { type: Number, ref: 'Day'}
+            dayId: { type: Number }
         }],
-    tasks: [
+    taskIds: [
         {
-            task: { type: Number, ref: 'Task' }
+            taskId: { type: Number }
         }]
-});
+},
+{collection: 'Period'}
+);
 
 var daySchema = new mongoose.Schema({
     _id: Number,
     date: Date,
     description: String,
     study_point: Number,
-    students: [
+    studentIds: [
         {
-            student: { type: Number, ref: 'Student' }
+            studentId: { type: Number }
         }]
-});
+},
+{collection: 'Day'}
+);
 
 
 exports.StudentModel = mongoose.model('Student', studentSchema);
