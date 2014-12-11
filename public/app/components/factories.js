@@ -8,11 +8,11 @@ var app = angular.module('myAppRename.factories', []);
     var info = "Hello World from a Factory";
     var getInfo = function getInfo(){
       return info;
-    }
+    };
     return {
       getInfo: getInfo
     }
-  })
+  });
 
   app.factory('authInterceptor', function ($rootScope, $q, $window) {
     return {
@@ -77,19 +77,23 @@ var app = angular.module('myAppRename.factories', []);
     }
     });
 
-app.factory('studentFactory', function($http){
-  var getProfiles = function(callback){
-    $http.get('userApi/students')
-        .success(function(data){
-          callback(null, data);
-        })
-        .error(function(err){
-          callback(err);
-        })
-  };
-  return{
-    getProfiles: getProfiles
-  }
+app.factory('studentDetails', function(){
+    var students = [];
+    var selectedStudent = "";
+    return {
+        getStudents: function(){
+            return students;
+        },
+        setStudents: function(array){
+            students = array;
+        },
+        setStudent: function(index){
+            selectedStudent = students[index];
+        },
+        getStudent: function(){
+            return selectedStudent;
+        }
+    }
 });
 
 app.factory('periodDetails', function(){

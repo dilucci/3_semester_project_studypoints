@@ -49,68 +49,18 @@ angular.module('myAppRename.schedule', ['ngRoute'])
             $scope.newPeriod = "";
         };
 
-        if ($scope.isUser) {
-            console.log('isUser get Periods');
-            $http({
-                method: 'GET',
-                url: 'userApi/periods'
-            })
-                .success(function (data, status, headers, config) {
-                    console.log("success!")
-                    $scope.periods = data;
-                    periodDetails.setPeriods(data);
-                    $scope.error = null;
-                }).
-                error(function (data, status, headers, config) {
-                    if (status == 401) {
-                        $scope.error = "You are not authenticated to request these data";
-                        return;
-                    }
-                    $scope.error = data;
-                });
-        }
-        if ($scope.isAdmin) {
-            adminDatabase.getPeriods(function(err, periods){
-                $scope.periods = periods;
-                periodDetails.setPeriods(periods);
-                adminDatabase.getClasses(function(err, classes){
-                    $scope.classes = classes;
-                    adminDatabase.getStudents(function(err, students){
-                        $scope.students = students;
-                        console.log("periods: " + $scope.periods);
-                        console.log("classes: " + JSON.stringify($scope.classes));
-                        console.log("students: " + $scope.students);
-                    })
-                })
-            })
-
-
-            //console.log('isAdmin get Periods');
-            //$http({
-            //    method: 'GET',
-            //    url: 'adminApi/periods'
-            //})
-            //    .success(function (data, status, headers, config) {
-            //        console.log("success!")
-            //        $scope.periods = data;
-            //        periodDetails.setPeriods(data);
-            //        $scope.error = null;
-            //    }).
-            //    error(function (data, status, headers, config) {
-            //        if (status == 401) {
-            //            $scope.error = "You are not authenticated to request these data";
-            //            return;
-            //        }
-            //        $scope.error = data;
-            //    });
-        }
+        adminDatabase.getPeriods(function(err, periods){
+            $scope.periods = periods;
+            periodDetails.setPeriods(periods);
+            console.log("periods: " + $scope.periods);
+        });
 
         $scope.showDetails = function (index) {
             periodDetails.setPeriod(index);
         };
     })
 
-    .controller('SchedulePeriodCtrl', function ($scope, periodDetails, adminDatabase, classdetails, $http) {
+    .controller('SchedulePeriodCtrl', function ($scope, studentDetails, periodDetails, classDetails, $http) {
         console.log('SchedulePeriodCtrl!');
         $scope.period = periodDetails.getPeriod();
         console.log('isUser get Periods');
@@ -118,6 +68,12 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         $scope.showStudentsInClass = function (index) {
             classDetails.setClass(index);
         };
+
+        $scope.showStudentDetails = function (index) {
+            studentDetails.setStudent(index);
+            $scope.student = studentDetails.getStudent();
+        };
+
         $http({
             method: 'GET',
             url: 'adminApi/periods/'+$scope.period._id+'/classes'
@@ -143,6 +99,7 @@ angular.module('myAppRename.schedule', ['ngRoute'])
             .success(function (data, status, headers, config) {
                 console.log("success!")
                 $scope.students = data;
+                studentDetails.setStudents(data);
                 $scope.error = null;
             }).
             error(function (data, status, headers, config) {
@@ -153,22 +110,3 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 $scope.error = data;
             });
     });
-
-/*
- function toggleTable() {
- var lTable = document.getElementById("periodetable");
- lTable.style.display = (lTable.style.display == "table") ? "none" : "table";
- };*/
-
-//function showHide(shID) {
-//  if (document.getElementById(shID)) {
-//    if (document.getElementById(shID+'-show').style.display != 'none') {
-//      document.getElementById(shID+'-show').style.display = 'none';
-//      document.getElementById(shID).style.display = 'block';
-//    }
-//    else {
-//      document.getElementById(shID+'-show').style.display = 'inline';
-//      document.getElementById(shID).style.display = 'none';
-//    }
-//  }
-//}
