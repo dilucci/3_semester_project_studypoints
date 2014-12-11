@@ -48,12 +48,12 @@ router.post('/authenticate', function (req, res) {
                         username: profileStr[1],
                         role: profileStr[3]
                     };
-            //console.log("profile: " + profile.id)
-            //console.log("profile: " + profile.username)
-            //console.log("profile: " + profile.role)
-            if(profile.role = "student")
+            console.log("profile: " + profile.id)
+            console.log("profile: " + profile.username)
+            console.log("profile: " + profile.role)
+            if(profile.role == "student")
                 token = jwt.sign(profile, require("../security/secrets").secretTokenUser, { expiresInMinutes: 60*5 });
-            if(profile.role = "admin")
+            if(profile.role == "admin")
                 token = jwt.sign(profile, require("../security/secrets").secretTokenAdmin, { expiresInMinutes: 60*5 });
             //console.log("token: " + token);
         });

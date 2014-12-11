@@ -6,16 +6,13 @@ angular.module('myAppRename.teachers', ['ngRoute'])
   $routeProvider.when('/teachers', {
     templateUrl: 'app/teachers/teachers.html',
     controller: 'teachersCtrl'
-  });
-  $routeProvider.when('/teachermarking', {
+  }).when('/teachermarking', {
     templateUrl: 'app/teachers/teachermarking.html',
     controller: 'teachersCtrl'
-  });
-  $routeProvider.when('/teacherchangestudent', {
+  }).when('/teacherchangestudent', {
     templateUrl: 'app/teachers/teacherchangestudent.html',
     controller: 'teachersCtrl'
-  });
-  $routeProvider.when('/teacheraddstudent', {
+  }).when('/teacheraddstudent', {
     templateUrl: 'app/teachers/teacheraddstudent.html',
     controller: 'teachersCtrl'
   });
@@ -25,37 +22,6 @@ angular.module('myAppRename.teachers', ['ngRoute'])
 .controller('teachersCtrl', function ($scope, $http) {
     console.log("inde i TeacherCtrl")
     $scope.searchStudent ="";
-    //$http({
-    //  method: 'GET',
-    //  url: 'adminApi/user'
-    //}).
-    //  success(function (data, status, headers, config) {
-    //    $scope.users = data;
-    //     $scope.error = null;
-    //  }).
-    //  error(function (data, status, headers, config) {
-    //    if(status == 401){
-    //      $scope.error ="You are not authenticated to request these data";
-    //        return;
-    //    }
-    //    $scope.error = data;
-    //  });
-      $http({
-        method: 'GET',
-        url: 'adminApi/schedule' + $scope.searchStudent
-      })
-          .success(function (data, status, headers, config) {
-            console.log("success!")
-            $scope.students = data;
-            $scope.error = null;
-          }).
-          error(function (data, status, headers, config) {
-            if (status == 401) {
-              $scope.error = "You are not authenticated to request these data";
-              return;
-            }
-            $scope.error = data;
-          });
 });
 
 

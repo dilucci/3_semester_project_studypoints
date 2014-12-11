@@ -3,22 +3,21 @@
 angular.module('myAppRename.schedule', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/schedule', {
+        $routeProvider
+            .when('/schedule', {
             templateUrl: 'app/schedule/schedule.html',
             controller: 'ScheduleCtrl'
-        });
-        $routeProvider.when('/scheduleperiod', {
+        })
+            .when('/scheduleperiod', {
             templateUrl: 'app/schedule/scheduleperiod.html',
-            controller: 'ScheduleCtrl'
+            controller: 'SchedulePeriodCtrl'
         });
     }])
-    .controller('ScheduleCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+    .controller('ScheduleCtrl', function ($scope, periodDetails, $http) {
         console.log("inde i ScheduleCtrl");
         console.log("isAutheticated: " + $scope.isAuthenticated);
         $scope.nextId = 3;
-        $scope.showDetails = function (period) {
-            $scope.period = period;
-        }
+        $scope.periods = [];
 
         $scope.add = function () {
             $scope.newPeriod = {
@@ -59,6 +58,7 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 .success(function (data, status, headers, config) {
                     console.log("success!")
                     $scope.periods = data;
+                    periodDetails.setPeriods(data);
                     $scope.error = null;
                 }).
                 error(function (data, status, headers, config) {
@@ -70,7 +70,6 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 });
         }
         if ($scope.isAdmin) {
-            console.log('token: ' + $window.sessionStorage.token);
             console.log('isAdmin get Periods');
             $http({
                 method: 'GET',
@@ -79,6 +78,7 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 .success(function (data, status, headers, config) {
                     console.log("success!")
                     $scope.periods = data;
+                    periodDetails.setPeriods(data);
                     $scope.error = null;
                 }).
                 error(function (data, status, headers, config) {
@@ -89,8 +89,30 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                     $scope.error = data;
                 });
         }
+        $scope.period_name = "";
+        $scope.start_date = "";
+        $scope.end_date = "";
 
-    }]);
+        $scope.showDetails = function (index) {
+            periodDetails.setPeriod(index);
+
+            $scope.period_name = $scope.periods[index].period_name;
+            $scope.start_date = $scope.periods[index].start_date;
+            $scope.end_date = $scope.periods[index].end_date;
+            console.log(JSON.stringify($scope.periods[index]))
+            console.log("scope period:" + JSON.stringify(index))
+            console.log("period name: " + $scope.period_name);
+            console.log("period start_date: " + $scope.start_date);
+            console.log("period end_date: " + $scope.end_date);
+        };
+        console.log("periods: " + $scope.periods)
+
+    })
+    .controller('SchedulePeriodCtrl', function ($scope, periodDetails) {
+        console.log("Er nu inde i ScheduleperiodCtrl, svin");
+        console.log("periodDetails " + periodDetails.getPeriods());
+        $scope.period = periodDetails.getPeriod();
+    });
 
 /*
  function toggleTable() {

@@ -19,16 +19,12 @@ var app = angular.module('myAppRename.factories', []);
       request: function (config) {
         config.headers = config.headers || {};
         if ($window.sessionStorage.token) {
-          console.log('sessionToken true');
           config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-          console.log("config: " + JSON.stringify(config));
         }
         return config;
       },
       responseError: function (rejection) {
-        console.log('rejection: ' + JSON.stringify(rejection));
         if (rejection.status === 401) {
-          console.log('REJECTED BITCH');
           // handle the case where the user is not authenticated
         }
         return $q.reject(rejection);
@@ -48,5 +44,24 @@ var app = angular.module('myAppRename.factories', []);
     return{
       getProfiles: getProfiles
     }
-    })
-;
+    });
+
+app.factory('periodDetails', function(){
+  var periods = [];
+  var selectedPeriod = "";
+  return {
+    getPeriods: function(){
+      return periods;
+    },
+    setPeriods: function(array){
+      periods = array;
+    },
+    setPeriod: function(index){
+      selectedPeriod = periods[index];
+    },
+    getPeriod: function(){
+      return selectedPeriod;
+    }
+  }
+
+});

@@ -26,7 +26,7 @@
 <!--          <li><a class="active" href="#/home">home</a></li>-->
           <!--<li><a href="#/schedule" ng-show="isUser">Users only (schedule)</a></li>-->
           <li><a href="#/mypage" ng-show="isUser">My page</a></li>
-          <li><a href="#/teachers" ng-show="isAdmin">Students</a></li>
+          <li><a href="#/teachers" ng-show="isAdmin">Teacher portal</a></li>
           <li><a href="#/schedule">Schedule</a></li>
           <!--<li><a href="#/teachers" >Admins only (teachers)</a></li>-->
           <!--<li><a href="#/profiles" >profiles</a></li>-->
@@ -44,7 +44,7 @@
           <button type="submit" class="btn btn-success">Sign in</button>
         </form>
         <div class="navbar-right" ng-show="isAuthenticated">
-          <p class="navbar-text">Logged on as: {{student.username}}</p>
+          <p class="navbar-text">Logged on as: {{username}}</p>
 
           <button type="submit" class="btn btn-primary navbar-btn"  ng-click="logout()">Logout
           </button>
