@@ -122,7 +122,7 @@ var periodSchema = new mongoose.Schema({
             }],
         dayIds: [
             {
-                type: Number, ref: 'Day'
+                dayId: {type: Number, ref: 'Day'}
 
             }],
         taskIds: [
@@ -134,8 +134,7 @@ var periodSchema = new mongoose.Schema({
 );
 
 var daySchema = new mongoose.Schema({
-    _id: Number,
-    date: {type: Date, unique: true},
+    _id: {type: Date, unique: true},
     studentIds: [
         {
             studentId: { type: Number, ref:'Student' }

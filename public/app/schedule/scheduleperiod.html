@@ -27,31 +27,31 @@
             <li ng-repeat="student in students">{{student.first_name}} {{student.last_name}}</li>
         </ul>
     </form>
-    <!--<div class="col-md-9">-->
-    <!--<accordion close-others="true">-->
-        <!--<accordion-group ng-repeat="student in students | orderBy:'name':reverse | filter:studentfilter" heading="{{student.first_name}} {{student.last_name}}" ng-click="getClassesForStudent(student._id)">-->
-            <!--<table class="table">-->
-                <!--<thead>-->
-                <!--<tr>-->
-                    <!--<td><b>Details</b></td>-->
-                <!--</tr>-->
-                <!--</thead>-->
-                <!--<tr>-->
-                    <!--<td>Email</td><td>{{student.email}}</td>-->
-                <!--</tr>-->
-                <!--<tr ng-repeat="class in classes">-->
-                    <!--<td>Class</td><td>{{class.class_name}}</td>-->
-                <!--</tr>-->
-                <!--<tfoot>-->
-                <!--<tr>-->
-                    <!--<td ng-click=""><a href="">See profile</a></td><td></td>-->
-                <!--</tr>-->
-                <!--</tfoot>-->
-            <!--</table>-->
-        <!--</accordion-group>-->
-    <!--</accordion>-->
-        <!--</div>-->
-<!--</div>-->
+    <div class="col-md-9">
+    <accordion close-others="true">
+        <accordion-group ng-repeat="student in students | orderBy:'name':reverse | filter:studentfilter" heading="{{student.first_name}} {{student.last_name}}" ng-click="getClassesForStudent(student._id)">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td><b>Details</b></td>
+                </tr>
+                </thead>
+                <tr>
+                    <td>Email</td><td>{{student.email}}</td>
+                </tr>
+                <tr ng-repeat="class in classes">
+                    <td>Class</td><td>{{class.class_name}}</td>
+                </tr>
+                <tfoot>
+                <tr>
+                    <td ng-click=""><a href="">See profile</a></td><td></td>
+                </tr>
+                </tfoot>
+            </table>
+        </accordion-group>
+    </accordion>
+        </div>
+</div>
 <!--<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="isAdmin">-->
     <!--<div class="alert alert-info" role="alert" style="text-align: center">Create a new Period</div>-->
     <!--<label for="class">Classes:</label>-->
