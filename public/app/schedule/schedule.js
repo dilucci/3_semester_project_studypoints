@@ -108,6 +108,33 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         $scope.period = periodDetails.getPeriod();
         console.log('isUser get Periods');
 
+        $scope.getClassesForStudent = function(studentID){
+            $http({
+                method: 'GET',
+                url: '/classes/student/'+studentID
+            })
+                .success(function (data, status, headers, config) {
+                    $scope.classes = [];
+                    var found = false;
+                    data.forEach(function(classes){
+                        found = false;
+                        $scope.classes.forEach(function(thisClasses){
+                            if(classes._id === thisClasses._id){
+                                found = true;
+                            }
+                        });
+                        if(found === false){
+                            $scope.classes.push(classes);
+                        }
+                    });
+                    console.log($scope.classes);
+                    $scope.error = null;
+                }).
+                error(function (data, status, headers, config) {
+                    $scope.error = data;
+                });
+        };
+
         $scope.showStudentsInClass = function (index) {
             classDetails.setClass(index);
             $http({
@@ -151,4 +178,4 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 }
                 $scope.error = data;
             });
-    });
+    })
