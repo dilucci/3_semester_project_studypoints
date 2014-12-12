@@ -122,7 +122,7 @@ var periodSchema = new mongoose.Schema({
             }],
         dayIds: [
             {
-                dayId: {type: Number, ref: 'Day'}
+                dayId: {type: Date, ref: 'Day'}
 
             }],
         taskIds: [

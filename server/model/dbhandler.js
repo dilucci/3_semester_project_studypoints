@@ -41,8 +41,18 @@ module.exports.getClasses = function(callback) {
 
 module.exports.addPeriod = function(newPeriod, callback) {
     mongo.connect();
+        var date = new Date(newPeriod.start_date);
+        console.log('date ' + date);
+        var lastDate = new Date(newPeriod.end_date);
+        console.log('lastDate: '  + lastDate);
+
+
     console.log("addPeriod metode!");
     model.PeriodModel.create(newPeriod, function (error, newPeriod) {
+        while(date <= lastDate) {
+            model.PeriodModel.update({_id: newPeriod._id}, {$push:{dayIds: date}})
+            date.setTime(date.getTime()+86400000);
+        }
         callback(newPeriod);
         mongo.close();
     });
