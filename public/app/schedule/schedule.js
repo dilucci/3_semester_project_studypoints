@@ -16,16 +16,59 @@ angular.module('myAppRename.schedule', ['ngRoute'])
     .controller('ScheduleCtrl', function ($scope, periodDetails, adminDatabase, $http) {
         console.log("inde i ScheduleCtrl");
         console.log("isAutheticated: " + $scope.isAuthenticated);
-        $scope.nextId = 3;
+        $scope.nextId = 1;
+        $scope.dateNextId = 1;
         $scope.periods = [];
 
+        var generateDays = function (startDate, endDate){
+            console.log("Inside generateDays()");
+            var date = new Date(startDate);
+            var lastDate = new Date(endDate);
+
+            var dateArray = [];
+            var dateIdArray = [];
+
+            while(date.getDate() <= lastDate.getDate()) {
+                console.log("Date to array: " + date);
+                $scope.newDate = {
+                    _id: $scope.dateNextId,
+                    date: new Date(date),
+                    studentIds: []
+                };
+                dateArray.push($scope.newDate);
+                dateIdArray.push($scope.newDate._id);
+                date.setDate(date.getDate()+1);
+                $scope.dateNextId++;
+            }
+            $http({
+                method: 'POST',
+                url: 'adminApi/days',
+                data: dateArray
+            }).success(function (data, status, headers, config) {
+                console.log('SUCCESS!');
+                $scope.error = null;
+            }).
+                error(function (data, status, headers, config) {
+                    if (status == 401) {
+                        $scope.error = "You are not authenticated to request these data";
+                        return;
+                    }
+                    $scope.error = data;
+                });
+            return dateIdArray;
+        };
+
         $scope.add = function () {
+            console.log("inde i add()");
+            var periodDayIds = generateDays($scope.newStart, $scope.newEnd);
+            console.log('periodDayIds: ' + periodDayIds);
             $scope.newPeriod = {
                 _id: $scope.nextId,
                 period_name: $scope.newPeriodName,
                 start_date: $scope.newStart,
                 end_date: $scope.newEnd,
-                max_points: $scope.newMaxPoints
+                max_points: $scope.newMaxPoints,
+                dayIds: periodDayIds
             };
             console.log('inde i add period function');
             $http({

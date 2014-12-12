@@ -18,15 +18,32 @@ router.get('/periods', function(req, res) {
 router.post('/periods', function(req, res) {
   console.log('POST');
   var newPeriod = req.body;
+  console.log('newPeriod: ' + JSON.stringify(newPeriod));
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
     return;
   }
   dbhandler.addPeriod(newPeriod, function(period){
-    console.log("period stringy: " + JSON.stringify(period));
+    console.log("addPeriod stringy: " + JSON.stringify(period));
     res.header("Content-type","application/json");
     res.end(JSON.stringify(period));
+  })
+});
+
+router.post('/days', function(req, res) {
+  console.log('POST');
+  var newDays = req.body;
+  console.log('newDays: ' + JSON.stringify(newDays));
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.addDays(newDays, function(newDays){
+    console.log("addDays stringy: " + JSON.stringify(newDays));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(newDays));
   })
 });
 

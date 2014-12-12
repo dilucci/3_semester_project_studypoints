@@ -82,13 +82,14 @@ function getPeriods() {
             end_date: period.end_date,
             max_points: period.max_points,
             classIds: [{
-                classId: period.classID
+                classId: period.classId
             }],
-            dayIds: [{
-                dayId: period.dayID
+            days: [{
+                day: period.day,
+                studentIds: period.studentId
             }],
             taskIds: [{
-                taskid: period.taskID
+                taskId: period.taskId
             }]
         };
     });
@@ -109,8 +110,6 @@ function getDays() {
         return {
             _id: day.dayID,
             date: day.date,
-            description: day.description,
-            study_point: day.study_point,
             studentIds: [{
                 studentId: day.studentID
             }]
@@ -122,8 +121,8 @@ var students = readData('students.json');
 var teachers = readData('teachers.json');
 var classes = readData('classes.json');
 var tasks = readData('tasks.json');
-var days = readData('days.json');
-var periods = readData('periods.json');
+//var days = readData('days.json');
+//var periods = readData('periods.json');
 
 
 var db = mongoose.connect(dbURI);
@@ -177,8 +176,8 @@ addData(getStudents(), model.StudentModel);
 addData(getTeachers(), model.TeacherModel);
 addData(getClasses(), model.ClassModel);
 addData(getTasks(), model.TaskModel);
-addData(getDays(), model.DayModel);
-addData(getPeriods(), model.PeriodModel);
+//addData(getDays(), model.DayModel);
+//addData(getPeriods(), model.PeriodModel);
 
 async.series(asyncTasks, function(){
     closeDatabase();

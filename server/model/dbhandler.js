@@ -57,6 +57,19 @@ module.exports.getPeriod = function(periodId, callback) {
     });
 };
 
+module.exports.addDays = function(newDays, callback) {
+    mongo.connect();
+    console.log("addDays metode!");
+    console.log('NEWDAYS: ' + newDays);
+    var addedDays = [];
+    newDays.forEach(function(newDay){
+        model.DayModel.create(newDay, function(error, newDay){
+            addedDays.push(newDay);
+            mongo.close();
+        });
+    }, callback(addedDays))
+};
+
 module.exports.getClassesInPeriod = function(periodId, callback) {
     console.log("getClassesInPeriod metode!");
     mongo.connect();

@@ -63,87 +63,94 @@ var mongoose = require('mongoose');
 //                }]
 //});
 var studentSchema = new mongoose.Schema({
-    _id: Number,
-    username: {type: String, unique: true},
-    first_name: String,
-    last_name: String,
-    address: String,
-    phone: String,
-    email: {type: String, unique: true},
-    study_points_total: Number
-},
+        _id: Number,
+        username: {type: String, unique: true},
+        first_name: String,
+        last_name: String,
+        address: String,
+        phone: String,
+        email: {type: String, unique: true},
+        study_points_total: Number
+    },
     {collection: 'Student'}
 );
 
 var teacherSchema = new mongoose.Schema({
-    _id: Number,
-    username: {type: String, unique: true},
-    first_name: String,
-    last_name: String,
-    phone: String,
-    email: {type: String, unique: true}
-},
+        _id: Number,
+        username: {type: String, unique: true},
+        first_name: String,
+        last_name: String,
+        phone: String,
+        email: {type: String, unique: true}
+    },
     {collection: 'Teacher'}
 );
 
 var classSchema = new mongoose.Schema({
-    _id: Number,
-    class_name: String,
-    studentIds: [{studentId:{ type: Number, ref:'Student' }}],
-    teacherIds: [{teacherId:{ type: Number, ref:'Teacher' }}]},
-{collection: 'Class'}
+        _id: Number,
+        class_name: String,
+        studentIds: [
+            {
+                studentId: {type: Number, ref: 'Student'}
+            }],
+        teacherIds: [
+            {
+                teacherId: {type: Number, ref: 'Teacher'}
+            }
+        ]
+    },
+    {collection: 'Class'}
 );
 
 var taskSchema = new mongoose.Schema({
-    _id: Number,
-    task_name: String,
-    description: String
-},
+        _id: Number,
+        task_name: String,
+        description: String
+    },
     {collection: 'Task'}
 );
 
 var periodSchema = new mongoose.Schema({
-    _id: Number,
-    period_name: String,
-    start_date: Date,
-    end_date: Date,
-    max_points: Number,
-    classIds: [
-        {
-            classId: { type: Number, ref:'Class' }
-        }],
-    dayIds: [
-        {
-            dayId: { type: Number, ref:'Day' }
-        }],
-    taskIds: [
-        {
-            taskId: { type: Number, ref:'Task' }
-        }]
-},
-{collection: 'Period'}
+        _id: Number,
+        period_name: String,
+        start_date: Date,
+        end_date: Date,
+        max_points: Number,
+        classIds: [
+            {
+                classId: {type: Number, ref: 'Class'}
+            }],
+        dayIds: [
+            {
+                type: Number, ref: 'Day'
+
+            }],
+        taskIds: [
+            {
+                taskId: {type: Number, ref: 'Task'}
+            }]
+    },
+    {collection: 'Period'}
 );
 
 var daySchema = new mongoose.Schema({
     _id: Number,
-    date: Date,
-    description: String,
-    study_point: Number,
+    date: {type: Date, unique: true},
     studentIds: [
         {
             studentId: { type: Number, ref:'Student' }
         }]
 },
-{collection: 'Day'}
+    {collection: 'Day'}
 );
 
 
 exports.StudentModel = mongoose.model('Student', studentSchema);
 exports.TeacherModel = mongoose.model('Teacher', teacherSchema);
 exports.ClassModel = mongoose.model('Class', classSchema);
-exports.TaskModel = mongoose.model( 'Task', taskSchema);
+exports.TaskModel = mongoose.model('Task', taskSchema);
 exports.DayModel = mongoose.model( 'Day', daySchema);
-exports.PeriodModel = mongoose.model( 'Period', periodSchema);
+exports.PeriodModel = mongoose.model('Period', periodSchema);
 
 //var semesterSchema = new mongoose.Schema({
 //    _id: String,
@@ -174,3 +181,30 @@ exports.PeriodModel = mongoose.model( 'Period', periodSchema);
 //            task: { type: Number, ref: 'Task' }
 //        }]
 //});
+
+//var periodSchema = new mongoose.Schema({
+//        _id: Number,
+//        period_name: String,
+//        start_date: Date,
+//        end_date: Date,
+//        max_points: Number,
+//        classIds: [
+//            {
+//                classId: {type: Number, ref: 'Class'}
+//            }],
+//        days: [
+//            {
+//                day: Date,
+//                studentIds: [
+//                    {
+//                        studentId: {type: Number, ref: 'Student'}
+//                    }]
+//
+//            }],
+//        taskIds: [
+//            {
+//                taskId: {type: Number, ref: 'Task'}
+//            }]
+//    },
+//    {collection: 'Period'}
+//);
