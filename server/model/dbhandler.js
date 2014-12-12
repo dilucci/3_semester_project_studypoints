@@ -39,6 +39,15 @@ module.exports.getClasses = function(callback) {
     });
 };
 
+module.exports.addClassToPeriod = function(pid, classToAdd, callback) {
+    mongo.connect();
+    console.log("addClassToPeriod metode!");
+    model.PeriodModel.update({_id: pid}, {$push: {classIds: classToAdd}}, function (erro, class_) {
+        callback(class_);
+        mongo.close();
+    });
+};
+
 module.exports.addPeriod = function(newPeriod, callback) {
     mongo.connect();
     //var date = new Date(newPeriod.start_date);

@@ -106,6 +106,23 @@ router.get('/periods/:id/classes', function(req, res) {
     })
 });
 
+router.post('/periods/:pid/class', function(req, res) {
+  var classToAdd = req.body;
+  var pid = req.params.pid;
+  console.log('class til period i admin');
+  console.log('class_: ' + classToAdd);
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.addClassToPeriod(pid, classToAdd, function(class_){
+    console.log("addClassToPeriod stringy: " + JSON.stringify(class_));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(class_));
+  })
+});
+
 router.get('/students/class/:id', function(req, res) {
   var classId = req.params.id;
   if(typeof global.mongo_error !== "undefined"){

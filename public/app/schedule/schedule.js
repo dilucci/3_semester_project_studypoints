@@ -105,9 +105,9 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         console.log('SchedulePeriodCtrl!');
         $scope.period = periodDetails.getPeriod();
         console.log('isUser get Periods');
-
+        $scope.classes = [];
         $scope.availableClasses = [];
-        $scope.class;
+        $scope.class = {};
 
         adminDatabase.getClasses(function(err, classes){
             $scope.availableClasses = classes;
@@ -140,6 +140,26 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         //            $scope.error = data;
         //        });
         //};
+
+        $scope.addClassToPeriod = function (class_) {
+            $http({
+                method: 'POST',
+                url: 'adminApi/periods/'+$scope.period._id+'/class',
+                data: $scope.class
+            })
+                .success(function (data, status, headers, config) {
+                    console.log("success!");
+                    $scope.classes.push(data);
+                    $scope.error = null;
+                }).
+                error(function (data, status, headers, config) {
+                    if (status == 401) {
+                        $scope.error = "You are not authenticated to request these data";
+                        return;
+                    }
+                    $scope.error = data;
+                });
+        };
 
         $scope.showStudentsInClass = function (index) {
             classDetails.setClass(index);
