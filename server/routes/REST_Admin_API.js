@@ -31,6 +31,21 @@ router.post('/periods', function(req, res) {
   })
 });
 
+router.get('/periodDays/:id', function(req, res) {
+  var periodId = req.params.id;
+  console.log('GET periodDays');
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.getPeriodDays(periodId, function(periodDays){
+    console.log("getPeriodDays stringy: " + JSON.stringify(periodDays));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(periodDays));
+  })
+});
+
 //router.post('/days', function(req, res) {
 //  console.log('POST');
 //  var newDays = req.body;

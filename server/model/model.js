@@ -105,7 +105,8 @@ var classSchema = new mongoose.Schema({
 var taskSchema = new mongoose.Schema({
         _id: Number,
         task_name: String,
-        description: String
+        description: String,
+        max_points: Number
     },
     {collection: 'Task'}
 );
@@ -144,12 +145,26 @@ var daySchema = new mongoose.Schema({
 );
 
 
+var semesterSchema = new mongoose.Schema({
+        _id: Number,
+        semester_name: String,
+        req_points: Number,
+        periodIds: [
+            {
+                periodId: { type: Number, ref:'Period' }
+            }]
+    },
+    {collection: 'Semester'}
+);
+
+
 exports.StudentModel = mongoose.model('Student', studentSchema);
 exports.TeacherModel = mongoose.model('Teacher', teacherSchema);
 exports.ClassModel = mongoose.model('Class', classSchema);
 exports.TaskModel = mongoose.model('Task', taskSchema);
 exports.DayModel = mongoose.model( 'Day', daySchema);
 exports.PeriodModel = mongoose.model('Period', periodSchema);
+exports.SemesterModel = mongoose.model('Semester', semesterSchema);
 
 //var semesterSchema = new mongoose.Schema({
 //    _id: String,

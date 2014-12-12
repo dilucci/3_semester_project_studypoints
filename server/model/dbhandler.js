@@ -51,34 +51,57 @@ module.exports.addClassToPeriod = function(pid, classToAdd, callback) {
 
 module.exports.addPeriod = function(newPeriod, callback) {
     mongo.connect();
-    //var date = new Date(newPeriod.start_date);
-    //console.log('date ' + date);
-    //var lastDate = new Date(newPeriod.end_date);
-    //console.log('lastDate: ' + lastDate);
+    var date = new Date(newPeriod.start_date);
+    console.log('date ' + date);
+    var lastDate = new Date(newPeriod.end_date);
+    console.log('lastDate: ' + lastDate);
+
+    var periodDays = [];
+
+    while (date <= lastDate) {
+        periodDays.push(new Date(date));
+        date.setTime(date.getTime() + (1000*60*60*24));
+    }
+    console.log(periodDays);
+
 
 
     console.log("addPeriod metode!");
-    model.PeriodModel.create(newPeriod, function (error, newPeriod) {
-        //while (date <= lastDate) {
-        //    model.PeriodModel.update({_id: newPeriod._id}, {$push: {dayIds: date}}, function (date) {
-        //        console.log('dateSet time ' + date);
-        //        //date.setTime(date.getTime()+86400000);
-        //    });
-        //    date.setTime(date.getTime() + 86400000);
-        //}
-        callback(newPeriod);
-        mongo.close();
+    model.PeriodModel.create(newPeriod, function (error, addedPeriod) {
+        model.PeriodModel.update({_id: newPeriod._id}, {$push: {'dayIds': {$each: periodDays}}}, function (error, rowsUpdated) {
+            console.log('dateSet time ' + date);
+            model.SemesterModel.update({_id: 1}, {$push: {'periodIds': {'periodId':newPeriod._id}}}, function (error, rowsUpdated) {
+                console.log("rows updated: " + rowsUpdated);
+                callback(addedPeriod);
+                mongo.close();
+            });
+        });
+
+
+
     });
 };
 
 module.exports.getPeriod = function(periodId, callback) {
+
     mongo.connect();
     console.log("getPeriod metode!");
     model.PeriodModel.find( {_id: periodId }, function (error, period) {
-        callback(period);
-        mongo.close();
+            callback(period);
+            mongo.close();
     });
 };
+
+module.exports.getPeriodDays = function(periodId, callback){
+    mongo.connect();
+    console.log("getPeriodDays metode!");
+    model.PeriodModel.findOne( {_id: periodId }, function (error, period) {
+        model.DayModel.find({_id: {$gte: period.start_date, $lte: period.end_date}}, function (error, periodDays) {
+            callback(periodDays);
+            mongo.close();
+        });
+    });
+}
 
 //module.exports.addDays = function(newDays, callback) {
 //    mongo.connect();

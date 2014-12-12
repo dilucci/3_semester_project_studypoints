@@ -4,7 +4,7 @@
 <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
 <!--<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
 <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
-<button type="button" class="btn btn-info" style="float: right;">Edit period</button>
+<!--<button type="button" class="btn btn-info" style="float: right;">Edit period</button>-->
 <h1>HEJ I SCHEDULE PERIOD</h1>
 <form>
 <h2>Periode: {{period.period_name}}</h2>
@@ -12,63 +12,81 @@
     to: {{period.end_date.substring(0,10)}}</h2>
 <h2>Max-Points: {{period.max_points}}</h2>
 </form>
-<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;">
-    <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Classes</div>
-    <ul style="list-style:none; position:relative; left:15%;">
-        <form ng-repeat="class in classes" ng-click="showStudentsInClass($index)">
-            <a href="">{{class.class_name}}</a>
-        </form>
-    </ul>
+<div>
+        <div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;" ng-show="isAdmin">
+            <div class="alert alert-info" role="alert" style="text-align: center">Calendar</div>
+            <input type="date" ng-model="datePicked" min="{{period.start_date.substring(0,10)}}" max="{{period.end_date.substring(0,10)}}">
+            <p></p>
+            <select ng-options="class.class_name for class in availableClasses" ng-model="class" name="class" id="class_" class="form-control" style="width:10em;">
+                <option value="">Select class</option>
+                <option value={{class}}></option>
+            </select>
+        </div>
+        <div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-hide="attendenceDisplay">
+            <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;" >Attendence dato</div>
+            <label for="class_">Classes:</label>
+        </div>
+        <div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="attendenceDisplay">
+            <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;" >Students</div>
+            <p>Attended:</p>
+            <form>
+                <ul>
+                    <li ng-repeat="student in students">{{student.first_name}} {{student.last_name}}</li>
+                </ul>
+            </form>
+            <div class="col-md-8">
+                <accordion close-others="true">
+                    <accordion-group ng-repeat="student in students | orderBy:'name':reverse | filter:studentfilter" heading="{{student.first_name}} {{student.last_name}}">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td><b>Details</b></td>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>Points for student</td><td>{{student.study_points_total}}</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td><td>{{student.address}}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone</td><td>{{student.phone}}</td>
+                            </tr>
+                            <tr>
+                                <td>Email</td><td>{{student.email}}</td>
+                            </tr>
+                            <tfoot>
+                            <tr>
+                                <td ng-click=""><a href="">See profile</a></td><td></td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </accordion-group>
+                </accordion>
+            </div>
+        </div>
+        <div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;">
+            <div class="alert alert-info" role="alert" style="text-align: center">Classes</div>
+            <ul style="list-style:none; position:relative; left:15%;">
+                <form ng-repeat="class in classes" ng-click="showStudentsInClass($index)">
+                    <a href="">{{class.class_name}}</a>
+                </form>
+            </ul>
+        </div>
+        <div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;" ng-show="isAdmin">
+            <div class="alert alert-info" role="alert" style="text-align: center">Add class to period</div>
+            <label for="class">Classes:</label>
+            <select ng-options="class.class_name for class in availableClasses" ng-model="class" name="class" id="class" class="form-control" style="width:10em;">
+                <option value="">Select class</option>
+                <option value={{class}}></option>
+            </select>
+            <p></p>
+            <!--<button type="button" class="btn btn-info" ng-click="addClassToPeriod(class)" ng-model="class">Add class to period</button>-->
+        </div>
 </div>
-<div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;">
-    <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Class-attendence</div>
-    <p>Attended:</p>
-  <form>
-        <ul>
-            <li ng-repeat="student in students">{{student.first_name}} {{student.last_name}}</li>
-        </ul>
-    </form>
-    <div class="col-md-9">
-    <accordion close-others="true">
-        <accordion-group ng-repeat="student in students | orderBy:'name':reverse | filter:studentfilter" heading="{{student.first_name}} {{student.last_name}}">
-            <table class="table">
-                <thead>
-                <tr>
-                    <td><b>Details</b></td>
-                </tr>
-                </thead>
-                <tr>
-                    <td>Points for student</td><td>{{student.study_points_total}}</td>
-                </tr>
-                <tr>
-                    <td>Address</td><td>{{student.address}}</td>
-                </tr>
-                <tr>
-                    <td>Phone</td><td>{{student.phone}}</td>
-                </tr>
-                <tr>
-                    <td>Email</td><td>{{student.email}}</td>
-                </tr>
-                <tr>
-                    <td>Class</td><td>{{class.class_name}}</td>
-                </tr>
-                <tfoot>
-                <tr>
-                    <td ng-click=""><a href="">See profile</a></td><td></td>
-                </tr>
-                </tfoot>
-            </table>
-        </accordion-group>
-    </accordion>
-    </div>
-</div>
-<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="isAdmin">
-    <div class="alert alert-info" role="alert" style="text-align: center">Add class to period</div>
-    <label for="class">Classes:</label>
-    <select ng-options="class.class_name for class in availableClasses" ng-model="class" name="class" id="class" class="form-control" style="width:10em;">
-        <option value="">Select class</option>
-        <option value={{class}}></option>
-    </select>
-    <p></p>
-    <button type="button" class="btn btn-info" ng-click="addClassToPeriod(class)" ng-model="class">Add class to period</button>
-</div>
+
+
+
+
+
+

@@ -16,7 +16,6 @@ angular.module('myAppRename.schedule', ['ngRoute'])
     .controller('ScheduleCtrl', function ($scope, periodDetails, adminDatabase, $http) {
         console.log("inde i ScheduleCtrl");
         console.log("isAutheticated: " + $scope.isAuthenticated);
-        $scope.nextId = 1;
         $scope.periods = [];
 
         //var generateDays = function (startDate, endDate){
@@ -62,7 +61,6 @@ angular.module('myAppRename.schedule', ['ngRoute'])
             //var periodDayIds = generateDays($scope.newStart, $scope.newEnd);
             //console.log('periodDayIds: ' + periodDayIds);
             $scope.newPeriod = {
-                _id: $scope.nextId,
                 period_name: $scope.newPeriodName,
                 start_date: $scope.newStart,
                 end_date: $scope.newEnd,
@@ -85,8 +83,6 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                     }
                     $scope.error = data;
                 });
-
-            $scope.nextId++;
             $scope.newPeriod = "";
         };
 
@@ -104,9 +100,16 @@ angular.module('myAppRename.schedule', ['ngRoute'])
     .controller('SchedulePeriodCtrl', function ($scope, studentDetails, periodDetails, adminDatabase, classDetails, $http) {
         console.log('SchedulePeriodCtrl!');
         $scope.period = periodDetails.getPeriod();
+
+
         $scope.classes = [];
         $scope.availableClasses = [];
         $scope.class = {};
+        $scope.attendenceDisplay = false;
+        $scope.datePicked = "";
+        $scope.$watch('datePicked', function(){
+            $scope.attendenceDisplay=false
+        });
 
 
 
@@ -119,6 +122,9 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 adminDatabase.getClasses(function(err, classes){
                     $scope.availableClasses = classes;
                     console.log('classes: ' + JSON.stringify($scope.availableClasses))
+                    adminDatabase.getPeriodDays($scope.periodId, function(err, periods){
+                        $scope.periodDays = periods;
+                    });
                 });
                 $scope.classes = data;
                 classDetails.setClasses(data);
@@ -180,6 +186,7 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         };
 
         $scope.showStudentsInClass = function (index) {
+            $scope.attendenceDisplay = true;
             classDetails.setClass(index);
             $http({
                 method: 'GET',

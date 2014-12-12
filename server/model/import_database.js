@@ -100,7 +100,8 @@ function getTasks() {
         return {
             _id: task.taskID,
             task_name: task.task_name,
-            description: task.description
+            description: task.description,
+            max_points: task.max_points
         };
     });
 };
@@ -117,12 +118,25 @@ function getDays() {
     });
 };
 
+function getSemesters() {
+    return semesters.map(function(semester) {
+        return {
+            _id: semester.semesterID,
+            semester_name: semester.semester_name,
+            req_points: semester.req_points,
+            max_points: semester.max_points
+        };
+    });
+};
+
+
 var students = readData('students.json');
 var teachers = readData('teachers.json');
 var classes = readData('classes.json');
 var tasks = readData('tasks.json');
 //var days = readData('days.json');
 //var periods = readData('periods.json');
+var semesters = readData('semesters.json');
 
 
 var db = mongoose.connect(dbURI);
@@ -151,8 +165,9 @@ model.StudentModel.remove({}).exec();
 model.TeacherModel.remove({}).exec();
 model.ClassModel.remove({}).exec();
 model.TaskModel.remove({}).exec();
-model.DayModel.remove({}).exec();
+//model.DayModel.remove({}).exec();
 model.PeriodModel.remove({}).exec();
+model.SemesterModel.remove({}).exec();
 
 function closeDatabase() {
     db.connection.close();
@@ -178,6 +193,7 @@ addData(getClasses(), model.ClassModel);
 addData(getTasks(), model.TaskModel);
 //addData(getDays(), model.DayModel);
 //addData(getPeriods(), model.PeriodModel);
+addData(getSemesters(), model.SemesterModel);
 
 async.series(asyncTasks, function(){
     closeDatabase();

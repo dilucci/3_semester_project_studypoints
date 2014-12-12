@@ -1,2 +1,2 @@
-taskID,task_name,description
-[[1,"CA-2","Compulsory Assignment 2 - ChatServer"]]
+taskID,task_name,description,max_points
+[[1,"CA-2","Compulsory Assignment 2 - ChatServer",20]]

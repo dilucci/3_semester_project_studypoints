@@ -60,6 +60,15 @@ var app = angular.module('myAppRename.factories', []);
             callback(err);
           })
     };
+      var getPeriodDays = function(periodId, callback){
+          $http.get('adminApi/periodDays/' + periodId)
+              .success(function(data){
+                  callback(null, data);
+              })
+              .error(function(err){
+                  callback(err);
+              })
+      }
     var getTeachers = function(callback){
       $http.get('adminApi/teachers')
           .success(function(data){
@@ -73,6 +82,7 @@ var app = angular.module('myAppRename.factories', []);
       getStudents: getStudents,
       getClasses: getClasses,
       getPeriods: getPeriods,
+      getPeriodDays: getPeriodDays,
       getTeachers: getTeachers
     }
     });
