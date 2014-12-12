@@ -1,8 +1,8 @@
-<script src="vendor/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
-<script src="vendor/ui-bootstrap-tpls-0.12.0.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!--<script src="vendor/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>-->
+<!--<script src="vendor/ui-bootstrap-tpls-0.12.0.min.js"></script>-->
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+<!--<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
 <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
 
 <h1>HEJ I SCHEDULE PERIOD</h1>
@@ -22,33 +22,41 @@
 <div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;">
     <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Class-attendence</div>
     <p>Attended:</p>
-<!--    <form>
+  <form>
         <ul>
             <li ng-repeat="student in students">{{student.first_name}} {{student.last_name}}</li>
         </ul>
-    </form>-->
-    <div class="col-md-9">
-    <accordion close-others="true">
-        <accordion-group ng-repeat="student in students | orderBy:'name':reverse | filter:studentfilter" heading="{{student.first_name}} {{student.last_name}}" ng-click="getClassesForStudent(student._id)">
-            <table class="table">
-                <thead>
-                <tr>
-                    <td><b>Details</b></td>
-                </tr>
-                </thead>
-                <tr>
-                    <td>Email</td><td>{{student.email}}</td>
-                </tr>
-                <tr ng-repeat="class in classes">
-                    <td>Class</td><td>{{class.class_name}}</td>
-                </tr>
-                <tfoot>
-                <tr>
-                    <td ng-click=""><a href="">See profile</a></td><td></td>
-                </tr>
-                </tfoot>
-            </table>
-        </accordion-group>
-    </accordion>
-        </div>
-</div>
+    </form>
+    <!--<div class="col-md-9">-->
+    <!--<accordion close-others="true">-->
+        <!--<accordion-group ng-repeat="student in students | orderBy:'name':reverse | filter:studentfilter" heading="{{student.first_name}} {{student.last_name}}" ng-click="getClassesForStudent(student._id)">-->
+            <!--<table class="table">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<td><b>Details</b></td>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tr>-->
+                    <!--<td>Email</td><td>{{student.email}}</td>-->
+                <!--</tr>-->
+                <!--<tr ng-repeat="class in classes">-->
+                    <!--<td>Class</td><td>{{class.class_name}}</td>-->
+                <!--</tr>-->
+                <!--<tfoot>-->
+                <!--<tr>-->
+                    <!--<td ng-click=""><a href="">See profile</a></td><td></td>-->
+                <!--</tr>-->
+                <!--</tfoot>-->
+            <!--</table>-->
+        <!--</accordion-group>-->
+    <!--</accordion>-->
+        <!--</div>-->
+<!--</div>-->
+<!--<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="isAdmin">-->
+    <!--<div class="alert alert-info" role="alert" style="text-align: center">Create a new Period</div>-->
+    <!--<label for="class">Classes:</label>-->
+    <!--<select ng-options="class for class in classes" ng-model="selected.class" name="class" id="class" class="form-control" style="width:10em;">-->
+        <!--<option value="">Select Class</option>-->
+        <!--<option value={{class}}></option>-->
+    <!--</select>-->
+<!--</div>-->

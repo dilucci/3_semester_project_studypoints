@@ -68,7 +68,9 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 start_date: $scope.newStart,
                 end_date: $scope.newEnd,
                 max_points: $scope.newMaxPoints,
-                dayIds: periodDayIds
+                classIds: [],
+                dayIds: periodDayIds,
+                taskIds: []
             };
             console.log('inde i add period function');
             $http({
