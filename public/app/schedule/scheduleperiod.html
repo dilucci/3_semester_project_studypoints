@@ -4,7 +4,7 @@
 <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
 <!--<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
 <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
-
+<button type="button" class="btn btn-info" style="float: right;">Edit period</button>
 <h1>HEJ I SCHEDULE PERIOD</h1>
 <form>
 <h2>Periode: {{period.period_name}}</h2>
@@ -38,9 +38,18 @@
                 </tr>
                 </thead>
                 <tr>
+                    <td>Points for student</td><td>{{student.study_points_total}}</td>
+                </tr>
+                <tr>
+                    <td>Address</td><td>{{student.address}}</td>
+                </tr>
+                <tr>
+                    <td>Phone</td><td>{{student.phone}}</td>
+                </tr>
+                <tr>
                     <td>Email</td><td>{{student.email}}</td>
                 </tr>
-                <tr ng-repeat="class in classes">
+                <tr>
                     <td>Class</td><td>{{class.class_name}}</td>
                 </tr>
                 <tfoot>
@@ -51,7 +60,7 @@
             </table>
         </accordion-group>
     </accordion>
-        </div>
+    </div>
 </div>
 <div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="isAdmin">
     <div class="alert alert-info" role="alert" style="text-align: center">Add class to period</div>
@@ -60,5 +69,6 @@
         <option value="">Select class</option>
         <option value={{class}}></option>
     </select>
-    <button ng-click="addClassToPeriod(class)" ng-model="class">Add class to period</button>
+    <p></p>
+    <button type="button" class="btn btn-info" ng-click="addClassToPeriod(class)" ng-model="class">Add class to period</button>
 </div>
