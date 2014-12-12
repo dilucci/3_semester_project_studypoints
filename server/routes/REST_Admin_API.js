@@ -106,11 +106,11 @@ router.get('/periods/:id/classes', function(req, res) {
     })
 });
 
-router.post('/periods/:pid/class', function(req, res) {
+router.put('/periods/:pid/classes', function(req, res) {
   var classToAdd = req.body;
   var pid = req.params.pid;
   console.log('class til period i admin');
-  console.log('class_: ' + classToAdd);
+  console.log('class_ to add: ' + JSON.stringify(classToAdd));
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");

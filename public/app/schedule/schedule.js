@@ -104,15 +104,33 @@ angular.module('myAppRename.schedule', ['ngRoute'])
     .controller('SchedulePeriodCtrl', function ($scope, studentDetails, periodDetails, adminDatabase, classDetails, $http) {
         console.log('SchedulePeriodCtrl!');
         $scope.period = periodDetails.getPeriod();
-        console.log('isUser get Periods');
         $scope.classes = [];
         $scope.availableClasses = [];
         $scope.class = {};
 
-        adminDatabase.getClasses(function(err, classes){
-            $scope.availableClasses = classes;
-            console.log('classes: ' + JSON.stringify($scope.availableClasses))
-        });
+
+
+        $http({
+            method: 'GET',
+            url: 'adminApi/periods/'+$scope.period._id+'/classes'
+        })
+            .success(function (data, status, headers, config) {
+                console.log("success!");
+                adminDatabase.getClasses(function(err, classes){
+                    $scope.availableClasses = classes;
+                    console.log('classes: ' + JSON.stringify($scope.availableClasses))
+                });
+                $scope.classes = data;
+                classDetails.setClasses(data);
+                $scope.error = null;
+            }).
+            error(function (data, status, headers, config) {
+                if (status == 401) {
+                    $scope.error = "You are not authenticated to request these data";
+                    return;
+                }
+                $scope.error = data;
+            });
 
         //$scope.getClassesForStudent = function(studentID){
         //    $http({
@@ -143,8 +161,8 @@ angular.module('myAppRename.schedule', ['ngRoute'])
 
         $scope.addClassToPeriod = function (class_) {
             $http({
-                method: 'POST',
-                url: 'adminApi/periods/'+$scope.period._id+'/class',
+                method: 'PUT',
+                url: 'adminApi/periods/'+$scope.period._id+'/classes',
                 data: $scope.class
             })
                 .success(function (data, status, headers, config) {
@@ -186,22 +204,4 @@ angular.module('myAppRename.schedule', ['ngRoute'])
             studentDetails.setStudent(index);
             $scope.student = studentDetails.getStudent();
         };
-
-        $http({
-            method: 'GET',
-            url: 'adminApi/periods/'+$scope.period._id+'/classes'
-        })
-            .success(function (data, status, headers, config) {
-                console.log("success!");
-                $scope.classes = data;
-                classDetails.setClasses(data);
-                $scope.error = null;
-            }).
-            error(function (data, status, headers, config) {
-                if (status == 401) {
-                    $scope.error = "You are not authenticated to request these data";
-                    return;
-                }
-                $scope.error = data;
-            });
-    })
+    });
