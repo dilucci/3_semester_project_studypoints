@@ -10,6 +10,7 @@
 <h2>Periode: {{period.period_name}}</h2>
 <h2>dato: {{period.start_date.substring(0,10)}}
     to: {{period.end_date.substring(0,10)}}</h2>
+<h2>Max-Points: {{period.max_points}}</h2>
 </form>
 <div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;">
     <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Classes</div>
@@ -29,7 +30,7 @@
     </form>
     <div class="col-md-9">
     <accordion close-others="true">
-        <accordion-group ng-repeat="student in students | orderBy:'name':reverse | filter:studentfilter" heading="{{student.first_name}} {{student.last_name}}" ng-click="getClassesForStudent(student._id)">
+        <accordion-group ng-repeat="student in students | orderBy:'name':reverse | filter:studentfilter" heading="{{student.first_name}} {{student.last_name}}">
             <table class="table">
                 <thead>
                 <tr>
@@ -52,11 +53,12 @@
     </accordion>
         </div>
 </div>
-<!--<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="isAdmin">-->
-    <!--<div class="alert alert-info" role="alert" style="text-align: center">Create a new Period</div>-->
-    <!--<label for="class">Classes:</label>-->
-    <!--<select ng-options="class for class in classes" ng-model="selected.class" name="class" id="class" class="form-control" style="width:10em;">-->
-        <!--<option value="">Select Class</option>-->
-        <!--<option value={{class}}></option>-->
-    <!--</select>-->
-<!--</div>-->
+<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="isAdmin">
+    <div class="alert alert-info" role="alert" style="text-align: center">Add class to period</div>
+    <label for="class">Classes:</label>
+    <select ng-options="class.class_name for class in availableClasses" ng-model="class" name="class" id="class" class="form-control" style="width:10em;">
+        <option value="">Select class</option>
+        <option value={{class}}></option>
+    </select>
+    <button ng-click="addClassToPeriod(class)" ng-model="class">Add period</button>
+</div>

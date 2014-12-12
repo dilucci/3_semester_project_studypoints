@@ -101,37 +101,45 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         };
     })
 
-    .controller('SchedulePeriodCtrl', function ($scope, studentDetails, periodDetails, classDetails, $http) {
+    .controller('SchedulePeriodCtrl', function ($scope, studentDetails, periodDetails, adminDatabase, classDetails, $http) {
         console.log('SchedulePeriodCtrl!');
         $scope.period = periodDetails.getPeriod();
         console.log('isUser get Periods');
 
-        $scope.getClassesForStudent = function(studentID){
-            $http({
-                method: 'GET',
-                url: '/classes/student/'+studentID
-            })
-                .success(function (data, status, headers, config) {
-                    $scope.classes = [];
-                    var found = false;
-                    data.forEach(function(classes){
-                        found = false;
-                        $scope.classes.forEach(function(thisClasses){
-                            if(classes._id === thisClasses._id){
-                                found = true;
-                            }
-                        });
-                        if(found === false){
-                            $scope.classes.push(classes);
-                        }
-                    });
-                    console.log($scope.classes);
-                    $scope.error = null;
-                }).
-                error(function (data, status, headers, config) {
-                    $scope.error = data;
-                });
-        };
+        $scope.availableClasses = [];
+        $scope.class;
+
+        adminDatabase.getClasses(function(err, classes){
+            $scope.availableClasses = classes;
+            console.log('classes: ' + JSON.stringify($scope.availableClasses))
+        });
+
+        //$scope.getClassesForStudent = function(studentID){
+        //    $http({
+        //        method: 'GET',
+        //        url: '/classes/student/'+studentID
+        //    })
+        //        .success(function (data, status, headers, config) {
+        //            $scope.classes = [];
+        //            var found = false;
+        //            data.forEach(function(classes){
+        //                found = false;
+        //                $scope.classes.forEach(function(thisClasses){
+        //                    if(classes._id === thisClasses._id){
+        //                        found = true;
+        //                    }
+        //                });
+        //                if(found === false){
+        //                    $scope.classes.push(classes);
+        //                }
+        //            });
+        //            console.log($scope.classes);
+        //            $scope.error = null;
+        //        }).
+        //        error(function (data, status, headers, config) {
+        //            $scope.error = data;
+        //        });
+        //};
 
         $scope.showStudentsInClass = function (index) {
             classDetails.setClass(index);
@@ -164,7 +172,7 @@ angular.module('myAppRename.schedule', ['ngRoute'])
             url: 'adminApi/periods/'+$scope.period._id+'/classes'
         })
             .success(function (data, status, headers, config) {
-                console.log("success!")
+                console.log("success!");
                 $scope.classes = data;
                 classDetails.setClasses(data);
                 $scope.error = null;

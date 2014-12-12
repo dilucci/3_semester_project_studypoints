@@ -76,7 +76,7 @@ router.get('/classes', function(req, res) {
 
 router.get('/periods/:id', function(req, res) {
   var periodId = req.params.id;
-  console.log('classes i admin');
+  console.log('period i admin');
   console.log('id: ' + periodId);
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
