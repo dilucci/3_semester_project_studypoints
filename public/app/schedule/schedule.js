@@ -172,9 +172,11 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         };
 
         $scope.addStudentToAttendence = function(){
+            console.log('Increment')
             $http({
                 method: 'PUT',
-                url: 'adminApi/student/'+$scope.student+'/day/'+$scope.datePicked
+                url: 'adminApi/student/'+$scope.student+'/day/'+$scope.datePicked,
+                data: $scope.student
             })
                 .success(function (data, status, headers, config) {
                     console.log("success!");

@@ -84,8 +84,8 @@ router.get('/students', function(req, res) {
   })
 });
 
-router.put('/student/:student/day/:day', function(req, res) {
-  var student = req.params.student;
+router.put('/student/:studentId/day/:day', function(req, res) {
+  var student = req.body;
   var day = req.params.day;
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);

@@ -85,6 +85,8 @@ module.exports.getPeriod = function(periodId, callback) {
 module.exports.incrementPoints = function(day, student, callback) {
     mongo.connect();
     console.log("incrementPoints metode!");
+    console.log("student: " + student);
+    console.log("day: " + JSON.stringify(day));
     model.StudentModel.findOne( {_id: student._id}, function (error, student) {
         model.StudentModel.update({_id: student._id}, {$set: {study_points_total: student.study_points_total++}}, function(error, updates){
             model.DayModel.update({_id: day}, {$push: {'studentIds': {'studentId': student._id}}}, function(error, rowsUpdated){
