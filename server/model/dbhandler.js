@@ -82,6 +82,26 @@ module.exports.getPeriod = function(periodId, callback) {
     });
 };
 
+
+module.exports.getStudentsInDay = function(day, callback) {
+    mongo.connect();
+    console.log("day " + day);
+    model.DayModel.findOne( {_id: day }, function (error, day) {
+        console.log("getStudentsInDay metode!");
+        var studentIds = [];
+        day.studentIds.forEach(function(sId){
+            studentIds.push(sId.studentId)
+        });
+        console.log('studentIds' + studentIds);
+
+        model.StudentModel.find({_id: {$in: studentIds}}, function(err, students){
+            console.log(students);
+            callback(students);
+            mongo.close();
+        });
+    });
+};
+
 module.exports.getPeriodDays = function(periodId, callback){
     mongo.connect();
     console.log("getPeriodDays metode!");
@@ -92,36 +112,60 @@ module.exports.getPeriodDays = function(periodId, callback){
         var endDate = new Date(period.end_date);
         console.log("start date: " + date);
         console.log("end date: " + endDate);
-        var dayArray = [];
+        var days = [];
 
-        while (date <= endDate) {
-            dayArray.push(new Date(date));
-            date.setTime(date.getTime() + (1000*60*60*24));
-        }
+        //while (date <= endDate) {
+        //    days.push(new Date(date));
+        //    date.setTime(date.getTime() + (1000*60*60*24));
+        //}
         //console.log(date.toISOString())
-        //console.log(dayArray);
+        //console.log(days);
+        //
+        //model.DayModel.find( {_id: date.toISOString().substring(0,10)}).populate('studentId').exec(function (error, periodDays) {
+        //    console.log("periodDays: " + periodDays);
+        //    callback(periodDays);
+        //    mongo.close();
+        //});
 
-        model.DayModel.find( {_id: date.toISOString().substring(0,10)}).populate('studentId').exec(function (error, periodDays) {
-            console.log("periodDays: " + periodDays);
+
+
+        //
+        period.dayIds.forEach(function(dId){
+            days.push(dId.dayId)
+        });
+        console.log(days)
+
+        model.DayModel.find({_id: {$in: days}}).populate('studentId').exec(function(err, periodDays){
+            console.log(periodDays)
             callback(periodDays);
             mongo.close();
         });
+
+        //while (date <= endDate) {
+        //    model.DayModel.find({_id: date.toISOString().substring(0,10)}).populate('studentIds.studentId').exec(function (error, periodDay) {
+        //        days.push(periodDay);
+        //        date.setTime(date.getTime() + (1000*60*60*24));
+        //    });
+        //    callback(days);
+        //    mongo.close();
+        //}
+
     });
 };
 
-//module.exports.addDays = function(newDays, callback) {
-//    mongo.connect();
-//    console.log("addDays metode!");
-//    console.log('NEWDAYS: ' + newDays);
-//
-//    var addedDays = [];
-//    newDays.forEach(function(newDay){
-//        model.DayModel.create(newDay, function(error, newDay){
-//            addedDays.push(newDay);
-//
-//        });
-//    },callback(addedDays))
-//};
+module.exports.addDays = function(newDays, callback) {
+    mongo.connect();
+    console.log("addDays metode!");
+    console.log('NEWDAYS: ' + newDays);
+
+    var addedDays = [];
+    newDays.forEach(function(newDay){
+        model.DayModel.create(newDay, function(error, newDay){
+            addedDays.push(newDay);
+
+        });
+    },callback(addedDays))
+};
 
 module.exports.getClassesInPeriod = function(periodId, callback) {
     console.log("getClassesInPeriod metode!");

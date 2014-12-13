@@ -16,9 +16,7 @@ router.get('/periods', function(req, res) {
 });
 
 router.post('/periods', function(req, res) {
-  console.log('POST NewPeriod');
   var newPeriod = req.body;
-  console.log('newPeriod: ' + JSON.stringify(newPeriod));
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
@@ -33,7 +31,6 @@ router.post('/periods', function(req, res) {
 
 router.get('/periodDays/:id', function(req, res) {
   var periodId = req.params.id;
-  console.log('GET periodDays');
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
@@ -46,10 +43,23 @@ router.get('/periodDays/:id', function(req, res) {
   })
 });
 
+router.get('/students/day/:day', function(req, res) {
+  var day = req.params.day;
+  console.log("day " + day);
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.getStudentsInDay(day, function(students){
+    console.log("getStudentsInDay stringy: " + JSON.stringify(students));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(students));
+  })
+});
+
 router.post('/days', function(req, res) {
-  console.log('POST');
   var newDays = req.body;
-  console.log('newDays: ' + JSON.stringify(newDays));
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
@@ -91,8 +101,6 @@ router.get('/classes', function(req, res) {
 
 router.get('/periods/:id', function(req, res) {
   var periodId = req.params.id;
-  console.log('period i admin');
-  console.log('id: ' + periodId);
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
@@ -107,8 +115,6 @@ router.get('/periods/:id', function(req, res) {
 
 router.get('/periods/:id/classes', function(req, res) {
   var periodId = req.params.id;
-  console.log('classes i admin');
-  console.log('id: ' + periodId);
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
@@ -124,8 +130,6 @@ router.get('/periods/:id/classes', function(req, res) {
 router.put('/periods/:pid/classes', function(req, res) {
   var classToAdd = req.body;
   var pid = req.params.pid;
-  console.log('class til period i admin');
-  console.log('class_ to add: ' + JSON.stringify(classToAdd));
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");

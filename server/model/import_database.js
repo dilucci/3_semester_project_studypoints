@@ -166,7 +166,7 @@ model.TeacherModel.remove({}).exec();
 model.ClassModel.remove({}).exec();
 model.TaskModel.remove({}).exec();
 //model.DayModel.remove({}).exec();
-model.PeriodModel.remove({}).exec();
+//model.PeriodModel.remove({}).exec();
 model.SemesterModel.remove({}).exec();
 
 function closeDatabase() {

@@ -99,28 +99,27 @@ angular.module('myAppRename.schedule', ['ngRoute'])
 
         $scope.showDetails = function (index) {
             periodDetails.setPeriod(index);
-        };
+            };
     })
 
     .controller('SchedulePeriodCtrl', function ($scope, studentDetails, periodDetails, adminDatabase, classDetails, $http) {
         console.log('SchedulePeriodCtrl!');
-        $scope.period = periodDetails.getPeriod();
-
         $scope.daysInPeriod = [];
         $scope.classes = [];
         $scope.availableClasses = [];
         $scope.class = {};
         $scope.attendenceDisplay = false;
         $scope.datePicked = "";
+        $scope.attendedStudents = [] ;
         $scope.$watch('datePicked', function(){
-            adminDatabase.getPeriodDays($scope.period._id, function(error, days){
-                $scope.daysInPeriod = days;
-                console.log("daysINPeiordd: " + days)
-            });
-            $scope.attendenceDisplay=false
+            $scope.attendenceDisplay=false;
+            adminDatabase.getStudentsInDay($scope.datePicked, function(err, students){
+                $scope.attendedStudents = students;
+            })
         });
 
 
+        $scope.period = periodDetails.getPeriod();
 
         $http({
             method: 'GET',
@@ -130,10 +129,10 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 console.log("success!");
                 adminDatabase.getClasses(function(err, classes){
                     $scope.availableClasses = classes;
-                    console.log('classes: ' + JSON.stringify($scope.availableClasses))
-                    adminDatabase.getPeriodDays($scope.period._id, function(err, periods){
-                        $scope.periodDays = periods;
-                    });
+                    //adminDatabase.getPeriodDays($scope.period._id, function(err, periods){
+                    //    console.log('PERIODS ' + periods);
+                    //    $scope.periodDays = periods;
+                    //});
                 });
                 $scope.classes = data;
                 classDetails.setClasses(data);
