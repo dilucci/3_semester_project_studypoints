@@ -171,8 +171,24 @@ angular.module('myAppRename.schedule', ['ngRoute'])
             });
         };
 
-        $scope.addStudentToAttendence = function(student){
-            adminDatabase.incrementPoints(function(err, student){
+        $scope.addStudentToAttendence = function(){
+            $http({
+                method: 'PUT',
+                url: 'adminApi/student/'+$scope.student+'/day/'+$scope.datePicked
+            })
+                .success(function (data, status, headers, config) {
+                    console.log("success!");
+                    $scope.attendedStudents.push(data)
+                    $scope.error = null;
+                }).
+                error(function (data, status, headers, config) {
+                    if (status == 401) {
+                        $scope.error = "You are not authenticated to request these data";
+                        return;
+                    }
+                    $scope.error = data;
+                });
+            adminDatabase.incrementPoints($scope.student, function(err, student){
 
             })
         };

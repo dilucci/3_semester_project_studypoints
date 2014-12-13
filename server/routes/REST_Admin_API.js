@@ -84,6 +84,21 @@ router.get('/students', function(req, res) {
   })
 });
 
+router.put('/student/:student/day/:day', function(req, res) {
+  var student = req.params.student;
+  var day = req.params.day;
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.incrementPoints(day, student, function(students){
+    console.log("Students stringy: " + JSON.stringify(students));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(students));
+  })
+});
+
 router.get('/classes', function(req, res) {
   console.log('classes i admin');
   if(typeof global.mongo_error !== "undefined"){

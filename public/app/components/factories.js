@@ -86,13 +86,14 @@ var app = angular.module('myAppRename.factories', []);
             callback(err);
           })
     };
+
     return{
       getStudents: getStudents,
       getClasses: getClasses,
       getPeriods: getPeriods,
       getPeriodDays: getPeriodDays,
       getTeachers: getTeachers,
-      getStudentsInDay: getStudentsInDay
+      getStudentsInDay: getStudentsInDay,
     }
     });
 
