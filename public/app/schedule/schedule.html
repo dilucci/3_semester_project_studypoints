@@ -19,8 +19,8 @@
   <div class="alert alert-info" role="alert" style="text-align: center">Create a new Period</div>
   <form>
     Name: <input type="text" class="newPeriods" ng-model="newPeriodName"><br>
-    From: <input type="date" class="newPeriods" ng-model="newStart"><br>
-    To: <input type="date" class="newPeriods" ng-model="newEnd"><br>
+    From: <input type="date" class="newPeriods" ng-model="newStart" min="2015-01-01" max="2015-12-31"><br>
+    To: <input type="date" class="newPeriods" ng-model="newEnd" min="2015-01-01" max="2015-12-31"><br>
     Max-Points: <input type="number" class="newPeriods" ng-model="newMaxPoints"><br>
     <button ng-click="add()">Add period</button>
   </form>

@@ -46,21 +46,21 @@ router.get('/periodDays/:id', function(req, res) {
   })
 });
 
-//router.post('/days', function(req, res) {
-//  console.log('POST');
-//  var newDays = req.body;
-//  //console.log('newDays: ' + JSON.stringify(newDays));
-//  if(typeof global.mongo_error !== "undefined"){
-//    res.status(500);
-//    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
-//    return;
-//  }
-//  dbhandler.addDays(newDays, function(newDays){
-//    //console.log("addDays stringy: " + JSON.stringify(newDays));
-//    res.header("Content-type","application/json");
-//    res.end(JSON.stringify(newDays));
-//  })
-//});
+router.post('/days', function(req, res) {
+  console.log('POST');
+  var newDays = req.body;
+  console.log('newDays: ' + JSON.stringify(newDays));
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.addDays(newDays, function(newDays){
+    console.log("addDays stringy: " + JSON.stringify(newDays));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(newDays));
+  })
+});
 
 router.get('/students', function(req, res) {
   if(typeof global.mongo_error !== "undefined"){

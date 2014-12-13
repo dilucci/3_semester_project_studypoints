@@ -27,17 +27,22 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         //
         //    var dateArray = [];
         //    var dateIdArray = [];
+        //    var nextId = date.toISOString().substring(0,10);
+        //
         //
         //
         //    while(date <= lastDate) {
         //        //console.log("Date to array: " + date);
         //        $scope.newDate = {
-        //            _id: new Date(date)
+        //            _id: nextId,
+        //            day: new Date(date)
         //        };
         //        dateArray.push($scope.newDate);
         //        //dateIdArray.push($scope.newDate._id);
         //        //date.setDate(date.getDate()+1);
-        //        date.setTime(date.getTime()+86400000);
+        //        date.setTime(date.getTime() +86400000);
+        //        nextId = date.toISOString().substring(0,10);
+        //
         //    }
         //    $http({
         //        method: 'POST',
@@ -122,7 +127,7 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 adminDatabase.getClasses(function(err, classes){
                     $scope.availableClasses = classes;
                     console.log('classes: ' + JSON.stringify($scope.availableClasses))
-                    adminDatabase.getPeriodDays($scope.periodId, function(err, periods){
+                    adminDatabase.getPeriodDays($scope.period._id, function(err, periods){
                         $scope.periodDays = periods;
                     });
                 });
@@ -138,34 +143,8 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 $scope.error = data;
             });
 
-        //$scope.getClassesForStudent = function(studentID){
-        //    $http({
-        //        method: 'GET',
-        //        url: '/classes/student/'+studentID
-        //    })
-        //        .success(function (data, status, headers, config) {
-        //            $scope.classes = [];
-        //            var found = false;
-        //            data.forEach(function(classes){
-        //                found = false;
-        //                $scope.classes.forEach(function(thisClasses){
-        //                    if(classes._id === thisClasses._id){
-        //                        found = true;
-        //                    }
-        //                });
-        //                if(found === false){
-        //                    $scope.classes.push(classes);
-        //                }
-        //            });
-        //            console.log($scope.classes);
-        //            $scope.error = null;
-        //        }).
-        //        error(function (data, status, headers, config) {
-        //            $scope.error = data;
-        //        });
-        //};
 
-        $scope.addClassToPeriod = function (class_) {
+        $scope.addClassToPeriod = function () {
             $http({
                 method: 'PUT',
                 url: 'adminApi/periods/'+$scope.period._id+'/classes',
