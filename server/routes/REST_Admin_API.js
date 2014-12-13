@@ -45,7 +45,6 @@ router.get('/periodDays/:id', function(req, res) {
 
 router.get('/students/day/:day', function(req, res) {
   var day = req.params.day;
-  console.log("day " + day);
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");

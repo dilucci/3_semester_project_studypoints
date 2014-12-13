@@ -12,19 +12,29 @@
     to: {{period.end_date.substring(0,10)}}</h2>
 <h2>Max-Points: {{period.max_points}}</h2>
 </form>
+<button type="button" class="btn btn-info" ng-click="showStudents()" >Show students</button>
+<p></p>
 <div>
         <div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;" ng-show="isAdmin">
             <div class="alert alert-info" role="alert" style="text-align: center">Calendar</div>
             <input type="date" ng-model="datePicked" min="{{period.start_date.substring(0,10)}}" max="{{period.end_date.substring(0,10)}}">
             <p></p>
+            <label for="student">Choose student to give attendence:</label>
+            <select ng-options="student.first_name for student in students" ng-model="student" name="chosenStudent" id="student" class="form-control" style="width:10em;">
+                <option value="">Select student</option>
+                <option value={{student}}></option>
+            </select>
+            <p></p>
+            <button type="button" class="btn btn-info" ng-click="addStudentToAttendence(student)" ng-model="student" style="float: right;">Add student</button>
         </div>
         <div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-hide="attendenceDisplay">
-            <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;" >Attendence dato</div>
+            <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;" >Attendence</div>
             <form>
                 <ul>
                     <li ng-repeat="attendedStudent in attendedStudents">{{attendedStudent.first_name}} {{attendedStudent.last_name}}</li>
                 </ul>
             </form>
+
         </div>
         <div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="attendenceDisplay">
             <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;" >Students</div>
@@ -43,6 +53,9 @@
                                 <td><b>Details</b></td>
                             </tr>
                             </thead>
+                            <tr>
+                                <td>Name</td><td>{{student.first_name}} {{student.last_name}}</td>
+                            </tr>
                             <tr>
                                 <td>Points for student</td><td>{{student.study_points_total}}</td>
                             </tr>
@@ -68,7 +81,7 @@
         <div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;">
             <div class="alert alert-info" role="alert" style="text-align: center">Classes</div>
             <ul style="list-style:none; position:relative; left:15%;">
-                <form ng-repeat="class in classes" ng-click="showStudentsInClass($index)">
+                <form ng-repeat="class in classes">
                     <a href="">{{class.class_name}}</a>
                 </form>
             </ul>

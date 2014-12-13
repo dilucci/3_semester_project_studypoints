@@ -7,7 +7,7 @@ module.exports.getStudents = function(callback) {
     mongo.connect();
     console.log("getStudents metode!");
     model.StudentModel.find( function (error, students) {
-        callback(null, students);
+        callback(students);
         mongo.close();
     });
 };
@@ -16,7 +16,7 @@ module.exports.getStudentDetails = function(id, callback) {
     mongo.connect();
     console.log("getStudentDetail metode!");
     model.StudentModel.find( {_id: id }, function (error, student) {
-        callback(null, student);
+        callback(student);
         mongo.close();
     });
 };
@@ -85,14 +85,12 @@ module.exports.getPeriod = function(periodId, callback) {
 
 module.exports.getStudentsInDay = function(day, callback) {
     mongo.connect();
-    console.log("day " + day);
     model.DayModel.findOne( {_id: day }, function (error, day) {
         console.log("getStudentsInDay metode!");
         var studentIds = [];
         day.studentIds.forEach(function(sId){
             studentIds.push(sId.studentId)
         });
-        console.log('studentIds' + studentIds);
 
         model.StudentModel.find({_id: {$in: studentIds}}, function(err, students){
             console.log(students);
@@ -200,7 +198,7 @@ module.exports.getStudentsInClass = function(classId, callback) {
         class_.studentIds.forEach(function(sId){
             studentIds.push(sId.studentId)
         });
-        model.StudentModel.find({'studentIds.studentId': {$in: studentIds}}, function(err, students){
+        model.StudentModel.find({_id: {$in: studentIds}}, function(err, students){
             callback(students);
             mongo.close();
         })

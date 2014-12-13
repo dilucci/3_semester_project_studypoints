@@ -128,12 +128,9 @@ angular.module('myAppRename.schedule', ['ngRoute'])
             .success(function (data, status, headers, config) {
                 console.log("success!");
                 adminDatabase.getClasses(function(err, classes){
-                    $scope.availableClasses = classes;
-                    //adminDatabase.getPeriodDays($scope.period._id, function(err, periods){
-                    //    console.log('PERIODS ' + periods);
-                    //    $scope.periodDays = periods;
-                    //});
+                        $scope.availableClasses = classes;
                 });
+
                 $scope.classes = data;
                 classDetails.setClasses(data);
                 $scope.error = null;
@@ -167,16 +164,28 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 });
         };
 
-        $scope.showStudentsInClass = function (index) {
-            $scope.attendenceDisplay = true;
+        $scope.showStudents = function(){
+            adminDatabase.getStudents(function(err, students){
+                $scope.attendenceDisplay = true;
+                $scope.students = students;
+            });
+        };
+
+        $scope.addStudentToAttendence = function(student){
+            adminDatabase.incrementPoints(function(err, student){
+
+            })
+        };
+
+        $scope.showClass = function (index) {
             classDetails.setClass(index);
             $http({
                 method: 'GET',
                 url: 'adminApi/students/class/'+classDetails.getClass()._id
             })
                 .success(function (data, status, headers, config) {
-                    console.log("success!")
-                    $scope.students = data;
+                    console.log("success!");
+                    $scope.studentsInClass = data;
                     studentDetails.setStudents(data);
                     $scope.error = null;
                 }).

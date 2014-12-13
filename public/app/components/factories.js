@@ -32,7 +32,6 @@ var app = angular.module('myAppRename.factories', []);
     };
   });
   app.factory('adminDatabase', function($http){
-    var students = [];
     var getStudents = function(callback){
       $http.get('adminApi/students')
           .success(function(data){

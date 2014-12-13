@@ -162,12 +162,12 @@ process.on('SIGINT', function() {
 });
 
 model.StudentModel.remove({}).exec();
-model.TeacherModel.remove({}).exec();
+//model.TeacherModel.remove({}).exec();
 model.ClassModel.remove({}).exec();
-model.TaskModel.remove({}).exec();
+//model.TaskModel.remove({}).exec();
 //model.DayModel.remove({}).exec();
 //model.PeriodModel.remove({}).exec();
-model.SemesterModel.remove({}).exec();
+//model.SemesterModel.remove({}).exec();
 
 function closeDatabase() {
     db.connection.close();
@@ -188,12 +188,12 @@ function addData(data, dataModel) {
 }
 
 addData(getStudents(), model.StudentModel);
-addData(getTeachers(), model.TeacherModel);
+//addData(getTeachers(), model.TeacherModel);
 addData(getClasses(), model.ClassModel);
-addData(getTasks(), model.TaskModel);
+//addData(getTasks(), model.TaskModel);
 //addData(getDays(), model.DayModel);
 //addData(getPeriods(), model.PeriodModel);
-addData(getSemesters(), model.SemesterModel);
+//addData(getSemesters(), model.SemesterModel);
 
 async.series(asyncTasks, function(){
     closeDatabase();
