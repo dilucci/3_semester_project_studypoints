@@ -9,7 +9,7 @@
     <div class="panel-body" style="border: 2px solid black; border-radius: 10px; display: block;">
       <ul style="list-style:none; position:relative; left:15%;">
       <form class="forminteach" ng-repeat="period in periods" ng-click="showDetails($index)">
-        <a href="#/scheduleperiod">{{period.period_name}}</a>
+        <a href="#/scheduleperiod">{{period.period_name}} : {{period.start_date.substring(0,10)}} - {{period.end_date.substring(0,10)}}</a>
         <!--<input type="submit" class="inputinteach" value={{period.period_name}}>-->
       </form>
         </ul>

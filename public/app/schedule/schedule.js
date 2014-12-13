@@ -106,13 +106,17 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         console.log('SchedulePeriodCtrl!');
         $scope.period = periodDetails.getPeriod();
 
-
+        $scope.daysInPeriod = [];
         $scope.classes = [];
         $scope.availableClasses = [];
         $scope.class = {};
         $scope.attendenceDisplay = false;
         $scope.datePicked = "";
         $scope.$watch('datePicked', function(){
+            adminDatabase.getPeriodDays($scope.period._id, function(error, days){
+                $scope.daysInPeriod = days;
+                console.log("daysINPeiordd: " + days)
+            });
             $scope.attendenceDisplay=false
         });
 

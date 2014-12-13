@@ -17,14 +17,18 @@
             <div class="alert alert-info" role="alert" style="text-align: center">Calendar</div>
             <input type="date" ng-model="datePicked" min="{{period.start_date.substring(0,10)}}" max="{{period.end_date.substring(0,10)}}">
             <p></p>
-            <select ng-options="class.class_name for class in availableClasses" ng-model="class" name="class" id="class_" class="form-control" style="width:10em;">
-                <option value="">Select class</option>
-                <option value={{class}}></option>
-            </select>
+            <!--<select ng-options="class.class_name for class in availableClasses" ng-model="class" name="class" id="class_" class="form-control" style="width:10em;">-->
+                <!--<option value="">Select class</option>-->
+                <!--<option value={{class}}></option>-->
+            <!--</select>-->
         </div>
         <div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-hide="attendenceDisplay">
             <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;" >Attendence dato</div>
-            <label for="class_">Classes:</label>
+            <form>
+                <ul>
+                    <li ng-repeat="dayInPeriod in daysInPeriod">{{dayInPeriod.substring(0,10)}}</li>
+                </ul>
+            </form>
         </div>
         <div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="attendenceDisplay">
             <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;" >Students</div>

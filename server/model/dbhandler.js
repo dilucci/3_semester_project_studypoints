@@ -43,7 +43,7 @@ module.exports.addClassToPeriod = function(pid, classToAdd, callback) {
     mongo.connect();
     console.log("addClassToPeriod metode!");
     console.log('classID: ' + classToAdd._id);
-        model.PeriodModel.update({_id: pid}, {$push: {'classIds': {'classId':classToAdd}}}, function (erro, class_) {
+        model.PeriodModel.update({_id: pid}, {$push: {'classIds': {'classId': classToAdd}}}, function (erro, class_) {
             callback(class_);
             mongo.close();
         });
@@ -52,16 +52,15 @@ module.exports.addClassToPeriod = function(pid, classToAdd, callback) {
 module.exports.addPeriod = function(newPeriod, callback) {
     mongo.connect();
     var date = new Date(newPeriod.start_date);
-    console.log('date ' + date);
+    //console.log('date ' + date);
     var lastDate = new Date(newPeriod.end_date);
-    console.log('lastDate: ' + lastDate);
+    //console.log('lastDate: ' + lastDate);
 
     console.log("addPeriod metode!");
     model.PeriodModel.create(newPeriod, function (error, addedPeriod) {
         model.SemesterModel.update({_id: 1}, {$push: {'periodIds': {'periodId':addedPeriod._id}}}, function (error, rowsUpdated) {
             while (date <= lastDate) {
                 model.PeriodModel.update({_id: addedPeriod._id}, {$push: {'dayIds': {'dayId': date.toISOString().substring(0,10)}}}, function (error, rowsUpdated) {
-                    console.log('rowsupdated #1 ' + rowsUpdated);
                     if(date == lastDate){
                         mongo.close();
                     }
@@ -87,7 +86,6 @@ module.exports.getPeriodDays = function(periodId, callback){
     mongo.connect();
     console.log("getPeriodDays metode!");
 
-
     model.PeriodModel.findOne( {_id: periodId }, function (error, period) {
         console.log(JSON.stringify(period));
         var date = new Date(period.start_date);
@@ -100,11 +98,11 @@ module.exports.getPeriodDays = function(periodId, callback){
             dayArray.push(new Date(date));
             date.setTime(date.getTime() + (1000*60*60*24));
         }
-        console.log(date.toISOString())
-        console.log(dayArray);
+        //console.log(date.toISOString())
+        //console.log(dayArray);
 
-        model.DayModel.find( {_id: date.toISOString()}, function (error, periodDays) {
-            console.log(periodDays);
+        model.DayModel.find( {_id: date.toISOString().substring(0,10)}).populate('studentId').exec(function (error, periodDays) {
+            console.log("periodDays: " + periodDays);
             callback(periodDays);
             mongo.close();
         });
