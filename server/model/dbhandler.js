@@ -105,22 +105,19 @@ module.exports.incrementPoints = function(day, student, callback) {
 module.exports.addPeriod = function(newPeriod, callback) {
     mongo.connect();
     var date = new Date(newPeriod.start_date);
-    //console.log('date ' + date);
+    console.log('date ' + date);
     var lastDate = new Date(newPeriod.end_date);
-    //console.log('lastDate: ' + lastDate);
+    console.log('lastDate: ' + lastDate);
 
     console.log("addPeriod metode!");
     model.PeriodModel.create(newPeriod, function (error, addedPeriod) {
         model.SemesterModel.update({_id: 1}, {$push: {'periodIds': {'periodId':addedPeriod._id}}}, function (error, rowsUpdated) {
             while (date <= lastDate) {
-                model.PeriodModel.update({_id: addedPeriod._id}, {$push: {'dayIds': {'dayId': date.toISOString().substring(0,10)}}}, function (error, rowsUpdated) {
-                    if(date == lastDate){
-                        mongo.close();
-                    }
-                });
+                model.PeriodModel.update({_id: addedPeriod._id}, {$push: {'dayIds': {'dayId': date.toISOString().substring(0,10)}}});
                 date.setTime(date.getTime() + (1000*60*60*24));
             }
             callback(addedPeriod);
+            mongo.close();
         });
     });
 };

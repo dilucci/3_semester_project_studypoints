@@ -123,11 +123,14 @@ angular.module('myAppRename.schedule', ['ngRoute'])
             }
         });
         $scope.$watch('class', function(){
-            if($scope.class !== "" && $scope.class !== null){
+            if($scope.class !== ""){
                 adminDatabase.getStudentsInClass($scope.class, function(err, students){
                     $scope.attendenceDisplay = true;
-                    $scope.attendedStudents = students;
+                    $scope.students = students;
                 })
+            }
+            else{
+                $scope.showStudents();
             }
         });
 
