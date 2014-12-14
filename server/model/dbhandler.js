@@ -63,7 +63,8 @@ module.exports.incrementPoints = function(day, student, callback) {
     mongo.connect();
     console.log("incrementPoints metode!");
     model.StudentModel.findOne( {_id: student._id}, function (error, student) {
-        model.StudentModel.update({_id: student._id}, {study_points_total: student.study_points_total++}, function(error, updates){
+        student.study_points_total = student.study_points_total + 1;
+        model.StudentModel.update({_id: student._id}, {study_points_total: student.study_points_total}, function(error, updates){
             model.DayModel.update({_id: day}, {$push: {'studentIds': {'studentId': student._id}}}, function(error, rowsUpdated){
                 callback(student);
                 mongo.close();
