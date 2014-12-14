@@ -84,6 +84,20 @@ router.get('/students', function(req, res) {
   })
 });
 
+router.post('/students', function(req, res) {
+  var newStudent = req.body;
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.addStudent(newStudent, function(student){
+    console.log("Students stringy: " + JSON.stringify(student));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(student));
+  })
+});
+
 router.put('/student/:studentId/day/:day', function(req, res) {
   var student = req.body;
   var day = req.params.day;
