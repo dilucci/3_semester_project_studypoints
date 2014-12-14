@@ -68,6 +68,29 @@ router.post('/authenticate', function (req, res) {
     console.log("Request ended.")
 });
 
+router.post('/changepw', function (req, res) {
+    var pwData = JSON.stringify(req.body);
+
+    var options = {
+        host: 'gruppe4.cloudapp.net',
+        path: '/changepw',
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': pwData.length
+        }
+    };
+    var httpreq = http.request(options, function (response) {
+        response.setEncoding('utf8');
+        response.on('data', function (data) {
+            console.log('password changed!');
+        });
+    });
+    console.log("Password change request...");
+    httpreq.write(pwData);
+    httpreq.end();
+});
+
 
 //Get Partials made as Views
 router.get('/partials/:partialName', function(req, res) {

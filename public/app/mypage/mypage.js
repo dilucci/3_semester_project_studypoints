@@ -18,14 +18,13 @@ angular.module('myAppRename.mypage', ['ngRoute'])
                 console.log("POSTING NEW PASSWORD!");
                 $scope.user.password = $scope.newPassword;
                 console.log('user new pass: ' +  $scope.user.password);
-                $http({
-                    method: 'POST',
-                    url: 'http://gruppe4.cloudapp.net/changepw',
-                    data: $scope.user
-                })
+                $http
+                    .post('/changepw', $scope.user)
                     .success(function (data, status, headers, config) {
                         console.log("success!");
-                        $scope.classes.push(data);
+                        $scope.oldPassword = "";
+                        $scope.newPassword = "";
+                        $scope.confirmPassword = "";
                         $scope.error = null;
                     }).
                     error(function (data, status, headers, config) {
