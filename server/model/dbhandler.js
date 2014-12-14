@@ -49,6 +49,29 @@ module.exports.addClassToPeriod = function(pid, classToAdd, callback) {
         });
 };
 
+module.exports.getPeriod = function(periodId, callback) {
+
+    mongo.connect();
+    console.log("getPeriod metode!");
+    model.PeriodModel.find( {_id: periodId}).populate('dayIds.dayId').exec(function (error, period) {
+            callback(period);
+            mongo.close();
+    });
+};
+
+module.exports.incrementPoints = function(day, student, callback) {
+    mongo.connect();
+    console.log("incrementPoints metode!");
+    model.StudentModel.findOne( {_id: student._id}, function (error, student) {
+        model.StudentModel.update({_id: student._id}, {study_points_total: student.study_points_total++}, function(error, updates){
+            model.DayModel.update({_id: day}, {$push: {'studentIds': {'studentId': student._id}}}, function(error, rowsUpdated){
+                callback(student);
+                mongo.close();
+            });
+        })
+    });
+};
+
 module.exports.addPeriod = function(newPeriod, callback) {
     mongo.connect();
     var date = new Date(newPeriod.start_date);
@@ -69,31 +92,6 @@ module.exports.addPeriod = function(newPeriod, callback) {
             }
             callback(addedPeriod);
         });
-    });
-};
-
-module.exports.getPeriod = function(periodId, callback) {
-
-    mongo.connect();
-    console.log("getPeriod metode!");
-    model.PeriodModel.find( {_id: periodId}).populate('dayIds.dayId').exec(function (error, period) {
-            callback(period);
-            mongo.close();
-    });
-};
-
-module.exports.incrementPoints = function(day, student, callback) {
-    mongo.connect();
-    console.log("incrementPoints metode!");
-    console.log("student: " + student);
-    console.log("day: " + JSON.stringify(day));
-    model.StudentModel.findOne( {_id: student._id}, function (error, student) {
-        model.StudentModel.update({_id: student._id}, {$set: {study_points_total: student.study_points_total++}}, function(error, updates){
-            model.DayModel.update({_id: day}, {$push: {'studentIds': {'studentId': student._id}}}, function(error, rowsUpdated){
-                callback(student);
-                mongo.close();
-            });
-        })
     });
 };
 

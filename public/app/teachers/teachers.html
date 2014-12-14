@@ -16,3 +16,14 @@
             </form>
         </div>
     </div>
+
+<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: right;" ng-show="isAdmin">
+    <div class="alert alert-info" role="alert" style="text-align: center">Add new student</div>
+    <form>
+        User Name: <input type="text" class="newPeriods" ng-model="newPeriodName"><br>
+        From: <input type="date" class="newPeriods" ng-model="newStart" min="2015-01-01" max="2015-12-31"><br>
+        To: <input type="date" class="newPeriods" ng-model="newEnd" min="2015-01-01" max="2015-12-31"><br>
+        Max-Points: <input type="number" class="newPeriods" ng-model="newMaxPoints"><br>
+        <button ng-click="add()">Add period</button>
+    </form>
+</div>

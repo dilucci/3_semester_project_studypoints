@@ -33,7 +33,6 @@ function readData(path) {
 function getStudents() {
     return students.map(function(student) {
         return {
-            _id: student.studentID,
             username: student.username,
             first_name: student.first_name,
             last_name: student.last_name,
@@ -165,8 +164,8 @@ model.StudentModel.remove({}).exec();
 //model.TeacherModel.remove({}).exec();
 model.ClassModel.remove({}).exec();
 //model.TaskModel.remove({}).exec();
-//model.DayModel.remove({}).exec();
-//model.PeriodModel.remove({}).exec();
+model.DayModel.remove({}).exec();
+model.PeriodModel.remove({}).exec();
 //model.SemesterModel.remove({}).exec();
 
 function closeDatabase() {

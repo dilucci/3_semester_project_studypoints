@@ -63,7 +63,6 @@ var mongoose = require('mongoose');
 //                }]
 //});
 var studentSchema = new mongoose.Schema({
-        _id: Number,
         username: {type: String, unique: true},
         first_name: String,
         last_name: String,
@@ -91,7 +90,7 @@ var classSchema = new mongoose.Schema({
         class_name: String,
         studentIds: [
             {
-                studentId: {type: Number, ref: 'Student'}
+                studentId: {type: mongoose.Schema.Types.ObjectId, ref: 'Student'}
             }],
         teacherIds: [
             {
@@ -138,7 +137,7 @@ var daySchema = new mongoose.Schema({
     day: Date,
     studentIds: [
         {
-            studentId: { type: Number, ref:'Student' }
+            studentId: { type: mongoose.Schema.Types.ObjectId, ref:'Student' }
         }]
 },
     {collection: 'Day'}
