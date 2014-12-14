@@ -109,7 +109,7 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         $scope.tasks = [];
         $scope.availableClasses = [];
         $scope.availableTasks = [];
-        $scope.class = {};
+        $scope.class = "";
         $scope.attendenceDisplay = false;
         $scope.datePicked = "";
         $scope.attendedStudents = [] ;
@@ -123,8 +123,9 @@ angular.module('myAppRename.schedule', ['ngRoute'])
             }
         });
         $scope.$watch('class', function(){
-            if($scope.class !== ''){
+            if($scope.class !== "" && $scope.class !== null){
                 adminDatabase.getStudentsInClass($scope.class, function(err, students){
+                    $scope.attendenceDisplay = true;
                     $scope.attendedStudents = students;
                 })
             }
@@ -192,6 +193,10 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                         $scope.availableClasses = classes;
                     adminDatabase.getTasks(function(err, tasks){
                         $scope.availableTasks = tasks;
+                        adminDatabase.getStudents(function(error, students){
+                            $scope.attendenceDisplay = true;
+                            $scope.students = students;
+                        })
                     })
                 });
                 classDetails.setClasses(data);

@@ -32,7 +32,7 @@ module.exports.getPeriods = function(callback) {
 
 module.exports.getTasks = function(callback) {
     mongo.connect();
-    console.log("getPeriods metode!");
+    console.log("getTasks metode!");
     model.TaskModel.find( function (error, tasks) {
         callback(tasks);
         mongo.close();
@@ -142,9 +142,9 @@ module.exports.getStudentsInDay = function(day, callback) {
     });
 };
 
-module.exports.getStudentsInClass = function(class_, callback) {
+module.exports.getStudentsInClass = function(classId, callback) {
     mongo.connect();
-    model.ClassModel.findOne( {_id: class_ }, function (error, class_) {
+    model.ClassModel.findOne( {_id: classId }, function (error, class_) {
         console.log("getStudentsInClass metode!");
         var studentIds = [];
         class_.studentIds.forEach(function(sId){
@@ -225,13 +225,7 @@ module.exports.getClassesInPeriod = function(periodId, callback) {
 
     model.PeriodModel.findOne({_id: periodId}, function(err, period){
         var classIds = [];
-        console.log('period: ' + period);
         period.classIds.forEach(function(classId){
-            console.log('classIds: ' + period.classIds);
-            console.log('classId: ' + period.classIds.classId);
-            console.log('name: ' + period.period_name);
-            console.log('points: ' + period.max_points);
-            console.log('classId.classId: ' + classId.classId);
             classIds.push(classId.classId)
         });
         model.ClassModel.find( {_id: {$in: classIds}}, function(err, classes){
@@ -251,6 +245,7 @@ module.exports.getStudentsInClass = function(classId, callback) {
         class_.studentIds.forEach(function(sId){
             studentIds.push(sId.studentId)
         });
+        console.log('StudentIds in class: ' + studentIds);
         model.StudentModel.find({_id: {$in: studentIds}}, function(err, students){
             callback(students);
             mongo.close();

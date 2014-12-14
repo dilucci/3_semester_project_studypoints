@@ -96,7 +96,7 @@ var app = angular.module('myAppRename.factories', []);
           })
     };
       var getStudentsInClass = function(class_, callback){
-          $http.get('adminApi/students/class/'+class_)
+          $http.get('adminApi/students/class/'+class_._id)
               .success(function(data){
                   callback(null, data);
               })

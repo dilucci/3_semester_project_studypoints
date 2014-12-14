@@ -5,11 +5,10 @@
 <!--<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
 <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
 <!--<button type="button" class="btn btn-info" style="float: right;">Edit period</button>-->
-<h1>HEJ I SCHEDULE PERIOD</h1>
 <form>
-<h2>Periode: {{period.period_name}}</h2>
-<h2>dato: {{period.start_date.substring(0,10)}}
-    to: {{period.end_date.substring(0,10)}}</h2>
+<h2>Period: {{period.period_name}}</h2>
+<h2>From: {{period.start_date.substring(0,10)}}
+    To: {{period.end_date.substring(0,10)}}</h2>
 <h2>Max-Points: {{period.max_points}}</h2>
 </form>
 <button type="button" class="btn btn-info" ng-click="showStudents()" >Show students</button>

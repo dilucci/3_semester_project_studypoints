@@ -65,7 +65,7 @@ router.get('/students/class/:class', function(req, res) {
     return;
   }
   dbhandler.getStudentsInClass(class_, function(students){
-    console.log("getStudentsInDay stringy: " + JSON.stringify(students));
+    console.log("getStudentsInClass stringy: " + JSON.stringify(students));
     res.header("Content-type","application/json");
     res.end(JSON.stringify(students));
   })
@@ -119,7 +119,7 @@ router.get('/tasks', function(req, res) {
     return;
   }
   dbhandler.getTasks(function(tasks){
-    console.log("Students stringy: " + JSON.stringify(tasks));
+    console.log("Tasks stringy: " + JSON.stringify(tasks));
     res.header("Content-type","application/json");
     res.end(JSON.stringify(tasks));
   })
