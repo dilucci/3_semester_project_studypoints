@@ -26,4 +26,15 @@
                 </tfoot>
         </table>
 </div>
+<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;">
+        <div class="alert alert-info" role="alert" style="text-align: center">Change password</div>
+        <form>
+                Old Password: <input type="password" class="newPeriods" ng-model="oldPassword"><br>
+                New Password: <input type="password" class="newPeriods" ng-model="newPassword"><br>
+                Confirm Password: <input type="password" class="newPeriods" ng-model="confirmPassword"><br>
+                <button type="button" class="btn btn-info" ng-click="changePassword()" ng-model="class">Change password</button>
+                <p></p>
+                <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
+        </form>
+</div>
 
