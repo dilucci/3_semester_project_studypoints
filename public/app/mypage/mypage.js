@@ -25,6 +25,7 @@ angular.module('myAppRename.mypage', ['ngRoute'])
                         $scope.oldPassword = "";
                         $scope.newPassword = "";
                         $scope.confirmPassword = "";
+                        $scope.user.password="";
                         $scope.error = null;
                     }).
                     error(function (data, status, headers, config) {
