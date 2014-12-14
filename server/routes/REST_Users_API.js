@@ -15,14 +15,14 @@ router.get('/students', function(req, res) {
     })
 });
 
-router.get('/students/:id', function(req, res) {
+router.get('/students/:username', function(req, res) {
     if(typeof global.mongo_error !== "undefined"){
         res.status(500);
         res.end("Error: "+global.mongo_error+"Make sure you have started the database");
         return;
     }
-    var id = req.params.id;
-    dbhandler.getStudentDetails(id, function(student){
+    var username = req.params.username;
+    dbhandler.getStudentDetails(username, function(student){
         console.log("Student-Detail stringy: " + JSON.stringify(student));
         res.header("Content-type","application/json");
         res.end(JSON.stringify(student));

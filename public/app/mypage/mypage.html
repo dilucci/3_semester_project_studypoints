@@ -1,4 +1,29 @@
-<h1>Welcome to your page</h1>
-        <p>Username: {{student.username}}</p>
-        <p>email: {{student.email}}</p>
-        <p>Studypoints: {{student.study_points_total}}</p>
+
+<div class="col-md-8" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;">
+        <div class="alert alert-info" role="alert" style="text-align: center; font-size: 25px; font-family: Verdana;">Welcome to your page</div>
+        <table class="table">
+                <thead>
+                <tr>
+                        <td><b>Credentials</b></td>
+                </tr>
+                </thead>
+                <tr>
+                        <td>Name</td><td>{{student.first_name}} {{student.last_name}}</td>
+                </tr>
+                <tr>
+                        <td>Points</td><td>{{student.study_points_total}}</td>
+                </tr>
+                <tr>
+                        <td>Address</td><td>{{student.address}}</td>
+                </tr>
+                <tr>
+                        <td>Phone</td><td>{{student.phone}}</td>
+                </tr>
+                <tr>
+                        <td>Email</td><td>{{student.email}}</td>
+                </tr>
+                <tfoot>
+                </tfoot>
+        </table>
+</div>
+

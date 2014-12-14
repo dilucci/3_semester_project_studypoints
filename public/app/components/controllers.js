@@ -36,7 +36,7 @@ angular.module('myAppRename.controllers', []).
           var encodedProfile = data.token.split('.')[1];
           var profile = JSON.parse(url_base64_decode(encodedProfile));
           $scope.username = profile.username;
-          $scope.userId = profile.id;
+          //$scope.userId = profile.id;
           console.log('Profile Role: ' + profile.role);
           $scope.isAdmin = profile.role == "admin";
           $scope.isUser = !$scope.isAdmin;
@@ -47,7 +47,7 @@ angular.module('myAppRename.controllers', []).
             if($scope.isUser){
               $http({
                 method: 'GET',
-                url: 'userApi/students/' + $scope.userId
+                url: 'userApi/students/' + $scope.username
               })
                   .success(function (studentArray, status, headers, config) {
                     $scope.student = studentArray[0];

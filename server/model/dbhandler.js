@@ -12,10 +12,10 @@ module.exports.getStudents = function(callback) {
     });
 };
 
-module.exports.getStudentDetails = function(id, callback) {
+module.exports.getStudentDetails = function(username, callback) {
     mongo.connect();
     console.log("getStudentDetail metode!");
-    model.StudentModel.find( {_id: id }, function (error, student) {
+    model.StudentModel.find( {username: username }, function (error, student) {
         callback(student);
         mongo.close();
     });
