@@ -97,7 +97,6 @@ function getPeriods() {
 function getTasks() {
     return tasks.map(function(task) {
         return {
-            _id: task.taskID,
             task_name: task.task_name,
             description: task.description,
             max_points: task.max_points
@@ -160,10 +159,10 @@ process.on('SIGINT', function() {
     });
 });
 
-model.StudentModel.remove({}).exec();
+//model.StudentModel.remove({}).exec();
 //model.TeacherModel.remove({}).exec();
 model.ClassModel.remove({}).exec();
-//model.TaskModel.remove({}).exec();
+model.TaskModel.remove({}).exec();
 //model.DayModel.remove({}).exec();
 //model.PeriodModel.remove({}).exec();
 //model.SemesterModel.remove({}).exec();
@@ -186,10 +185,10 @@ function addData(data, dataModel) {
     });
 }
 
-addData(getStudents(), model.StudentModel);
+//addData(getStudents(), model.StudentModel);
 //addData(getTeachers(), model.TeacherModel);
 addData(getClasses(), model.ClassModel);
-//addData(getTasks(), model.TaskModel);
+addData(getTasks(), model.TaskModel);
 //addData(getDays(), model.DayModel);
 //addData(getPeriods(), model.PeriodModel);
 //addData(getSemesters(), model.SemesterModel);

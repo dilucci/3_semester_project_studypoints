@@ -41,6 +41,15 @@ var app = angular.module('myAppRename.factories', []);
             callback(err);
           })
         };
+      var getTasks = function(callback){
+          $http.get('adminApi/tasks')
+              .success(function(data){
+                  callback(null, data);
+              })
+              .error(function(err){
+                  callback(err);
+              })
+      };
     var getClasses = function(callback){
       $http.get('adminApi/classes')
           .success(function(data){
@@ -86,6 +95,15 @@ var app = angular.module('myAppRename.factories', []);
             callback(err);
           })
     };
+      var getStudentsInClass = function(class_, callback){
+          $http.get('adminApi/students/class/'+class_)
+              .success(function(data){
+                  callback(null, data);
+              })
+              .error(function(err){
+                  callback(err);
+              })
+      };
 
     return{
       getStudents: getStudents,
@@ -94,6 +112,8 @@ var app = angular.module('myAppRename.factories', []);
       getPeriodDays: getPeriodDays,
       getTeachers: getTeachers,
       getStudentsInDay: getStudentsInDay,
+      getTasks: getTasks,
+      getStudentsInClass: getStudentsInClass
     }
     });
 

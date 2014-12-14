@@ -102,7 +102,6 @@ var classSchema = new mongoose.Schema({
 );
 
 var taskSchema = new mongoose.Schema({
-        _id: Number,
         task_name: String,
         description: String,
         max_points: Number
@@ -126,7 +125,7 @@ var periodSchema = new mongoose.Schema({
             }],
         taskIds: [
             {
-                taskId: {type: Number, ref: 'Task'}
+                taskId: {type: mongoose.Schema.Types.ObjectId, ref: 'Task'}
             }]
     },
     {collection: 'Period'}

@@ -106,7 +106,9 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         console.log('SchedulePeriodCtrl!');
         $scope.daysInPeriod = [];
         $scope.classes = [];
+        $scope.tasks = [];
         $scope.availableClasses = [];
+        $scope.availableTasks = [];
         $scope.class = {};
         $scope.attendenceDisplay = false;
         $scope.datePicked = "";
@@ -120,10 +122,66 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 })
             }
         });
+        $scope.$watch('class', function(){
+            if($scope.class !== ''){
+                adminDatabase.getStudentsInClass($scope.class, function(err, students){
+                    $scope.attendedStudents = students;
+                })
+            }
+        });
 
 
         $scope.period = periodDetails.getPeriod();
 
+        $scope.addTask = function () {
+            //var periodDayIds = generateDays($scope.newStart, $scope.newEnd);
+            //console.log('periodDayIds: ' + periodDayIds);
+            $scope.newTask = {
+                task_name: $scope.newTaskName,
+                description: $scope.newTaskDescription,
+                max_points: $scope.newTaskPoints
+            };
+            console.log('inde i addTask function');
+            $http({
+                method: 'POST',
+                url: 'adminApi/task',
+                data: $scope.newTask
+            }).success(function (data, status, headers, config) {
+                console.log('SUCCESS!');
+                $scope.availableTasks.push(data);
+                $scope.error = null;
+            }).
+                error(function (data, status, headers, config) {
+                    if (status == 401) {
+                        $scope.error = "You are not authenticated to request these data";
+                        return;
+                    }
+                    $scope.error = data;
+                });
+            $scope.newTask = "";
+        };
+
+        $scope.addTaskToPeriod = function () {
+            $http({
+                method: 'PUT',
+                url: 'adminApi/periods/'+$scope.period._id+'/tasks',
+                data: $scope.task
+            })
+                .success(function (data, status, headers, config) {
+                    console.log("success!");
+                    $scope.tasks.push(data);
+                    $scope.error = null;
+                }).
+                error(function (data, status, headers, config) {
+                    if (status == 401) {
+                        $scope.error = "You are not authenticated to request these data";
+                        return;
+                    }
+                    $scope.error = data;
+                });
+        };
+
+        //Henter classes og tasks ud og sætter på $scope
         $http({
             method: 'GET',
             url: 'adminApi/periods/'+$scope.period._id+'/classes'
@@ -132,9 +190,10 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 console.log("success!");
                 adminDatabase.getClasses(function(err, classes){
                         $scope.availableClasses = classes;
+                    adminDatabase.getTasks(function(err, tasks){
+                        $scope.availableTasks = tasks;
+                    })
                 });
-
-                $scope.classes = data;
                 classDetails.setClasses(data);
                 $scope.error = null;
             }).
@@ -175,7 +234,7 @@ angular.module('myAppRename.schedule', ['ngRoute'])
         };
 
         $scope.addStudentToAttendence = function(){
-            console.log('Increment')
+            console.log('Increment');
             $http({
                 method: 'PUT',
                 url: 'adminApi/student/'+$scope.student+'/day/'+$scope.datePicked,
@@ -195,26 +254,26 @@ angular.module('myAppRename.schedule', ['ngRoute'])
                 });
         };
 
-        $scope.showClass = function (index) {
-            classDetails.setClass(index);
-            $http({
-                method: 'GET',
-                url: 'adminApi/students/class/'+classDetails.getClass()._id
-            })
-                .success(function (data, status, headers, config) {
-                    console.log("success!");
-                    $scope.studentsInClass = data;
-                    studentDetails.setStudents(data);
-                    $scope.error = null;
-                }).
-                error(function (data, status, headers, config) {
-                    if (status == 401) {
-                        $scope.error = "You are not authenticated to request these data";
-                        return;
-                    }
-                    $scope.error = data;
-                });
-        };
+        //$scope.showClass = function (index) {
+        //    classDetails.setClass(index);
+        //    $http({
+        //        method: 'GET',
+        //        url: 'adminApi/students/class/'+classDetails.getClass()._id
+        //    })
+        //        .success(function (data, status, headers, config) {
+        //            console.log("success!");
+        //            $scope.studentsInClass = data;
+        //            studentDetails.setStudents(data);
+        //            $scope.error = null;
+        //        }).
+        //        error(function (data, status, headers, config) {
+        //            if (status == 401) {
+        //                $scope.error = "You are not authenticated to request these data";
+        //                return;
+        //            }
+        //            $scope.error = data;
+        //        });
+        //};
 
         $scope.showStudentDetails = function (index) {
             studentDetails.setStudent(index);

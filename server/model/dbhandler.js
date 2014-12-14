@@ -30,6 +30,35 @@ module.exports.getPeriods = function(callback) {
     });
 };
 
+module.exports.getTasks = function(callback) {
+    mongo.connect();
+    console.log("getPeriods metode!");
+    model.TaskModel.find( function (error, tasks) {
+        callback(tasks);
+        mongo.close();
+    });
+};
+
+module.exports.addTask = function(newTask, callback) {
+    mongo.connect();
+    console.log("getPeriods metode!");
+    model.TaskModel.create(newTask, function (error, task) {
+        callback(task);
+        mongo.close();
+    });
+};
+
+module.exports.addTaskToPeriod = function(pid, taskToAdd, callback) {
+    mongo.connect();
+    console.log("addTaskToPeriod metode!");
+    model.TaskModel.create(taskToAdd, function (error, task) {
+        model.PeriodModel.update({_id: pid}, {$push: {'taskIds': {'tasksId': task}}}, function (erro, task) {
+            callback(task);
+            mongo.close();
+        });
+    });
+};
+
 module.exports.getClasses = function(callback) {
     mongo.connect();
     console.log("getClasses metode!");
@@ -102,6 +131,23 @@ module.exports.getStudentsInDay = function(day, callback) {
         console.log("getStudentsInDay metode!");
         var studentIds = [];
         day.studentIds.forEach(function(sId){
+            studentIds.push(sId.studentId)
+        });
+
+        model.StudentModel.find({_id: {$in: studentIds}}, function(err, students){
+            console.log(students);
+            callback(students);
+            mongo.close();
+        });
+    });
+};
+
+module.exports.getStudentsInClass = function(class_, callback) {
+    mongo.connect();
+    model.ClassModel.findOne( {_id: class_ }, function (error, class_) {
+        console.log("getStudentsInClass metode!");
+        var studentIds = [];
+        class_.studentIds.forEach(function(sId){
             studentIds.push(sId.studentId)
         });
 

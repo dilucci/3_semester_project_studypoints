@@ -57,19 +57,33 @@ router.get('/students/day/:day', function(req, res) {
   })
 });
 
-router.post('/days', function(req, res) {
-  var newDays = req.body;
+router.get('/students/class/:class', function(req, res) {
+  var class_ = req.params.class;
   if(typeof global.mongo_error !== "undefined"){
     res.status(500);
     res.end("Error: "+global.mongo_error+"Make sure you have started the database");
     return;
   }
-  dbhandler.addDays(newDays, function(newDays){
-    console.log("addDays stringy: " + JSON.stringify(newDays));
+  dbhandler.getStudentsInClass(class_, function(students){
+    console.log("getStudentsInDay stringy: " + JSON.stringify(students));
     res.header("Content-type","application/json");
-    res.end(JSON.stringify(newDays));
+    res.end(JSON.stringify(students));
   })
 });
+
+//router.post('/days', function(req, res) {
+//  var newDays = req.body;
+//  if(typeof global.mongo_error !== "undefined"){
+//    res.status(500);
+//    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+//    return;
+//  }
+//  dbhandler.addDays(newDays, function(newDays){
+//    console.log("addDays stringy: " + JSON.stringify(newDays));
+//    res.header("Content-type","application/json");
+//    res.end(JSON.stringify(newDays));
+//  })
+//});
 
 router.get('/students', function(req, res) {
   if(typeof global.mongo_error !== "undefined"){
@@ -95,6 +109,33 @@ router.post('/students', function(req, res) {
     console.log("Students stringy: " + JSON.stringify(student));
     res.header("Content-type","application/json");
     res.end(JSON.stringify(student));
+  })
+});
+
+router.get('/tasks', function(req, res) {
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.getTasks(function(tasks){
+    console.log("Students stringy: " + JSON.stringify(tasks));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(tasks));
+  })
+});
+
+router.post('/tasks', function(req, res) {
+  var newTask = req.body;
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.addTask(newTask, function(task){
+    console.log("Students stringy: " + JSON.stringify(task));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(task));
   })
 });
 
@@ -167,6 +208,21 @@ router.put('/periods/:pid/classes', function(req, res) {
     console.log("addClassToPeriod stringy: " + JSON.stringify(class_));
     res.header("Content-type","application/json");
     res.end(JSON.stringify(class_));
+  })
+});
+
+router.put('/periods/:pid/tasks', function(req, res) {
+  var taskToAdd = req.body;
+  var pid = req.params.pid;
+  if(typeof global.mongo_error !== "undefined"){
+    res.status(500);
+    res.end("Error: "+global.mongo_error+"Make sure you have started the database");
+    return;
+  }
+  dbhandler.addTaskToPeriod(pid, taskToAdd, function(task){
+    console.log("addClassToPeriod stringy: " + JSON.stringify(task));
+    res.header("Content-type","application/json");
+    res.end(JSON.stringify(task));
   })
 });
 

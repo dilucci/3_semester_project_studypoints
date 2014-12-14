@@ -96,6 +96,32 @@
             <p></p>
             <button type="button" class="btn btn-info" ng-click="addClassToPeriod(class)" ng-model="class">Add class to period</button>
         </div>
+        <!--<div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;" ng-show="isAdmin">-->
+            <!--<div class="alert alert-info" role="alert" style="text-align: center">Add task to period</div>-->
+            <!--<label for="task">Tasks:</label>-->
+            <!--<select ng-options="task.task_name for task in availableTasks" ng-model="task" name="class" id="task" class="form-control" style="width:10em;">-->
+                <!--<option value="">Select Task</option>-->
+                <!--<option value={{task}}></option>-->
+            <!--</select>-->
+            <!--<p></p>-->
+            <!--<button type="button" class="btn btn-info" ng-click="addTaskToPeriod(task)" ng-model="class">Add task to period</button>-->
+        <!--</div>-->
+        <div class="col-md-4" style="border: 2px solid black; border-radius: 10px; padding: 1em; float: left;" ng-show="isAdmin">
+            <div class="alert alert-info" role="alert" style="text-align: center">Add new task</div>
+            <form>
+                Task name: <input type="text" class="newPeriods" ng-model="newTaskName"><br>
+                Description of task: <input type="text" class="newPeriods" ng-model="newTaskDescription"><br>
+                Max points: <input type="number" class="newPeriods" ng-model="newTaskPoints"><br>
+                <!--<button type="button" class="btn btn-info" ng-click="addTask()">Add task</button>-->
+                <!--<label for="task">Tasks:</label>-->
+                <!--<select ng-options="task.task_name for task in availableTasks" ng-model="task" name="class" id="task" class="form-control" style="width:10em;">-->
+                    <!--<option value="">Select Task</option>-->
+                    <!--<option value={{task}}></option>-->
+                <!--</select>-->
+                <!--<p></p>-->
+                <button type="button" class="btn btn-info" ng-click="addTaskToPeriod(task)" ng-model="class">Add task to period</button>
+            </form>
+        </div>
 </div>
 
 
