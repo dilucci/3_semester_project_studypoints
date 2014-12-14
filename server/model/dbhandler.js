@@ -168,6 +168,7 @@ module.exports.addStudent = function(newStudent, callback) {
     console.log("addStudent metode!");
         model.StudentModel.create(newStudent, function(error, student){
             callback(student);
+            mongo.close();
         });
 };
 
